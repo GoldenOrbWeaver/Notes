@@ -1,0 +1,1 @@
+This is a folder for my notes created using LaTeX. Since they were written by me, do not trust that they are accurate.
