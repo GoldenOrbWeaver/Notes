@@ -1,1 +1,2 @@
-This is a folder for my notes created using LaTeX. Since they were written by me, do not trust that they are accurate.
+#Notes
+All the notes I've made using LaTeX are here. Since they were made by me, they may not be entirely accurate. I'll add descriptions for each document document once I create more.
