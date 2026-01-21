@@ -36,16 +36,70 @@
 \fancyhead[L]{\thetitle}
 \fancyhead[R]{GoldenOrbWeaver}
 
-\section{chapter name}
-Example text
+\section{Linear Programming}
+\begin{definition}
+    Linear programming: The optimization of a linear function subject to linear constraints.
+\end{definition}
+
 \begin{eg}
-    This is an example
+    Suppose a starving artist is trying to plan a food budget. He is health 
+    conscious and wants a healthy diet that includes the following: at least
+    70 g of protein per day, at least 100 g of carbohydrates per day, exactly
+     15 mg of vitamin D per day, but no more than 75 g of fat per day.
+
+     Five foods to choose from (fix formatting later): \\
+     Hamburger: 10g protein/oz, 2g carb/oz, .5mg vit D/oz, 8g fat/oz, \$0.20/oz \\
+     Milk: 2g protein/oz, 3 g carb/oz, 4mg vit D/oz, 2g fat/oz, \$0.02/oz \\
+     Cereal: 3g protein/oz, 23g carb/oz, 2mg vit D/oz, 1g fat/oz, \$0.10/oz \\
+     Ch. N S: 2g protein/oz, 2g carb/oz, 0 vit D/oz, 0.5g fat/oz, \$0.03/oz\\
+     Eggs: 6g protein/egg, 4g carb/egg, 1mg vit D/egg, 5g fat/egg, \$0.10/egg\\
+
+     Question: How can he meet dietary goals while minimizing cost?
 \end{eg}
 
-\subsection{section name}
-More example text
-\begin{problem}
-    This is a problem
-\end{problem}
+Set up variables: \\
+H, M, C, CNS, and E are oz (or number) per day, called \textbf{decision variables}\\
+
+Constraints: \\
+Protein: \(p=10H+2M+3C+2CNS+6E\geq70\) \\
+Carbs: \( c=2H+3M+23C+2CNS+4E\geq100\) \\
+Vitamin D: \(0.5H+4M+2C+E=15\) \\
+Fat: \(f=8H+2M+1C+0.5CNS+5E\leq75\) \\
+Nonnegativity: \(H,M,C,CNS,E\geq0\) \\
+
+Subject to these requirements, we wish to minimize cost:
+\[
+    cost=20H+2M+10C+3CNS+10E
+\]
+\begin{definition}
+    Let \(f:R^n\rightarrow R\) be a function of n variables, then f is called
+    linear $\iff$ f is of the form
+    \[
+        f(x_1,x_2, \dots x_n)=a_1x_1+a_2x_2+\dots+a_nx_n+b_0
+    \]
+    for some constraints
+    \[
+        a_1, a_2, \dots a_n \text{and}b_0
+    \]
+
+\end{definition}
+
+\begin{definition}
+    A linear equation is an equation of the form \(f(x_1, \dots, x_n)=a\) constant. 
+\end{definition}
+
+\begin{definition}
+    A linear inequality is an inequality of the form \(f(x_1, \dots, x_n)\leq\) 
+    a constant, or \(f(x_1, \dots,x_n)\geq\) a constant.  
+\end{definition}
+
+\begin{definition}
+    A linear constraint is either a linear equation or a linear inequality.
+\end{definition}
+
+\begin{definition}
+    A linear program is the optimization of a linear function subject to linear constraints.
+\end{definition}
+
 
 \end{document}
