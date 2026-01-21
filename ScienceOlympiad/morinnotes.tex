@@ -12,10 +12,12 @@
 \usepackage{enumitem}
 \usepackage{subcaption}
 \usepackage{multicol}
+\usepackage{import}
 \usepackage[usenames,dvipsnames]{xcolor}
 \usepackage[a4paper, margin=1in]{geometry}
 % The configuration for boxes and parts of the overall idea come from Pingbang Hu: https://github.com/sleepymalc
-\input{header.tex}
+% Use a relative path (forward slashes or "..") to avoid backslash-escapes
+\subimport{../}{header.tex}
 
 \title{\textbf{Notes for \textit{Introduction to Classical Mechanics} by Morin}}
 \author{GoldenOrbWeaver}
