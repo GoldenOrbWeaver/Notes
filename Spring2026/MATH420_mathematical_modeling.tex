@@ -36,16 +36,27 @@
 \fancyhead[L]{\thetitle}
 \fancyhead[R]{GoldenOrbWeaver}
 
-\section{chapter name}
-Example text
+\section{Ch.1 One Variable Optimization}
+Approach to mathematical modeling:
+1. Ask the question
+2. Select the modeling approach
+3. Formulate the model
+4. Solve the problem
+5. Answer the question
+(possibly move later, reformat)
+
 \begin{eg}
-    This is an example
+    A pig weighing 200 pounds gains 5 pounds per day and costs 45 cents a day 
+    to keep. The market price for pigs is 65 cents per pound, but is falling
+     1 center per day. When should the pig be sold?
 \end{eg}
+Start at \(t=0\), with \(t\)  in days \\
+Weight of pig: \(w(t)=200+5t\)  \\
+Cost of pig: \[c(t)=0.45t\] \\
+Price per pound to sell pig: \[p(t)=0.65-0.01t\] \\
+Revenue from selling pig: \[r(t)=w(t)p(t)\]\\
+Profit from selling at time t: \[p(t)=r(t)-c(t)\]
 
-\subsection{section name}
-More example text
-\begin{problem}
-    This is a problem
-\end{problem}
 
-\end{document}
+Look into math modeling competitions (SIAM, consortium)
+download and learn julia
