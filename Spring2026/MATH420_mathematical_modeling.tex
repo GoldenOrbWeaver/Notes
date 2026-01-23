@@ -23,6 +23,7 @@
 \author{GoldenOrbWeaver}
 \date{Spring 2026}
 
+
 \begin{document}
 
 \maketitle
@@ -36,14 +37,15 @@
 \fancyhead[L]{\thetitle}
 \fancyhead[R]{GoldenOrbWeaver}
 
-\section{Ch.1 One Variable Optimization}
+\section{One Variable Optimization}
 Approach to mathematical modeling:
-1. Ask the question
-2. Select the modeling approach
-3. Formulate the model
-4. Solve the problem
-5. Answer the question
-(possibly move later, reformat)
+\begin{enumerate}
+    \item Ask the question
+    \item Select the modeling approach
+    \item Formulate the model
+    \item Solve the problem
+    \item Answer the question
+\end{enumerate}
 
 \begin{eg}
     A pig weighing 200 pounds gains 5 pounds per day and costs 45 cents a day 
@@ -52,16 +54,78 @@ Approach to mathematical modeling:
 \end{eg}
 
 \begin{answer}
-    Start at \(t=0\), with \(t\)  in days \\
-    Weight of pig: \(w(t)=200+5t\)  \\
+    Start at \(t=0\), with \(t\)  in days. Then we find each component:\\
+    Weight of pig:   \\
+    \[
+        w(t)=200+5t
+    \]
     Cost of pig: \[c(t)=0.45t\] \\
     Price per pound to sell pig: \[p(t)=0.65-0.01t\] \\
     Revenue from selling pig: \[r(t)=w(t)p(t)\]\\
     Profit from selling at time t: \[p(t)=r(t)-c(t)\]
 \end{answer}
 
+However, we aren't sure that our values are accurate. The amount the price
+falls per day could be different, so we can instead set it to a function \(r(t)\)
+then:
+\[
+    p(t)=0.65-rt
+\]
+
+To find the optimal time to sell, solve \(p^{\prime} (t)=0\) to get \(t_{max}\). 
+We are interested in how sensitive \(t_{max}\) is on changes in \(r\), which
+we call \(s(t,r)\):
+\[
+    s(t,v)=\lim{\frac{\frac{\Delta t}{t}}{\frac{\Delta r}{r}}}=\frac{r}{t}*\frac{dt}{dr}
+\]
+We begin to solve:
+\[
+    p^{\prime} (t)=r^{\prime} (t)-c^{\prime} (t) \\
+    =w^{\prime} (t)p^{\prime} (t)=w(t)p^{\prime} (t)-0.45 \\
+    =5(0.65-rt)+(200+5t)(-r)-0.45 \\
+    =-10rt-200r+2.80=0
+\]
+Then, we solve for \(t_{max}\):
+\[
+    t_{max}=\frac{2.80-200r}{10r}=0.28r^{-1}-20
+\] 
+Next, we find \(\frac{dt_{max}}{dr}\):
+\[
+    \frac{dt_{max}}{dr}=-0.28r^{-2}
+\] 
+Therefore:
+\[
+    S(t,r)=\frac{-r}{t_{max}}*\frac{0.28}{r^2}=\frac{-0.28}{t_{max}r}
+\]
+Substituting \(t_{max}\):
+\[
+    S(t,r)=\frac{-0.28}{(0.28r^{-1}-20)r}=\frac{-0.28}{0.28-20r}
+\] 
+At our best guess of \(r=0.01\):
+\[
+    S(t,0.01)=\frac{-0.28}{0.28-0.2}=\frac{-0.28}{0.08}=\frac{-7}{2}
+\] 
+Thus, if \(r\) is wrong by \(\pm10\%\), then \(t_{max}\) will be wrong by \(S(t,r)*10\%=\frac{7}{2}*10\%=\pm35\%\) 
+
+What if the rate of growth of the pig is also wrong? We redefine \(w(t)\):
+\[
+    w(t)=200+gt
+\] 
+Then, we find \(S(t,g)\):
+\[
+    S(t,g)=\frac{g}{t_{max}}*\frac{dt_{max}}{dg}|_{g=5}\approx3.0625
+\] 
+We can also examine the sensitivity of the outcome:
+\[
+    S(P,r)=\frac{r}{P}*\frac{dP}{dr}=\frac{r}{P(t_{max})}*\frac{dP(t)}{dt}*\frac{dt}{dr}|_{t=8}=0
+\]
+This means that the profit doesn't change that much (to the first order) when the rate of change in the price of the pig varies.
 
 Look into math modeling competitions (SIAM, consortium)
-download and learn julia
+download and learn julia. FIX FORMATTING
+
+\begin{definition}
+    Sensitiv
+\end{definition}
 
 \end{document}
