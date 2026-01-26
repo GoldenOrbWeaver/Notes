@@ -121,6 +121,61 @@ We can also examine the sensitivity of the outcome:
 \]
 This means that the profit doesn't change that much (to the first order) when the rate of change in the price of the pig varies.
 
+\textbf{(FIX LAST PART WITH dp/dr, on website)}
+
+\begin{eg}
+    A manufacturer of color TV sets is planning the introduction of two new products,
+    a 19-inch LCD flat panel set with a manufacturer's suggested retail price 
+    (MSRP) of \$339 and a 21-inch LCD flat panel set with an MSRP of \$399. The cost to
+    the company is \$195 per 19-inch set and \$225 per 21-inch set, plus an additional 
+    \$400,000 in fixed costs. In the competitive market in which these sets 
+    will be sold, the number of sales per year will affect the average selling 
+    price. It is estimated that for each type of set, the average selling price drops by
+    one cent for each additional unit sold. Furthermore, sales of the 19-inch set will affect
+    sales of the 21-inch set and vice-versa. It is estimated that the average selling 
+    price for the 19-inch set will be reduced by an additional 0.3 cents for each
+    21-inch set sold, and the price for the 21-inch set will decrease by 0.4 cents
+    for each 19-inch set sold. How many units of each type of set should be manufactured?
+\end{eg}
+\begin{answer}
+    Let \(x_1\) be the number of 19" TVs sold and \(x_2\) be the number of 21" TVs sold. 
+    Then, our price for the 19" TVs is:
+    \[
+        p_1(x_1,x_2)=339-0.01x_1-0.003x_2
+    \]
+    And our price for the 21" TVs is:
+    \[
+        p_2(x_1,x_2)=399-0.004x_1-0.01x_2
+    \]
+    The total cost to produce TVs is:
+    \[
+        C(x_1,x_2)=400000+195x_1+225x_2
+    \]
+    Our revenue is:
+    \[
+        R(x_1,x_2)=x_1p_1(x_1,x_2)+x_2p_2(x_1,x_2)
+    \]
+    Our profit is:
+    \[
+        P(x_1,x_2)=R(x_1,x_2)-C(x_1,x_2)
+    \]
+    \includegraphics[width=0.5\linewidth]{MATH420_example2_image1.png}
+    \begin{note}
+        When using computer algebra systems, use fractions instead of decimals
+        because computers using floating point decimal systems, which can cause errors.
+    \end{note}
+    We are trying to maximize \(P(x_1,x_2)\) on the set:
+    \[
+        S=\{(x_1,x_2):x_1\geq0, x_2\leq0\}\cap \mathbb{Z}\cross\mathbb{Z}
+    \] 
+    \[
+       \frac{\partial p}{\partial x_1}=\frac{\partial R}{\partial x_1}-\frac{\partial C}{} 
+    \] 
+    \textbf{(FINISH WRITING THIS SOLUTION, ADD JULIA PART)}
+\end{answer}
+
+
+
 Look into math modeling competitions (SIAM, consortium)
 download and learn julia. FIX FORMATTING
 
