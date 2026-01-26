@@ -38,7 +38,7 @@
 
 \section{Linear Programming}
 \begin{definition}
-    Linear programming: The optimization of a linear function subject to linear constraints.
+    \textbf{Linear programming}: The optimization of a linear function subject to linear constraints.
 \end{definition}
 
 \begin{eg}
@@ -96,21 +96,183 @@ Subject to these requirements, we wish to minimize cost:
 \end{definition}
 
 \begin{definition}
-    A linear equation is an equation of the form \(f(x_1, \dots, x_n)=a\) constant. 
+    A \textbf{linear equation} is an equation of the form \(f(x_1, \dots, x_n)=a\) constant. 
 \end{definition}
 
 \begin{definition}
-    A linear inequality is an inequality of the form \(f(x_1, \dots, x_n)\leq\) 
+    A \textbf{linear inequality} is an inequality of the form \(f(x_1, \dots, x_n)\leq\) 
     a constant, or \(f(x_1, \dots,x_n)\geq\) a constant.  
 \end{definition}
 
 \begin{definition}
-    A linear constraint is either a linear equation or a linear inequality.
+    A \textbf{linear constraint} is either a linear equation or a linear inequality.
 \end{definition}
 
 \begin{definition}
-    A linear program is the optimization of a linear function subject to linear constraints.
+    A \textbf{linear program} is the optimization of a linear function subject to linear constraints.
 \end{definition}
 
+\begin{eg}{The Furniture Problem}
+    
+    Suppose you are in charge of a furniture factory. Your plant makes tables
+    and chairs out of iron, wood, and labor. \\
+    \begin{tabular}
+    { |c | c | c | c | c | }
+     \hline
+     Product & Iron (lbs) & Wood (ft) & Labor (hrs) & Profit (\$) \\
+     \hline \\
+        Table & 1 & 20 & 16 & 80 \\
+     \hline \\
+        Chair & 2 & 15 & 5 & 40 \\
+     \hline
+    \end{tabular} \\
+    
+    Suppose that your plant has access to 100 lbs of iron/day, 1000 lbs of 
+    wood/day, and it has 80 employees and thus 640 labor hours/day. What should
+    their production plan be?
+\end{eg}
+
+\begin{answer}
+    First, we need to decide on the decision variables. These should have two properties:
+    \begin{enumerate}
+        \item The direction manager must have control over them
+        \item Designation of optimal values solves the problem
+    \end{enumerate}
+    We select two, \(T\) and \(C\), the number of tables and chairs produced per day respectively. \\
+
+    Next, we need to select our objective function. Since we wish to maximize
+    profit, our objective function is:
+    \[
+        profit=\Pi =80T+40C
+    \]
+
+    We also need to figure out constraints:
+    \[
+        Iron: T+2C\leq100
+        \\Wood: 20T+15C\leq1000 \\
+        \\Labor: 16T+5C\leq640 
+        \\Nonnegativity: T,C\geq0
+    \]
+    
+    We have a linear program:
+    \[
+        max_{T,C} 80T+40C \\
+        s.t. 
+    \]
+
+\end{answer}
+
+\begin{remark}
+    When there are two decision variables, we can graphically solve a linear program.
+\end{remark}
+
+ADD DRAWING later
+
+\begin{definition}
+    The \textbf{feasible region} of a linear program is the set of all points that
+    satisfy all constraints.
+\end{definition}
+
+Geometrically, we wish to find the highest isoprofit that intersects the feasible
+region, grazing the side of it. This will occur at a vertex (unless a constraint
+line is parallel to the isoprofit line). We can check all the vertices or we can
+analyze the slopes of the constraints and find the vertex of constraints with
+slopes above and below the slope of the isoprofits. 
+
+\begin{definition}
+    An \textbf{integer program} is a linear program where all of the decision variables
+    must have integer values.
+\end{definition}
+
+\begin{eg}{Blending Model}
+    A scrap metal operator reviews an order for 24 lbs of tin, 15 lbs of copper, and 20 lbs of aluminum. 
+    She can buy two types of scrap metal which she can melt down:
+    \begin{tabular}
+        { |c | c | c | c | c | }
+        \hline
+        Type & Tin & Copper & Aluminum & Cost (\$0.01/lb) \\
+        \hline \\
+        Metal 1 & 40\% & 50\% & 10\% & 20 \\
+        \hline
+        Metal 2 & 40\% & 10\% & 50\% & 10 \\
+        \hline
+    \end{tabular}
+    Only 50 lbs of Metal 1 are available. How can she meet the order most effectively?
+\end{eg}
+\begin{answer}
+    Decision variables: \\
+    \(M_1\) = Amount of metal 1 to buy (lbs) \\
+    \(M_2\) = Amount of metal 2 to buy (lbs)\\ 
+    Linear program:\\
+    min \(20M_1+10M_2=cost\)\\
+    %\begin{align*}
+    s.t. \(0.4M_1+0.4M_2\geq24\) (tin)\\
+    \(0.5M_1+0.1M_2\geq15\) (copper)\\
+    \(0.1M_1+0.5M_2\geq20\) (aluminum)\\
+    \(M_1\leq50\) (availability)\\
+    %\end{align*} FIX THIS
+    Since there are only 2 decision variables, we can solve this graphically:
+\end{answer}
+
+\begin{eg}{Transportation Problems}
+
+    Goods are located at sources and needed to be shipped to destinations. There 
+    is a per unit cost to ship from any particular source to an particular 
+    destination. The objective is to minimize the cost\dots
+
+    Suppose that the Frank Perdue Chicken Co. has 2000 tons of chickens on inventory,
+    500 of which are on a farm near San Francisco, 500 on a farm near Houston,
+    and 1000 on a farm near Detroit. They wish to ship the chicken to four superstores 
+    located in New York, Los Angeles, Kansas City, and Miami. Demand is NYC 300 tons,
+    LA 900 tons, KC 600 tons, and Mia 200 tons. The shipping costs per ton are:\\
+    \begin{tabular}
+        { |c | c | c | c | c | }
+        \hline
+        From/To & NY & LA & KC & Mia \\
+        \hline \\
+        SF & 80 & 10 & 65 & 80 \\
+        \hline
+        Hou & 30 & 50 & 20 & 20 \\
+        \hline
+        Det & 30 & 100 & 50 & 50 \\
+        \hline
+    \end{tabular}
+
+    Define \(x_{i,j}=\) the tonnage of chicken shipped from \(i\) to \(j\)\\
+    Linear program: \\
+    \[
+      min_{x} 80x_{11}+10x_{12}+65x_{13}+80x_{14}+30x_{21}+50x_{12}+20x_{23}+20x_{24}+30x_{31}+100x_{32}+50x_{33}+50x_{34}     
+    \]
+    s.t. \(x_{11}+x_{12}+x_{13}+x_{14}\leq500\)\\
+    \(x_{21}+x_{22}+x_{23}+x_{24}\leq500\)\\
+    \(x_{31}+x_{32}+x_{33}+x_{34}\leq1000\)\\
+    \(x_{11}+x_{21}+x_{31}\geq300\)\\
+    \(x_{12+x_{22}+x_{32}\geq900}\)\\
+    \(x_{13}+x_{23}+x_{33}\geq600\)\\
+    \(x_{14}+x_{24}+x_{34}\geq200\)\\  
+    \(x_{i,j}\geq0\) 
+    \begin{remark}
+        Note the specific special structure of the constraint matrix. This allows
+        for specialized algorithms to solve transportation problems.
+    \end{remark}
+    \begin{remark}
+        In this particular problem, the sum of the supplies at sources equals the 
+        sum of the demands at destinations. This implies that for any feasible solution, 
+        all the constraints hold with equality. In general transportation problems, 
+        the total supply at sources is greater than or equal to total demand at sinks.
+    \end{remark}
+    \begin{remark}
+        In general, the transportation problem has the form: \\
+        \(max_{x}\)  \(\sum_{i=1}^{I}\sum_{j=1}^{J}C_{ij}X_{ij}\) \\
+        s.t. \(\sum_{i=1}^{I}X_{ij}\leq S_i \) for \(i=1,\dots,I\) \\
+        \(\sum_{j=1}^{J}X_{ij}\geq D_j \) for \(j=1,\dots,J\) \\
+        \(X_{ij}\geq0\) for all \(i,j\) \\
+        where \(C_{ij}=\) cost per unit shipped from source \(i\) to destination \(j\) \\ 
+        \(I=\) number of sources \\
+        \(J=\) number of destinations \\
+        \(S_i=\) on hand at source i \\
+        \(d_j=\) demand at destination j    
+    \end{remark}
+\end{eg}
 
 \end{document}
