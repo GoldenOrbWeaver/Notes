@@ -275,4 +275,87 @@ slopes above and below the slope of the isoprofits.
     \end{remark}
 \end{eg}
 
+\begin{eg}
+    Daisy Drugs manufactures two drugs, Drug 1 and Drug 2. The drugs are produced
+    by blending together two chemicals: Chemical ! and Chemical 2. By weight,
+    Drug 1 must contain at least 65\% Chemical 1, and Drug 2 must contain at least
+    55 \% Chemical 1. Both drugs, by weight, are completely composed of Chemical 1
+    and Chemical 2. Drug 1 sells for \$6/oz and Drug 2 sells for \$4/oz. Chemicals  1
+    and 2 are produced by one of two production processes: \\
+    \begin{tabular}
+        { |c | c | c | c |c | } 
+        \hline
+        Process & Raw Mat./hr & Labor/hr & Chemical 1 & Chemical 2 \\
+        \hline \\
+        I & 3 & 2 & 3 & 3 \\
+        \hline 
+        II & 2 & 3 & 3 & 1 \\
+        \hline
+    \end{tabular} \\
+
+    A total of 120 hours of skilled labor, 100 oz of raw material are available. 
+    Formulate a LP which can be used to maximize Daisy's sale revenue. 
+    \begin{remark}
+        There is a more complicated problem than the furniture problem because 
+        we now have to model a multi-step production process. We have 1 (raw materials 
+        and labor) -> 2 (chemicals) -> 3 (drugs).
+    \end{remark}
+
+    Decision variables: \\
+    \(D_1=\) amount of Drug 1 produced (oz) \\
+    \(D_2=\) amount of Drug 2 produced (oz) \\
+    \(C_1=\) amount of Chemical 1 produced (oz) \\
+    \(C_2=\) amount of Chemical 2 produced (oz) \\
+    \(P_1=\) number of hours used with Process I \\
+    \(P_2=\) number of hours used with Process II \\ 
+    \(C_1D_1=\) amount of Chemical 1 used in Drug 1 (oz) \\
+    \(C_2D_1=\) amount of Chemical 2 used in Drug 1 (oz) \\
+    \(C_1D_2=\) amount of Chemical 1 used in Drug 2 (oz) \\
+    \(C_2D_2=\) amount of Chemical 2 used in Drug 2 (oz) \\  
+
+    Linear program: \\
+    max \(6D_1+4D_2\) \\
+    s.t. \(\frac{C_1D_1}{C_1D_1+C_2D_1}\geq0.65\) \\
+    \(=>C_1D_1\geq0.65(C_1D_1+C_2D_1)\) \\
+    \(=>0.35C_1D_1-0.65C_2D_1\geq0\) \\
+    \(0.45C_1D_2-0.55C_2D_2\geq0\) (Since we need constraints to be linear) \\
+    \(C_1-C_1D_1-C_1D_2\geq0\) \\
+    \(C_2-C_2D_1-C_2D_2\geq0\) \\
+    \(D_1=C_1D_1+C_2D_2\) \\
+    \(D_2=C_1D_2+C_2D_2\) \\
+
+    The constraints defining \(C_1\), \(C_1\), \(D_1\), and \(D_2\) are sometimes called 
+    linking constraints. We still need constraints linking 1 to 2:
+
+    \(C_1-3P_1-3P_2=0\) \\
+    \(C_2-3P_1-P_2=0\)  \\
+
+    We also have resource constraints: \\
+    \(3P_1+2P_2\leq100\) \\
+    \(2P_1+3P_2\leq120\)  \\
+
+    And of course nonnegativity: \\
+    \(D_1, D_2, C_1, C_2, C_1D_1, C_1D_2, C_2D_1, C_2D_2, P_1, P_2 \geq 0\) 
+
+    \begin{definition}
+        \textbf{The Simplex Method} is a way of solving an LP with more than 2 decision variables\dots
+        
+        Preliminaries: \\
+        \begin{enumerate}
+            \item 3 Classes of LPs 
+            \begin{enumerate}
+                \item LPs with finite optima
+                \item Infeasible LPs, where \(F.R.=\emptyset\) 
+                \item Unbounded LPs, where either:
+                \begin{enumerate}
+                    \item min problems where we can send \(z^*\rightarrow-\infty\) 
+                    \item max problems where we can send \(z^*\rightarrow\infty\) 
+                \end{enumerate}
+            \end{enumerate}
+            We desire that an algorithm tells us which of these classes our LP is in 
+            and if an optimum exists, what it is.
+        \end{enumerate}
+    \end{definition}
+\end{eg}
+
 \end{document}
