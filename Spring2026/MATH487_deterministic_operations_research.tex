@@ -358,4 +358,142 @@ slopes above and below the slope of the isoprofits.
     \end{definition}
 \end{eg}
 
+Types of linear programs: \\
+\begin{enumerate}
+    \item LPs in general form
+    \begin{enumerate}
+        \item max or min problem
+        \item constraints are \(\leq\), \(\geq\), or \(=\) (never < or >) 
+        \item RHS of constraints can be negative, positive or O 
+        \item The variables can be nonnegative, nonpositive, or unrestricted
+    \end{enumerate}
+    \item LPs in standard form. Similar to LPs in general form except:
+    \begin{enumerate}
+        \item Constraints are all \(=\)
+        \item RHS of constraints are all positive or 0
+        \item Variables are all nonnegative 
+    \end{enumerate}
+\end{enumerate}
+
+\begin{proposition}
+    Any LP in general form can be rewritten as an equivalent LP in standard form.
+\end{proposition}
+\begin{proof}
+    We demonstrate a procedure on an example, which can be used on any example. The 
+    steps can be used in any order. 
+
+    Put the LP below into an equivalent LP in standard form:\\
+    \(max \text{ } 6x_1+x_2-x_3-x_4=z\)\\
+    s.t. \(x_1-x_2\leq5\) \\
+    \(x_1+2x_2+x_3-x_4\geq 2\) \\
+    \(2x_2+x_3=-4\) \\
+    \(x_1, x_4 \geq 0\) \\
+    \(x_2\leq0\) \\
+    \(x_3 \text { unrestricted}\)
+    
+    Step 1: Change "max" problem to "min" problem, if necessary, by multiplying the 
+    objective function by -1: \\
+    \(min \text{} -6x_1-x_2+x_3+x_4=-z\)
+    s.t. \(x_1-x_2\leq5\) \\
+    \(x_1+2x_2+x_3-x_4\geq 2\) \\
+    \(2x_2+x_3=-4\) \\
+    \(x_1, x_4 \geq 0\) \\
+    \(x_2\leq0\) \\
+    \(x_3 \text { unrestricted}\) 
+
+    Step 2: Multiply any constraints with negative RHS by -1. (This changes 
+    \(\leq\) constraints to \(\geq\) and vice versa): \\
+    \(min \text{} -6x_1-x_2+x_3+x_4=-z\)
+    s.t. \(x_1-x_2\leq5\) \\
+    \(x_1+2x_2+2x_3-x_4\geq2\) \\
+    \(-2x_2-x_3=4\) \\
+    \(x_1, x_4 \geq 0\) \\
+    \(x_2\leq 0\) \\
+    \(x_3 \text{ unrestricted}\) \\
+    
+    Step 3: Add slack variables so that all constraints are \(=\): \\
+    \(min \text{} -6x_1-x_2+x_3+x_4=-z\)
+    s.t. \(x_1-x_2+S_1=5\) \\
+    \(x_1+2x_2+2x_3-x_4-S_2=2\) \\
+    \(-2x_2-x_3=4\) \\
+    \(x_1, x_4\geq 0\) \\
+    \(x_2\leq 0\) \\
+    \(x_3 \text{ unrestricted}\) \\
+    \(S_1, S_2\geq 0\) \\
+    
+    Step 4: Replace any nonpositive variable \(x_i\) with a new variable 
+    \(x_i^*\), where \(x_i^{\prime} =-x_i\): \\
+    \(min \text{} -6x_1+x_2^{\prime} +x_3+x_4=-z\)
+    s.t. \(x_1+x_2^{\prime} +S_1=5\) \\
+    \(x_1-2x_2^{\prime} +2x_3-x_4-S_2=2\) \\
+    \(2x_2^{\prime} -x_3=4\) \\
+    \(x_1, x_2^{\prime}, x_4, S_1, S_2 \geq 0\) \\
+    \(x_3 \text{ unrestricted}\) \\
+
+    Step 5: Replace any unrestricted variables \(x_i\) with the difference of two 
+    nonnegative variables \(x_i^{\prime} -x_i^{\prime\prime} \): \\
+    \(min \text{} -6x_1+x_2^{\prime} +x_3^{\prime} -x_3^{\prime\prime} +x_4=-z\)
+    s.t. \(x_1+x_2^{\prime} +S_1=5\) \\
+    \(x_1-2x_2^{\prime} +2x_3^{\prime} -2x_3^{\prime\prime} -x_4-S_2=2\) \\
+    \(2x_2^{\prime} -x_3^{\prime} +x_3^{\prime\prime} =4\) \\
+    \(x_1, x_2^{\prime}, x_3^{\prime} , x_3^{\prime\prime} x_4, S_1, S_2 \geq 0\) \\
+
+    This is now in standard form
+
+\end{proof}
+
+\begin{note}
+    Suppose we solved the linear program in standard form that we just found 
+    using the simplex method and get an optimal answer of: \\
+    \(x_1=0\), \(x_2^{\prime} =5\), 
+    \(x_3^{\prime} =6\), \(x_3^{\prime\prime} =0\), \(x_4=0\), \(S_1=0\), \(S_2=0\), 
+    \(-z=11\)\\
+    Then we can translate back and find that the solution of the linear 
+    program in general form is: \\
+    \(x_1=0\), \(x_2=-5\), \(x_3=6\), \(x_4=0\), \(z=-11\)     
+\end{note}
+
+\begin{definition}
+    An \(m\cross n\) linear program is in \textbf{canonical form} if it is 
+    in standard form and there is a distinguished set of \(m\) variables called 
+    \textbf{basic variables} for which: \\
+    \begin{enumerate}
+        \item Each basic variable has coefficient 1 in one constraint and 0 
+        in the others. 
+        \item Each basic variable has coefficient 0 in the objective function. 
+        \item Each constraint has exactly 1 basic variable with coefficient 1.
+    \end{enumerate}
+\end{definition}
+
+\begin{eg}
+    Recall the furniture problem: \\
+    \(\text{max }80T+40C=z\) \\
+    s.t. \(T+2C\leq100\) \\
+    \(20T+15C\leq1000\) \\
+    \(16T+5C\leq640\) \\
+    \(T,C\geq0\)\\
+    
+    We start by converting this to a linear program in standard form: \\
+    \(\text{min }-80T-40C=-z\) \\
+    s.t \(T+2C+S_1=100\) \\
+    \(20T+15C+S_2=1000\) \\
+    \(16T+5C+S_3=640\) \\
+    \(T, C, S_1, S_2\geq0\) \\
+    
+    This happens to also be in canonical form with the set of basic variables 
+    or basis=\(\left\{S_1, S_2, S_3\right\}\)     
+\end{eg}
+
+\begin{remark}
+    We were lucky that our standard form turned out to be a canonical form. In most 
+    examples this won't be the case.
+\end{remark} 
+
+\begin{remark}
+    If we have a canonical form LP, it is easy to see what is called an associated \textbf{basic feasible solution}. 
+    In this case, \(T=C=0\) (nonbasic variables are 0), \(S_1=100\), \(S_2=1000\), and \(S_3=640\) (basic variables are RHS).    
+\end{remark}
+
+We now have a b.f.s. for the LP. Is this b.f.s. optimal? We already know it isn't
+
 \end{document}
