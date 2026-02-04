@@ -494,6 +494,81 @@ Types of linear programs: \\
     In this case, \(T=C=0\) (nonbasic variables are 0), \(S_1=100\), \(S_2=1000\), and \(S_3=640\) (basic variables are RHS).    
 \end{remark}
 
-We now have a b.f.s. for the LP. Is this b.f.s. optimal? We already know it isn't
+We now have a b.f.s. for the LP, but this isn't optimal. We can raise C while reducing 
+\(S_1\), \(S_2\), \(S_3\) to maintain constraints, but we can't do this indefinitely, only 
+up to \(\frac{100}{2}\) for the iron constraint, \(\frac{1000}{15}\) for the wood constraint, 
+and \(\frac{640}{5}\) for the labor constraint. Therefore, we should make \(C\) basic and \(S_1\) nonbasic.
+
+\begin{theorem}{Minimum-Ratio Test}\\
+    In general, if we've decided that \(x_{j^*}\) should enter the basis, then the current basic 
+    variable of the \(i^*\)th row should leave the basis where \(i^*\) minimizes \(\frac{b_i}{a_{ij^*}}\) over 
+    all \(i\) s.t. \(a_{ij^*}>0\) .    
+\end{theorem}
+
+To make \(C\) basic and \(S_1\) nonbasic while retaining canonical form:
+\begin{enumerate}
+    \item Multiply equation (1) by \(1/2\), obtaining (1').
+    \item Subtract \(15*(1^{\prime})\)  from (2), obtaining (2')\\
+    Subtract \(15*(1^{\prime})\) from (3), obtaining (3') \\
+    Subtract \(-40*(1^{\prime})\) from (obj), obtaining (obj') 
+\end{enumerate}
+Doing the first step: \\
+\[
+    \frac{1}{2}T+C+\frac{1}{2}S_1=50
+\]  
+Doing the second step: \\
+\begin{align}
+    20T+15C+S_2&=1000 \\
+    -15(\frac{1}{2}T+C+\frac{1}{2}S_1&=50 \\
+    \frac{25}{2}T-\frac{15}{2}S_1+S_2&=250
+\end{align}
+\begin{align}
+    16T+5C+S_3&=640 \\
+    -5(\frac{1}{2}T+C+\frac{1}{2}S_1&=50) \\
+    \frac{27}{2}T-\frac{5}{2}S_1+S_3&=390
+\end{align}
+\begin{align}
+    -80T-40C&=-Z \\
+    +40(\frac{1}{2}T+C+\frac{1}{2}S_1&=50) \\
+    -60T+20S_1&=-Z+2000
+\end{align}
+Our new LP is: \\
+\(\text{max }-60T+20S_1=-Z+2000\) \\
+s.t. \(\frac{1}{2}T+C+\frac{1}{2}S_1=50\)\\
+\(\frac{25}{2}T-\frac{15}{2}S_1+S_2=250\) \\
+\(\frac{27}{2}T-\frac{5}{2}S_1+S_3=390\) \\
+\(T, C, S_1, S_2, S_3\geq0\)\\
+
+
+We have a new canonical form with basis \(C, S_2, S_3\). The associated b.f.s 
+is \((T,C,S_1,S_2,S_3)=(0, 50, 0, 250, 390)\).
+
+Note that we can read the associated \(Z\) value from the canonical form (here \(Z=2000\).) 
+
+\begin{remark}
+    In general, if we wish to enter \(x_{j*}\) into the basis and remove the basic variable 
+    from the \(i^*\)th row from the basis, then the canonical form tableau changes as follows: \\
+    \begin{note}
+        No prime means before pivot and prime means after pivot.
+    \end{note}
+    \begin{enumerate}
+        \item \(a_{i^*j^*}^{\prime}=1\) 
+        \item \(a_{i^*j}^{\prime} =\frac{a_{i^*j}}{a_{i^*j^*}}\) for \(j=j^*\)
+        \item \(a_{ij^*}^{\prime} =0\) for \(i\neq i^*\)
+        \item \(a_{ij}^{\prime} =a_{ij}-\frac{a_{ij^*}*a_{i^*j}}{a_{i^*j^*}}\) for \(i\neq i^*\) and \(j\not j^*\)
+        \item \(b_{i^*}^{\prime} =\frac{b_{i^*}}{a_{i^*j^*}}\)
+        \item \(b_i^{\prime} =b_i-\frac{b_{i^*a_{ij^*}}}{a_{i^*j^*}}\) for \(i\neq i^*\)
+        \item \(C_{j^*}^{\prime} =0\) 
+        \item \(C_j^{\prime} =C_j-\frac{C_{j^*}a_{i^*j}}{a_{i^*j^*}}\) for \(j\neq j^*\)
+        \item \((\pm Z)+Z_0^{\prime}=(\pm Z)+Z_0-\frac{b_{i^*}C_{j^*}}{a_{i^*j^*}}\)    
+    \end{enumerate} 
+    The operation which generates a new canonical form from an old canonical form is called a pivot on \(a_{i^*j^*}\) 
+\end{remark}
+
+An easy way to do this is to use the \textbf{box method}. First, write the original LP in 
+\textbf{tableau form}: \\
+\textbf{ADD A DIAGRAM FOR THIS}
+
+
 
 \end{document}
