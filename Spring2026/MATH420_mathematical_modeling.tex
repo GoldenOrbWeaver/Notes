@@ -219,6 +219,48 @@ download and learn julia. FIX FORMATTING'
 \end{answer}
 \textbf{FINISH WRITING ANSWER}
 
+We now perform sensitivity analysis on our answer to this question, with \(a\) being 
+the elasticity of demand: 
+\[
+    S(x_1, a)=\frac{dx_1}{da}*\frac{a}{x_1}
+\]
+\[
+    S(X_2, a)= \frac{dx_2}{da}*\frac{a}{x_2} \\
+\]
+We first set up an equation with the Lagrange multiplier (REPHRASE): \\
+\[
+    \grad{P}=\lambda \grad{g} \text{ max condition}
+\]
+\[
+    g(x_1,x_2)=x_1+x_2
+\]
+\[
+  \text{Constraint is } g(x_1,x_2)=10000   
+\]
+We then solve: \\
+\[
+    \grad{g}=\begin{bmatrix}
+    1 \\ 1
+    \end{bmatrix}
+\]
+\[
+    \grad{P}=\begin{bmatrix}
+    \frac{\partial P}{\partial x_1} \\ \frac{\partial P}{\partial x_2}
+    \end{bmatrix}
+\]
+(ADD PART WITH JULIA)\\
+We get: \\
+\[
+    x_1=\frac{\frac{-831}{500}+\frac{13}{1000}\lambda}{\frac{49}{1000000}-\frac{1}{25}a}
+\]
+\[
+    x_1=\frac{144-\frac{348000}{7}a-\lambda +\frac{2000}{7}a\lambda}{\frac{7}{1000}-\frac{40}{7}a}
+\]\\
+Sensitivity analysis: \\
+\begin{align}
+    S(x_1,a)&=\frac{a}{x_1}\frac{dx_1}{da}=\frac{a}{x_1}(\frac{\partial x_1}{\partial a}+\frac{\partial x_1}{\partial \lambda}\frac{d \lambda }{da}) \\
+    &=\frac{a}{x_1}\big[(\frac{\frac{-831}{500}+\frac{13}{1000}\lambda }{(\frac{49}{1000000}-\frac{1}{25}a)^2})(\frac{1}{25})+\frac{13}{1000}*\frac{1}{\frac{49}{1000000}-\frac{1}{25}a}\frac{d \lambda }{da}\big]
+\end{align}
 
 
 add section breaks, check textbook!!!!!!
