@@ -262,6 +262,31 @@ Sensitivity analysis: \\
     &=\frac{a}{x_1}\big[(\frac{\frac{-831}{500}+\frac{13}{1000}\lambda }{(\frac{49}{1000000}-\frac{1}{25}a)^2})(\frac{1}{25})+\frac{13}{1000}*\frac{1}{\frac{49}{1000000}-\frac{1}{25}a}\frac{d \lambda }{da}\big]
 \end{align}
 
+We evaluate this at \(a=0.01\) and the corresponding optimal production level to get 
+the elasticity at that point. 
+
+Setting up: \\
+\includegraphics[width=0.7\linewidth]{MATH420_image2.png}
+
+Solving for maximum: \\
+\includegraphics[width=0.7\linewidth]{MATH420_image3.png}
+
+Differentiating: \\
+
+\includegraphics[width=0.7\linewidth]{MATH420_image4.png}
+
+\includegraphics[width=0.7\linewidth]{MATH420_image5.png}
+
+And finally evaluating \(S(x_1,a)\): \\ 
+
+\includegraphics[width=0.7\linewidth]{MATH420_image6.png}
+
+We can repeat the same procedure to find \(S(x_2, a)\), but that it left as an exercise to the reader as 
+I'd prefer for my notes to not be too long. 
+
+Next, we find \(S(P, a)\) (similar workflow in Julia of finding derivatives and substituting): \\ 
+
+\includegraphics[width=0.7\linewidth]{MATH420_image7.png}
 
 add section breaks, check textbook!!!!!!
 
