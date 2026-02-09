@@ -568,11 +568,11 @@ Note that we can read the associated \(Z\) value from the canonical form (here \
 An easy way to do this is to use the \textbf{box method}. First, write the original LP in 
 \textbf{tableau form}: \\
 \begin{tabular}{c c c c c | c}
-    T & C & S_1 & S_2 & S_3 & RHS \\
+    T & C & $S_1$ & $S_2$ & $S_3$ & RHS \\
     1 & 2 & 1 & 0 & 0 & 100 \\
-
-    
 \end{tabular}
+
+\textbf{FINISH ADDING PHYSICAL NOTES}
 
 \begin{definition}{Simplex Algorithm}
 
@@ -584,13 +584,122 @@ An easy way to do this is to use the \textbf{box method}. First, write the origi
             \item Consider the coefficients in the objective row of the current canonical form. If they are all nonnegative, 
             the current associate B.F.S. is optimal. If not, select a column (\(j^*\) ) in which 
             the coefficient is negative, to pivot \(x_{j^*}\) into the basis.
-            \item If \(a_{ij}\leq0\) for \(i=i,\dots,m\), the LP is unbounded. Otherwise, 
-            \item perform the M.R.T. to determine the coefficient \(a_{i^*j^*}\) on which to pivot next.
-            \item Pivot on \(a_{i^*j^*}\), obtaining a new canonical form. Go to 1.    
+            \item If \(a_{ij^*}\leq0\) for \(i=i,\dots,m\), the LP is unbounded. Otherwise, 
+            perform the M.R.T. to determine the coefficient \(a_{i^*j^*}\) on which to pivot next.
+            \item Pivot on \(a_{i^*j^*}\), obtaining a new canonical form. Go to (a).    
         \end{enumerate}
     \end{enumerate}
-
 \end{definition}
+
+Suppose we are given an LP in standard form: \\
+\begin{align}
+    \text{min }c_1x_1+\dots+c_n x_n &=z \\
+    \text{s.t. }a_{11}x_1+\dots+a_{1n}x_n&=b_1 \\
+    \vdots \\
+    a_{m1}x_1+\dots+a_{mn}x_n&=b_m \\
+    x_{1},\dots, x_ n & \geq0
+\end{align}
+
+Let us introduce \(m\) artificial variables \(w_1,\dots,w_m\) and consider a second 
+objective function as follows: \\
+\begin{align}
+    \text{min }c_1x_1+\dots+c_n x_n &=z \\
+    \text{min }w_1+\dots+w_m &=w \\
+    \text{s.t. }a_{11}x_1+\dots+a_{1n}x_n+w_1&=b_1 \\
+    \vdots \\
+    a_{m1}x_1+\dots+a_{mn}x_n+w_m&=b_m \\
+    x_{1},\dots,x_ n, w_1, \dots, w_m & \geq0
+\end{align}
+
+We note two things: \\
+\begin{enumerate}
+    \item The original LP is feasible iff the optimal \(w^*\) is 0.
+    \item The LP (where \(w\) is the objective) is almost in canonical form. The only 
+    problem is that we have \(w_i\)s in the objective function. 
+\end{enumerate}
+
+To fix (2), we use the substitutions:
+\begin{align}
+    w_1=b_1-a_{11}x_1-a_{12}x_2-\dots-a_{1n}x_n \\
+    \vdots \\
+    w_m=b_m-a_{1m}x_1-a_{m2}x_2-\dots-a_{mn}x_n \\
+\end{align}
+
+So the second objective function is now: \\
+\begin{align}
+    \text{min }w&=w_1+\dots+w_m \\
+    &= \sum_{i=1}^m b_1-(\sum_{i=1}^m a_{11})x_1-\dots -(\sum_{i=1}^m a_{1n})x_n
+\end{align}
+
+We rewrite this: \\
+\[
+    \text{min }-(\sum_{i=1}^m a_{11})x_1-\dots -(\sum_{i=1}^m a_{1n})x_n=w-\sum_{i=1}^m b_1
+\]
+
+So, part 2 of the simplex method is: Given the LP in standard for, set up the following 
+LP: \\
+\begin{align}
+    \text{min }c_1x_1+\dots+c_n x_n &=z \\
+    \text{min }-(\sum_{i=1}^m a_{11})x_1-\dots -(\sum_{i=1}^m a_{1n})x_n &=w-\sum_{i=1}^m b_1 \\
+    \text{s.t. }a_{11}x_1+\dots+a_{1n}x_n+w_1&=b_1 \\
+    \vdots \\
+    a_{m1}x_1+\dots+a_{mn}x_n+w_m&=b_m \\
+    x_{1},\dots,x_ n, w_1, \dots, w_m & \geq0
+\end{align}
+
+This is in canonical form with basis \(w_1,\dots,w_m\)
+
+We solve this to find the optimal \(w^*\). We have two scenarios: \\
+\begin{enumerate}
+    \item If \(w^*>0\), the LP is infeasible \\
+    \item If \(w^*=0\), the LP is feasible and you have a canonical form 
+\end{enumerate} 
+
+\begin{eg}
+    \begin{align}
+        \text{min }3x_1+x_2-x_3-x_4 &=z \\
+        \text{s.t. }x_1-x_2+x_3+2x_4 &=3 \\
+        2x_1+2x_2-x_3-x_4 &=1 \\
+        -x_1+x_2+3x_3+3x_4 &=6 \\
+        x_1, x_2, x_3, x_4 &\geq 0
+    \end{align}
+\end{eg}
+\begin{answer}
+    First, we add \(m=3\) artificial variables \(w_1, w_2, w_3\): \\
+    \begin{align}
+        \text{min }3x_1+x_2-x_3-x_4 &=z \\
+        \text{min }-2x_1-2x_2-3x_3+x_4 &=w-10 \\
+        \text{s.t. }x_1-x_2+x_3+2x_4 +w_1 &=3 \\
+        2x_1+2x_2-x_3-x_4 +w_2&=1 \\
+        -x_1+x_2+3x_3+3x_4 +w_3&=6 \\
+        x_1, x_2, x_3, x_4, w_1, w_2, w_3 &\geq 0
+    \end{align}
+
+    We write this in tableau form: \\
+    \begin{tabular}{c c c c c c c | c }
+        \(x_1\) & \(x_2\) & \(x_3\) & \(x_4\) & \(w_1\) & \(w_2\) & \(w_3\) & RHS \\
+        1 & -1 & 1 & -2 & 1 & 0 & 0 & 3 \\
+        2 & 2 & -1 & -2 & 0 & 1 & 0 & 1 \\
+        -1 & 1 & 3 & 3 & 0 & 0 & 1 & 6 \\
+        \hline
+        -2 & -2 & -3 & 1 & 0 & 0 & 0 & \(w-10\) \\
+        3 & 1 & -1 & -1 & 0 & 0 & 0 & z
+    \end{tabular}
+
+    We perform the M.R.T., \(\frac{3}{1}\) vs \(\frac{1}{2}\), and chose \(\frac{1}{2}\). Thus, we pivot on \(x_1\): \\
+    
+    \begin{tabular}
+        \(x_1\) & \(x_2\) & \(x_3\) & \(x_4\) & \(w_1\) & \(w_2\) & \(w_3\) & RHS \\
+        0 & -2 & \frac{3}{2} & -1 & 1 & \frac{-1}{2} & 0 & \frac{5}{2} \\
+        2 & 2 & -1 & -2 & 0 & 1 & 0 & 1 \\
+        -1 & 1 & 3 & 3 & 0 & 0 & 1 & 6 \\
+        \hline
+        -2 & -2 & -3 & 1 & 0 & 0 & 0 & \(w-10\) \\
+        3 & 1 & -1 & -1 & 0 & 0 & 0 & z
+    \end{tabular}
+
+    \textbf{finish writing tableau for pivots}
+\end{answer}
 
 
 
