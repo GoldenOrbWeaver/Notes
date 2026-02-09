@@ -288,6 +288,75 @@ Next, we find \(S(P, a)\) (similar workflow in Julia of finding derivatives and 
 
 \includegraphics[width=0.7\linewidth]{MATH420_image7.png}
 
+\textbf{figure out where to add section 2, reformat and fix}
+
+\section{Computational Methods for Optimization}
+\begin{eg}
+    Reconsider the pig problem of Example 1.1, but now take into account the fact that the growth rate of the pig is not constant. 
+    Assume that the pig is young, so that the growth rate is increasing. When should we sell the pig 
+    for maximum profit?
+\end{eg}
+\begin{answer}
+    We start with our equations from 1.1: \\
+    \[
+        w(t)=200+5t
+    \]
+    \[
+        C(t)=0.45t
+    \]
+    \[
+        p(t)=0.65-0.01t
+    \]
+    \[
+        R(t)=w(t)p(t)
+    \]
+    \[
+        P(t)=R(t)-C(t)
+    \]
+    
+    Since the rate of growth now increases with time, we rewrite the equation for weight as: \\
+    \[
+        w(t)=w_0e^{ct}
+    \]
+
+    We want this to be consistent with 1.1, so we solve for \(w_0\):\\
+    \[
+        w(t)=200=w_0e^{ct}=w_0
+    \]
+    
+    Then, we solve for \(c\) using the fact that the pig initially grows at 5 
+    pounds per day: \\
+    \begin{align}
+        w^{\prime} (0)&=5=w_0ce^{ct} |_{t=0}=200c \\
+        \Rightarrow c&=\frac{1}{40}
+    \end{align}
+
+    We can rewrite the rate of growth in differential form: \\
+    \[
+        \frac{dw}{dt}=constant*w(t)
+    \]
+
+    We then set this up in Julia and plot: \\
+
+    \includegraphics[width=0.7\linewidth]{MATH420_image8.png}
+
+    We start our search for the maximum by finding \(\frac{dP}{dt}\): \\
+    
+    \includegraphics[width=0.7\linewidth]{MATH420_image9.png}
+
+    Since this isn't linear, we can't easily solve a system of equations to find 
+    the maximum. Instead, we use successive numerical approximations, called \textbf{Newton's method}: \\
+    \textbf{ADD DRAWING AND EXPLANATION OF TANGENT LINE THING}
+
+    \includegraphics[width=0.7\linewidth]{MATH420_image10.png}
+
+    We repeat this several times, plugging the resulting back into \(g(t)\), until it converges: \\
+    
+    \includegraphics[width=0.7\linewidth]{MATH420_image11.png}
+
+\end{answer}
+
+(ask how he saves old julia things)
 add section breaks, check textbook!!!!!!
 
 install julia lab and jupyter 

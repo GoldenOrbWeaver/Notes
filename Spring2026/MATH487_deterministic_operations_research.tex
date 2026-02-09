@@ -562,12 +562,35 @@ Note that we can read the associated \(Z\) value from the canonical form (here \
         \item \(C_j^{\prime} =C_j-\frac{C_{j^*}a_{i^*j}}{a_{i^*j^*}}\) for \(j\neq j^*\)
         \item \((\pm Z)+Z_0^{\prime}=(\pm Z)+Z_0-\frac{b_{i^*}C_{j^*}}{a_{i^*j^*}}\)    
     \end{enumerate} 
-    The operation which generates a new canonical form from an old canonical form is called a pivot on \(a_{i^*j^*}\) 
+    The operation which generates a new canonical form from an old canonical form is called a \textbf{pivot} on \(a_{i^*j^*}\) 
 \end{remark}
 
 An easy way to do this is to use the \textbf{box method}. First, write the original LP in 
 \textbf{tableau form}: \\
-\textbf{ADD A DIAGRAM FOR THIS}
+\begin{tabular}{c c c c c | c}
+    T & C & S_1 & S_2 & S_3 & RHS \\
+    1 & 2 & 1 & 0 & 0 & 100 \\
+
+    
+\end{tabular}
+
+\begin{definition}{Simplex Algorithm}
+
+    Given an LP problem in general form:
+    \begin{enumerate}
+        \item Turn into an equivalent problem in standard form
+        \item Obtain an initial canonical form, or else determine that the LP is infeasible. 
+        \item \begin{enumerate}
+            \item Consider the coefficients in the objective row of the current canonical form. If they are all nonnegative, 
+            the current associate B.F.S. is optimal. If not, select a column (\(j^*\) ) in which 
+            the coefficient is negative, to pivot \(x_{j^*}\) into the basis.
+            \item If \(a_{ij}\leq0\) for \(i=i,\dots,m\), the LP is unbounded. Otherwise, 
+            \item perform the M.R.T. to determine the coefficient \(a_{i^*j^*}\) on which to pivot next.
+            \item Pivot on \(a_{i^*j^*}\), obtaining a new canonical form. Go to 1.    
+        \end{enumerate}
+    \end{enumerate}
+
+\end{definition}
 
 
 
