@@ -290,6 +290,7 @@ Next, we find \(S(P, a)\) (similar workflow in Julia of finding derivatives and 
 
 \textbf{figure out where to add section 2, reformat and fix}
 
+\newpage
 \section{Computational Methods for Optimization}
 \begin{eg}
     Reconsider the pig problem of Example 1.1, but now take into account the fact that the growth rate of the pig is not constant. 
@@ -353,8 +354,23 @@ Next, we find \(S(P, a)\) (similar workflow in Julia of finding derivatives and 
     We repeat this several times, plugging the resulting back into \(g(t)\), until it converges: \\
     
     \includegraphics[width=0.7\linewidth]{MATH420_image11.png}
-
 \end{answer}
+
+We then do sensitivity analysis on this to find \(S(t,c)\): \\
+\[
+    S(t,c)=\frac{c}{t}\frac{dt}{dc}\big| _{t=19.4815944416122, c=\frac{1}{40}}
+\]
+
+We found that \\
+\[
+    \frac{dP}{dt}=-0.45-2*e^{ct}+200c*(0.65-0.01t)*e^{c*t}
+\]
+
+We try to use implicit differentiation and set this equal to \(u(t,c)=0\): \\
+\begin{align}
+    \frac{d}{dc}u(t,c)&=\frac{\partial u}{\partial t}\frac{dt}{dc}+\frac{\partial u}{\partial c}=0 \\
+    \Rightarrow \frac{dt}{dc}=\frac{-\frac{\partial u}{\partial c}}{\frac{\partial u}{t}}
+\end{align}
 
 (ask how he saves old julia things)
 add section breaks, check textbook!!!!!!
