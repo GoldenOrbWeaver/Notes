@@ -688,21 +688,56 @@ We solve this to find the optimal \(w^*\). We have two scenarios: \\
 
     We perform the M.R.T., \(\frac{3}{1}\) vs \(\frac{1}{2}\), and chose \(\frac{1}{2}\). Thus, we pivot on \(x_1\): \\
     
-    \begin{tabular}
-        \(x_1\) & \(x_2\) & \(x_3\) & \(x_4\) & \(w_1\) & \(w_2\) & \(w_3\) & RHS \\
-        0 & -2 & \frac{3}{2} & -1 & 1 & \frac{-1}{2} & 0 & \frac{5}{2} \\
-        2 & 2 & -1 & -2 & 0 & 1 & 0 & 1 \\
-        -1 & 1 & 3 & 3 & 0 & 0 & 1 & 6 \\
-        \hline
-        -2 & -2 & -3 & 1 & 0 & 0 & 0 & \(w-10\) \\
-        3 & 1 & -1 & -1 & 0 & 0 & 0 & z
-    \end{tabular}
+    %\begin{tabular}
+       % \(x_1\) & \(x_2\) & \(x_3\) & \(x_4\) & \(w_1\) & \(w_2\) & \(w_3\) & RHS \\
+      %  0 & -2 & $\frac{3}{2}$ & -1 & 1 & $\frac{-1}{2}$ & 0 & $\frac{5}{2}$ \\
+     %   2 & 2 & -1 & -2 & 0 & 1 & 0 & 1 \\
+    %    -1 & 1 & 3 & 3 & 0 & 0 & 1 & 6 \\
+   %     \hline
+  %      -2 & -2 & -3 & 1 & 0 & 0 & 0 & \(w-10\) \\
+ %       3 & 1 & -1 & -1 & 0 & 0 & 0 & z
+ %   \end{tabular}
 
     \textbf{finish writing tableau for pivots}
+
 
     Since \(w=0\), the LP is feasible. However, \(z\) is not optimized because we 
     still have a negative coefficient in the objective function. Therefore, we pivot on (FINSIH THIS)
 \end{answer}
+
+\begin{definition}{\textbf{Multi-period Decision Models}}
+
+    These are dynamic problems in where decisions must be 
+    made over a series of time periods. Many of these problems can also be solved using \textbf{dynamic programming}\dots
+
+    Idea of formulation: To formulate such problems as LPs, you must include linking constraints, which tie 
+    together variables from one period to variables from previous periods.
+\end{definition}
+
+\begin{eg}{Staffing a Training Program}
+
+
+
+\end{eg}
+\begin{answer}
+    We first chose our decision variables: \\
+    \begin{align*}
+        A_t&= \text{number of agents available at the beginning of each month t} \\
+        H_t&= \text{number of students hired at beginning of month t}
+    \end{align*}
+
+    Then, we formulate an LP: \\
+    \begin{align*}
+        \text{min }350(H_1+\dots+h_6)+600(A_1+\dots+A_6) \\
+        \text{s.t. }A_1&=60 \\
+        150A_1-20H_1&\geq8000 \\
+        150A_2-20H_2&\geq 9000 \\
+        \vdots \\
+        150A_6-20H_6&\geq11000 \\
+    \end{align*}
+\end{answer}
+\textbf{FINISH WRITING THIS OUT}
+
 
 
 
