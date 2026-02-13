@@ -738,7 +738,115 @@ We solve this to find the optimal \(w^*\). We have two scenarios: \\
 \end{answer}
 \textbf{FINISH WRITING THIS OUT}
 
+\begin{eg}
+    Suppose a salt mining company in Utah makes salt for use in clearing
+    snowy streets. It has 20 tons of salt on hand as of July 1st. It forecasts
+    its future as follows: \\
+    \begin{tabular}{| c | c | c |}
+        \hline
+        Period & Amount of salt & Costs (\$/ton) \\
+        \hline
+        Jul-Sep & 10 & 100 \\
+        \hline
+        Oct-Dec & 40 & 300 \\
+        \hline
+        Jan-March & 80 & 500 \\
+        \hline
+        Apr-Jun & 40 & 250 \\
+        \hline
+    \end{tabular}
 
+    In addition to meeting its demand, the company must also balance the books 
+    by having exactly 20 tons on hand the following July 1st.
 
+    It costs \$50 to store a ton of salt on company grounds through the end of
+    a period. Formulate an LP to minimize costs.
+\end{eg}
+\begin{answer}
+    
+    
+    In problems like this, it is usually beneficial to: \\
+    \begin{enumerate}
+        \item Index the decision periods
+        \item Have a diagram of a decision period indicating what gets done
+        when. This can either be given or assumed.
+    \end{enumerate}
+    
+    We start by choosing the decision variables: \\
+    \begin{align*}
+        S_i&=\text{tons of salt produced in period i}\in(1,2,3,4) \\
+        I_i&=\text{amount of inventory after demand + production at end of period i}\in(0,1,2,3,4)
+    \end{align*}
+
+    Then, we formulate the LP: \\
+    \begin{align*}
+        \text{min }100S_1+300S_2+500S_3+250S_4+50(I_1+I_2+I_3+I_4)&=z\\
+        \text{s.t. }I_0&=20 \\
+        I_1=I_0+S_1-10 \\
+        I_2=I_1+S_2-40 \\
+        I_3=I_2+S_3-80 \\
+        I_4=I_3+S_4-40\\
+        I_4=20 \\
+        S_1,S_2,S_3,S-4,I_0,I_1,I_2,I_3,I_4\geq0
+    \end{align*}
+
+    \begin{note}
+        In practice the salt maker might:
+        \begin{enumerate}
+            \item Solve the LP paying strict attention to \(I_1\) and \(S_1\)
+            \item Do their July-September business according to \(I_1\) and \(S_1\)
+            \item In September, make an updated forecast of demand for October to December, 
+            January to March, April to June, and July to September.
+            \item Reformulate a new LP according to the new demand. 
+            \item Solve the new LP, obtaining an October to December strategy, etc. 
+        \end{enumerate} 
+
+        This is called a rolling planning horizon.
+    \end{note}
+\end{answer}
+
+\begin{eg}
+    Suppose backlogging is allowed (not strictly required to meet demand), 
+    but a penalty cost of \$400/ton short is assessed. The shortage is then carried 
+    forward to the next period.
+    
+    Another possibility is that the shortage is wiped off the slate.
+\end{eg}
+\begin{answer}
+    We first choose our decision variables: \\
+    \begin{align*}
+        S_i&=\text{tons of salt produced in period i} \\
+        I_i^{\prime} &=\text{amount of positive inventory at end of period i after demand} \\
+        I_i^{\prime\prime} &=\text{ amount of negative inventory at end of period i, after demand}
+    \end{align*}
+
+    \begin{note}
+        In terms of the previous LP: \\
+        \[
+            I_i=I_i^{\prime} -I_i^{\prime\prime} 
+        \]
+
+        If we set the penalty cost to \(\infty \)\$/ton, we should get the same optimum 
+        solution as the previous problem. 
+    \end{note}
+
+    We formulate the LP: \\
+    \begin{align*}
+        \text{min }100S_1+300S_2+500S_3+250S_4+50\sum_{i=1}^4I_i^{\prime} +400\sum_{i=1}^4I_i^{\prime\prime} \\
+        \text{s.t. }I_0^{\prime}-I_0^{\prime\prime}&=20 \\
+        I_1^{\prime} -I_1^{\prime\prime} &=I_0^{\prime} +I_0^{\prime\prime} +S_1-10 \\
+        I_2^{\prime} -I_2^{\prime\prime} &=I_1^{\prime} -I_1^{\prime\prime} +S_2-40 \\
+        I_3^{\prime} -I_3^{\prime\prime} &=I_2^{\prime} -I_2^{\prime\prime} +S_3-80 \\
+        I_4^{\prime} -I_4^{\prime\prime} &=I_3^{\prime} -I_3^{\prime\prime} +S_4-40 \\
+        I_4^{\prime}&=20 \\
+        I_4^{\prime\prime}&=0 \\
+        \text{All variables nonnegative}
+    \end{align*}
+
+    \begin{note}
+        It would be impossible for \(I_i^{\prime} \) and \(I_i^{\prime\prime} \), 
+        for any particular \(i\), to both be positive in an optimal solution.   
+    \end{note}
+\end{answer}
 
 \end{document}
