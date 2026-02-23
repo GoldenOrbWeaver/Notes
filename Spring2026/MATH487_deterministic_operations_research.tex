@@ -849,4 +849,86 @@ We solve this to find the optimal \(w^*\). We have two scenarios: \\
     \end{note}
 \end{answer}
 
+Sensitivity Analysis: \\
+We go back to the furniture problem
+\begin{align*}
+    \text{max }80T+40C&=z \\
+    \text{s.t. }T+2C&\leq100 \\
+    20T+15C&\leq1000 \\
+    16T+5C&\leq640 \\
+    T,C&\geq0 \\
+\end{align*}
+
+Question: Suppose \(x\) more labor hours become available. In terms of \(x\), 
+by how much (if any) will this raise our \(z^*\)?
+
+Graphically, this is equivalent to shifting the labor constraint outward. If 
+\(x\) is relatively small, the maximum will still be where the labor constrain and 
+the wood constraint intersect, so the optimum would still be at \((T,C)\) where 
+\(20T+15C=1000\) and \(16T+5C=640+x\).
+
+We solve this and find that: \\
+\begin{align*}
+    T&=\frac{230}{7}+\frac{3}{28}x \\
+    C&=\frac{160}{7}-\frac{1}{7}x
+\end{align*}
+
+Therefore, the new optimum is \((32 \frac{6}{7}+\frac{3}{28}x, 22 \frac{6}{7}-\frac{1}{7}x)\), 
+which agrees with our graphical picture. 
+
+The new optimal objective function \(z^*\) is equal to \(3542 \frac{6}{7}+\frac{20}{7}x\)\dots
+
+Conclusion: If \(x\) is the increase in labor capacity, we gain \(\frac{20}{7}x\) in optimal profits. 
+
+\begin{definition}
+    The \textbf{dual price} or \textbf{shadow price} of a constraint is the amount of improvement in the 
+    optimal objective function value given a unit increase in the RHS of that constraint.
+\end{definition}
+
+A constraint with a nonzero "s lack or surplus" has a dual price of 0.
+
+\begin{eg}
+    WRITE NEW HAVEN BUSING BACKGROUND
+\end{eg}
+\begin{answer}
+    To formulate a linear program, we start by choosing our decision variables: \\
+    
+    \begin{align*}
+        w_{ij}&=\text{\# of white students bused from district i to school j} \\
+        m_{ij}&=\text{\# of minority students bused from district i to school j} \\
+    \end{align*}
+
+    We then choose our objective function, the number of bus-miles driven: \\
+    \[
+        z(w_{ij}, m_{ij})=\sum_{i=1}^{30} \sum_{j=1}^{4}c_{ij}*(w_{ij}+m_{ij}) \text{ where \(c_{ij}\) is the distance from i to j}
+    \]
+
+    We then formulate the constraints. First, everyone must go to school, so: \\
+    \begin{align*}
+        \sum_{j=1}^4 w_{ij}&=W_i \text{ for }i=1,\dots,30 \\
+        \sum_{j=1}^4 m_{ij}&=M_i \text{ for }i=1,\dots,30 \\
+    \end{align*}
+
+    We also need to not exceed the capacities of the schools: \\
+    \begin{align*}
+        tw_j+tm_j&\leq C_j \text{ for }j=1,\dots,4
+    \end{align*}
+    where \\
+    \begin{align*}
+        tw_j&=\sum_{i=1}^{30} w_{ij} \\
+        tm_j&=\sum_{i=1}^{30} m_{ij}
+    \end{align*}
+
+    Additionally, the \% of minority students at each school must be between 
+    29.05\% and 53.95\%: \\
+    \begin{align*}
+        0.2905 &\leq \frac{tm_j}{tw_j+tm_j} \leq 0.5395 \text{ for }j=1,\dots,4 \\
+        \Rightarrow 0.2905(tw_j+tm_j) &\leq tm_j \leq 0.5395(tw_j+tm_j) \text{ for }j=1,\dots,4 \\
+        \Rightarrow -0.7095tm_j+0.2905tw_j &\leq 0 \text{ for }j=1,\dots,4 \\
+        \text{and } 0.4605tm_j-0.5395tw_j &\leq 0 \text{ for }j=1,\dots,4   
+    \end{align*}
+
+    And, of course, nonnegativity.
+\end{answer}
+
 \end{document}
