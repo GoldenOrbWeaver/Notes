@@ -931,4 +931,82 @@ A constraint with a nonzero "s lack or surplus" has a dual price of 0.
     And, of course, nonnegativity.
 \end{answer}
 
+Q: Can an equality constraint have a shadow price?
+
+A: Yes, but you need to be careful to interpret it using the precise definition given in class. 
+
+\begin{eg}
+    Vitamin Problem: \\
+    \begin{align*}
+        \text{min }20H+2M+10C+3CNS+10E&=\text{cost} \\
+        \text{s.t. }10H+3M+3C+2CNS+6E&\geq 70 \text{(protein)}\\
+        2H+3M+23C+2CNS+4E&\geq 100 \text{carbohydrates)} \\
+        0.5H+4M+2C+E&=15 \text{(vitamin D)} \\
+        8H+2M+C+0.5CNS+5E&\leq 75 \text{(fat)} \\
+        H,M,C,CNS,E&\geq 0
+    \end{align*}
+\end{eg}
+\begin{answer}
+    Raising the 15 on the RHS of row 4 to \(15+x\) (for \(-12\leq x\leq105\)) will decrease 
+    the optimal objective value by 0.326923 
+\end{answer}
+
+Q: Can a shadow price be negative? 
+
+A: Yes, it just means that increasing the RHS of a constraint yields a disimprovement in the 
+objective function value, which typically happens with a \(\geq\) constraint, but can also happen 
+with an \(=\). This occurs with the protein and carbohydrate constraints in the diet problem. 
+
+\subsection{Sensitivity of objective function coefficients}
+\begin{align*}
+    Furniture problem: \\
+    \text{max }80T+40C \\
+    \text{s.t. }T+2C&\leq 100 \\
+    20T+15C &\leq 1000 \\
+    16T+5C &\leq 690 \\
+    T,C &\geq 0
+\end{align*}
+
+Q: Suppose the profit per table changes from \$80 to \$\(80+x\). How does that affect \(z^*\)? 
+
+A: Suppose \(x\) is very close to 0. Then the slope of the isoprofit lines will be 
+\(\frac{-(80+x)}{40}\). As long as this stays between \(\frac{-4}{3}\) and \(\frac{-16}{5}\), the point 
+\((32 \frac{6}{7}, 22 \frac{6}{7})\) will remain optimal. However, the optimal \(z^*\) will increase by 
+\(32 \frac{6}{7}*x\).
+
+Q: Over what range of \(x\) values is the above true?
+
+A: So long as \(\frac{-16}{5} \leq \frac{-(80+x)}{40} \leq \frac{-4}{3}\Rightarrow 48 \geq x \geq -26 \frac{2}{3}\). These values 
+can be found on the LINDO printout as the current allowable increases and decreases.
+
+\subsection{Pricing Out a New Variable}
+
+\textbf{ASK FOR NOTES FROM WEDNESDAY 2/25}
+
+Suppose the furniture company now considers making bookshelves. Each bookshelf requires 
+4 pounds of iron, 25 pounds of wood, and 8 hours of labor. They can bring in \$100 profit per unit. Should 
+the company produce bookshelves.
+
+Analysis: \\
+Suppose the company produces 1 bookshelf but otherwise produces all tables and chairs. This would 
+lower the RHS of the original furniture problem by 4, 25, and 8, respectively. From the LINDO printout, 
+lowering the RHS of the iron constraint by 4 causes the \(z^*\) to decrease by \(4*0=0\). Lowering the RHS 
+of the wood constraint causes \(z^*\) to drop by \(25*1.714=42.86\). Lowering the RHS of the labor constraint by 
+8 causes \(z^*\) to drop by \(8*2.857=22.86\). Thus, the total loss is \(0+42.86+22.86=65.72\). Since this is less 
+than the profit of \$100, the company should produce bookshelves. 
+
+This procedure is called \textbf{pricing out} a new variable.
+
+\begin{eg}
+    Suppose that the starving artist in the diet problem considers buying bread. Bread contains 
+    no protein, 20 g of carbohydrates, 1 mg of vitamin D, and 4 g of fat per oz. How much is he willing 
+    to pay per oz of bread?
+\end{eg}
+\begin{answer}
+    Consuming one oz of bread lowers the RHS of the diet problem by 0, 20, 1, and 4 respectively. 
+    This disimproves the optimal objective function value by \(0*(-1.192)+20*(-0.308)+1*(0.327)+4*0=-5.833\). This means it improves the 
+    optimal objective function value by +5.833, meaning the cost lowers by 5.833 cents. Therefore, the artist should be willing to pay 
+    up to 5.833 cents per oz of bread. 
+\end{answer}
+
 \end{document}
