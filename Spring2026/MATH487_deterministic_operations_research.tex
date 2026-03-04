@@ -1009,4 +1009,140 @@ This procedure is called \textbf{pricing out} a new variable.
     up to 5.833 cents per oz of bread. 
 \end{answer}
 
+The optimal solution includes no eggs. How much would it cost the starving artist to 
+eat eggs?
+
+We can solve this by pricing out eggs.
+
+\begin{definition}
+    For any variable \(y\) already in an LP, the reduced cost of the variable is 
+    the disimprovement in the optimal objective function value per unit of \(y\) required in 
+    the solution.   
+\end{definition}
+
+\begin{remark}
+    If \(y\) is already a basic variable in an optimal solution, the reduced cost is 0. 
+\end{remark}
+
+\section{Duality Theory}
+\textbf{ADD NOTES FROM 3/4}
+Rules for generating dual linear program, given an LP: \\
+Max problem | Min problem (reformat in columns):\\
+\(i^{th}\) constraint \(\leq \) | \(i^{th}\) variable \(\geq 0\) \\
+\(i^{th}\) constraint \(=\) | \(i^{th}\) variable unrestricted  \\
+i^{th} constraint \(\geq\) | i^{th} variable \(\leq 0\) \\
+j^{th} variable \(\geq 0\) | j^{th} constraint \(\geq \) \\
+j^{th} variable unrestricted | j^{th} constraint \(=\)    \\
+j^{th} variable \(\leq 0\) | j^{th} constraint \(\leq \) \\
+Objective function coefficients | RHSs\\
+RHSs | Objective function coefficients \\
+Coefficients matrix A | coefficient matrix \(A^T\) \\
+
+\begin{eg}
+    Given: \\
+    \begin{align*}
+        \text{min }2x_1+3x_2-x_3-x_4&=z \\
+        \text{s.t. }x_1+x_2+x_3 &=5 \\
+        x_1-2x_2+4x_4&\geq 6 \\
+        x_1, x_4 &\geq 0 \\
+        x_2 \text{ unrestricted} \\
+        x_3&\leq 0
+    \end{align*}
+    Find the dual
+\end{eg}
+\begin{answer}
+    \begin{align*}
+        \text{max }5y_1+6y_2 \\
+        \text{s.t. }y_1+y_2 &\leq 2 \\
+        y_1-2y_2 &=3 \\
+        y_1&\geq -1 \\
+        4y_2&\leq -1 \\
+        y_1 \text{ unrestricted} \\
+        y_1&\geq 0
+    \end{align*} 
+\end{answer}
+
+What happens if we take the dual of the dual?
+\begin{align*}
+    \text{min }2z_1+3z_2-z_3-z_4 \\
+    \text{s.t. }z_1+z_2+z_3 &= 5 \\
+    z_1-2z_2 +4z_4 &\geq 6 \\
+    z_1,z_4&\geq 0 \\
+    z_2 \text{ unrestricted} \\
+    z_3&\leq 0
+\end{align*}
+
+If an LP (B) is the dual of an LP (A), then LP(A) is the dual of LP(B).
+
+\begin{theorem}{\textbf{Weak Duality Theorem}}
+    The objective value of the dual LP at any feasible solution is always a bound 
+    on the objective of the primal LP at any feasible solution (upper or 
+    lower bound, depending on whether it is a maximization or minimization problem). 
+    In fact, this bounding property holds for the optimal values of the dual and primal 
+    LPs.
+\end{theorem}
+
+\begin{theorem}{\textbf{Strong Duality Theorem}}
+    If the primal has an optimal solution then the dual has an optimal solution too,
+     and the two optima are equal.
+\end{theorem}
+
+The optimal dual variables are the shadow prices for the primal LP.
+
+The allowable increases and decreases for the constraints of one program are those for the objective 
+function coefficients in the other.
+
+\begin{theorem}
+    Suppose (LP) is a linear program with dual (D). Then, one of the following four conditions must hold: \\
+    \begin{enumerate}
+        \item (LP) and (D) are both infeasible. 
+        \item (LP) is unbounded, which implies that (D) is infeasible. 
+        \item (D) is unbounded, which implies that (LP) is infeasible. 
+        \item Both (LP) and (D) have optimal solutions with finite optimal objective function values \(z^*\) and \(z^*\). 
+        In this case, \(z^*=z^*\).   
+    \end{enumerate}
+\end{theorem}
+
+\begin{theorem}{\textbf{Complimentary Slackness Theorem}}
+    Suppose we have the following LP and its dual: \\
+    \begin{align*}
+        \text{max } \vec{c}^T \vec{x} \\
+        \text{s.t. }A\vec{x}&\leq \vec{b} \\
+        \vec{x}&\geq \vec{0}
+    \end{align*}
+    Dual: \\
+    \begin{align*}
+        \text{min }\vec{b}^T\vec{y} \\
+        \text{s.t. }A^T\vec{y}^&\geq \vec{c} \\
+        \vec{y}&\geq 0
+    \end{align*}
+    Then: \\
+    \begin{align*}
+        \vec{x}^* \text{ is optimal for (P)} \\
+        \vec{y}^* \text{ is optimal for (D)}
+    \end{align*}
+    if and only if: \\
+    \begin{align*}
+        x^*_j(A^T\vec{y}^*-\vec{c})_j=0 \text{ for }j=1,2,\dots \\
+        y^*_i(A\vec{x}^*-\vec{b})_i=0 \text{ for } i=1,2, \dots
+    \end{align*}
+\end{theorem}
+
+\begin{section}{Integer Programming}
+Now we consider the case where one or more of the decision variables is constrained to be an integer. 
+
+\begin{eg}
+    \begin{align*}
+        \text{max }x_1+3x_2&=z \\
+        \text{s.t. }2x_1+x_2&\leq 6 \\
+        x_1+5x_2&\leq 10 \\
+        x_1,x_2&\geq 0
+    \end{align*}
+\end{eg}
+\begin{answer}
+    \textbf{Add this later. Also fix formatting for -th}
+\end{answer}
+
+(ask about where i should look since i can't take 751)
+
 \end{document}
