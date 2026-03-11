@@ -1145,4 +1145,100 @@ Now we consider the case where one or more of the decision variables is constrai
 
 (ask about where i should look since i can't take 751)
 
+\begin{eg}{\textbf{Altec Case}}
+    Altec inc. is considering two options for expansion to accommodate up to four new machines: 
+    the vacuum melting furnace, the ingot press, the radiac trimmer, and the extrusion press.
+\end{eg}
+\begin{answer}
+    We start by choosing our decision variables: \\
+    \begin{align*}
+        e&=\begin{cases}
+            1 & \text{ if you build extension} \\ 
+            0 & \text{ if not} 
+        \end{cases} \\
+        a&=\begin{cases}
+            1 & \text{ if you build alcove} \\
+            0 & \text{ if not}
+        \end{cases} \\
+        x_1&=\begin{cases}
+            1 & \text{ if VMF purchased} \\
+            0 & \text{ if not}
+        \end{cases}\\
+        x_2&=\begin{cases}
+            1 & \text{ if IP purchased} \\
+            0 & \text{ if not}
+        \end{cases}\\
+        x_3&=\begin{cases}
+            1 & \text{ if RT purchased} \\
+            0 & \text{ if not}
+        \end{cases}\\
+        x_4&=\begin{cases}
+            1 & \text{ if LEP purchased} \\
+            0 & \text{ if not}
+        \end{cases}\\
+    \end{align*}
+
+    Since we want to maximize the net present value profits, our objective function is 
+    \[
+        \text{max }22x_1+52x_2+40x_3+61x_4-10a-30e
+    \]
+
+    We also need constraints for space and power: 
+    \begin{align*}
+        600x_1+1400x_2+800x_3+2000x_4 &\leq 400a+1000e+1200 \\
+        5x_1+10x_2+10x_3+15x_4\leq 5a+20e
+    \end{align*}
+
+    And our variables must equal 0 or 1: \\
+    \[
+        x_1,x_2,x_3,x_4,a,e =0 \text{ or } 1
+    \]
+
+    It turns out that the solution to this LP is \(x_2^*=x_3^*=e^*=1, x_1^*=x_4^*=a^*=0\) since this 
+    fits to the constraints the tightest. 
+\end{answer}
+
+\section{Networks and Graph Theory}
+\begin{definition}
+    An undirected graph \(G=(V, E)\) consists of a set of vertices \(V\) and a set of 
+    edges \(E\) connecting pairs of the vertices in \(V\).  
+\end{definition}
+
+\begin{eg}
+    \begin{align*}
+        V&={A,B,C,D,E} \\
+        E&={AB, CD, AD, BC}
+    \end{align*}
+
+    We represent the graph \(G=(V,E)\) with a diagram: 
+
+    \begin{tikzpicture}[shorten >=1pt,->]
+        \tikzstyle{vertex}=[circle,fill=black!25,minimum size=12pt,inner sep=2pt]
+        \node[vertex] (A) at (-1,-1) {A};
+        \node[vertex] (B) at (0,0)   {B};
+        \node[vertex] (C) at (1,-1)  {C};
+        \node[vertex] (D) at (2, -1) {D};
+        \node[vertex] (E) at (1, -2) {F};
+        \draw (A) -- (B) -- (C) -- (D) -- cycle;
+    \end{tikzpicture}
+\end{eg}
+
+An edge where both vertices are the same is called a \textbf{loop}. 
+
+\begin{definition}
+    A \textbf{directed graph} or \textbf{digraph} is a system \(D=(V,A)\) where \(V\) is 
+    a set of vertices and \(A\) is a set of \textbf{directed arcs} connecting pairs of vertices in \(V\). 
+\end{definition}
+
+\begin{eg}
+    \begin{align*}
+        V&={A,B,C,D,E,F} \\
+        A&={\vec{AB}, \vec{BB}, \vec{CD}, \vec{BF}, vec{DC}}
+    \end{align*}
+
+    \textbf{Draw this in TekZ!!!!!!}
+\end{eg}
+
+\textbf{MATH 487 Midterm 3/18. 1 8.5 by 11 inch notesheet allowed, 1 side (write small)}
+
 \end{document}
