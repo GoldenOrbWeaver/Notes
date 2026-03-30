@@ -1218,7 +1218,7 @@ Now we consider the case where one or more of the decision variables is constrai
         \node[vertex] (B) at (0,0)   {B};
         \node[vertex] (C) at (1,-1)  {C};
         \node[vertex] (D) at (2, -1) {D};
-        \node[vertex] (E) at (1, -2) {F};
+        \node[vertex] (E) at (1, -2) {E};
         \draw (A) -- (B) -- (C) -- (D) -- cycle;
     \end{tikzpicture}
 \end{eg}
@@ -1239,6 +1239,62 @@ An edge where both vertices are the same is called a \textbf{loop}.
     \textbf{Draw this in TekZ!!!!!!}
 \end{eg}
 
-\textbf{MATH 487 Midterm 3/18. 1 8.5 by 11 inch notesheet allowed, 1 side (write small)}
+Shortest path problems: \\
+Given a digraph \(D=(v,a)\) with nonnegative weights \(w_{ij}\) on each \(\vec{y}\in a\) and 
+designated vertices \(s,t\in V\), find the shortest path from \(s\) to \(t\).  
+
+Another application:\\
+\begin{eg}
+    We want to drive a Buick Century for the next 5 years. The following is true of the model: \\
+    \begin{tabular}{c | c | c }
+        Age & Max Cost for Next Yr (1000\$) & Trade-in Value (1000\$)\\
+        \hline
+        0 & 2 & 12 \\
+        1 & 4 & 7 \\
+        2 & 5 & 6 \\
+        3 & 9 & 2 \\
+        4 & 12 & 1 \\
+        5 & 12 & 0 \\
+    \end{tabular}
+
+    We want to minimize the total costs of driving a Buick Century over the next 5 years (from 
+    beginning of year 0 to beginning of year 5). There are many options for when you replace your car.
+\end{eg}
+\begin{answer}
+    We notice that we can represent potential plans of action as paths in a digraph. We have nodes for 
+    each year and multiple arcs between each, with each arc representing a different option (such as keeping 
+    the car for one year, keeping it for two years, etc.).
+
+    \textbf{DRAW THIS DIAGRAM}
+
+    Then, we can run Dijkstra's algorithm on this to find the shortest path. The result is 
+    0 to 2 to 4 to 5, with a length of 31 (or cost of \$31,000).
+\end{answer}
+
+\begin{definition}{\textbf{Dijkstra's Algorithm}} 
+    Given digraph \(D=(v,a)\), vertices \(s, t\in v\): \\
+    \begin{enumerate}
+        \item Set \(P={s}\), \(p=s\), \(D=(d_s, d_1, d_2, \dots, d_n, d_t)=(0, \infty, \infty, \dots, \infty)\), 
+            \(A=(x-, a_1, a_2, \dots, a_n, a_t)=(x, \emptyset, \emptyset, \emptyset, \emptyset)\) 
+        \item Given \(p\), consider each arc \(\vec{pq}\in a\) for which \(q \notin P\) 
+            \begin{enumerate}
+                \item If \(d_q>d_p+\abs{\vec{pq}}\), change \(d_q\) to \(d_p+\abs{\vec{pq}}\) and set \(a_q=p\). 
+                \item If \(d_q<d_p+\abs{\vec{pq}}\), do nothing.     
+            \end{enumerate}
+        \item Let \(p\) be an element \(\notin P\) for which \(d_p\) is smallest. 
+            \begin{enumerate}
+                \item If \(p=t\), we found the shortest path.
+                \item If \(p\neq t\), set \(P=P \cup {p}\) and go to 2.   
+            \end{enumerate}   
+    \end{enumerate}
+
+    \textbf{FIX FORMATTING HERE AND EARLIER SO COMPILATION WORKS}
+\end{definition}
+
+\begin{eg}
+
+\end{eg}
+
+Suppose D=(v,a)
 
 \end{document}
