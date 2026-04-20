@@ -1297,4 +1297,70 @@ Another application:\\
 
 Suppose D=(v,a)
 
+\textbf{EOQ Model:}\\
+\begin{align*}
+    \text{Ordering Cost: } C(Q)&=K+cQ \\
+    \text{Holding Cost: } H(z)&=hz \text{ per time unit} \\
+    \text{Demand Rate: } &=a \text{ per unit time}\\
+    \text{Penalty Cost: } \infty \text{ if shortages not permitted}, P(z)=Pz \text{ per unit time}\\
+\end{align*}
+
+Diagram: \\
+
+Case where shortages are not permitted is a special case of more general case, just with the 
+penalty cost set to \(\infty \). When we take the limit of \(Q*\) for \(p\rightarrow \infty \), we should get the 
+formula for the formula for \(Q^*\) with shortages not permitted.   
+
+Also, we had an example where a steel company with \(K=\$5000\), \(c=30\), \(p=\$50\), \(h=\$20\), 
+and \(a=500\). We got \(Q^*=591.6\), \(\frac{Q^*}{a}=1.18\), \(S^*=422.6\), and \(S^*-Q^*\approx 169.0\)\dots
+
+Two generalizations of EOQ model: \\
+\begin{enumerate}
+    \item Quantity discounts: Suppose the cost is given by \(C(z)=\begin{cases} k+c_1z \text{ if } z<b_1 \\ \dots \\ k+c_{n+1}z \text{ if } z\geq b_n \end{cases}\) where 
+    \(b_1<b_2<\dots<b_n\) and \(c_1>c_2>\dots>c_{n+1}\) 
+    \item Known fixed time delivery lag: If delivery is not instantaneous and instead doesn't occur 
+    until \(\lambda \) time units have passed, then we compensate by just ordering \(\lambda\) time units sooner, or at time \(t^*-\lambda \) 
+    instead of  \(t^*\). This turns out to be when the inventory is \(S^*-Q^*+a \lambda \mod{Q^*/a}\)  
+\end{enumerate}
+
+Thus, if in the steel company example, there is a 3 month delay, then we should order when the inventory level is 
+\(422.5-591.6+500*0.64=151.0\).
+
+\section{Dynamic Programming (DP)}
+DP is another solution technique for solving certain types of problems which occur over stages. Many times 
+an important feature is starting at the end and working backwards.
+
+\begin{eg}
+    A Navy recruiter has 5 days to recruit. She starts in New York and will then go to Chicago and 
+    Los Angeles. The number of potential recruits she can contact in each city is a function of the 
+    number of (whole) days she spends there: 
+    \begin{tabular}{c | c | c | c }
+        Days & New York & Chicago & Los Angeles \\
+        \hline
+        0 & 0 & 0 & 0 \\
+        1 & 45 & 20 & 50 \\
+        2 & 70 & 45 & 70 \\
+        3 & 90 & 75 & 80 \\
+        4 & 105 & 110 & 100 \\
+        5 & 120 & 150 & 130 \\
+    \end{tabular}
+
+    How much time should she spend in each city to maximize the total number of potential recruits contacted?
+\end{eg}
+\begin{answer}
+    This problem has three stages: NY (\(i=1\)), Chi (\(i=2\)), and LA (\(i=3\)). We start by setting up the variables: \\
+    \[
+        V_i(x)=\text{max number of recruits contacted given recruiter goes to city i with x days left}
+    \]
+    At each stage, there are 6 possible states (for \(x\) from \(0\) to \(5\)). We are trying to calculate: \(V_1(5)\) 
+
+    Observe that the definition of \(V_i(x)\) obeys the following recursion: \\
+    \[
+        V_i(x)=\max{x_i=0,1,\dots, x} [V_i(x_i)+V_{i+1}(x-x_i)] %REFORMAT THIS MAX SHOULD BE WHOLE THING
+    \]  
+
+    We can use this formula to calculate \(V_2(x)\) from \(V_3(x)\) and then calculate \(V_1(x)\) from \(V_2(x)\)    
+\end{answer}
+
+
 \end{document}
