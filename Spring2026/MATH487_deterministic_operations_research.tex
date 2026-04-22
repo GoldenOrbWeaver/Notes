@@ -1356,11 +1356,26 @@ an important feature is starting at the end and working backwards.
 
     Observe that the definition of \(V_i(x)\) obeys the following recursion: \\
     \[
-        V_i(x)=\max{x_i=0,1,\dots, x} [V_i(x_i)+V_{i+1}(x-x_i)] %REFORMAT THIS MAX SHOULD BE WHOLE THING
+        V_i(x)=\max{x_i=0,1,\dots, x, [V_i(x_i)+V_{i+1}(x-x_i)]} %REFORMAT THIS MAX SHOULD BE WHOLE THING
     \]  
 
-    We can use this formula to calculate \(V_2(x)\) from \(V_3(x)\) and then calculate \(V_1(x)\) from \(V_2(x)\)    
+    We can use this formula to calculate \(V_2(x)\) from \(V_3(x)\) and then calculate \(V_1(x)\) from \(V_2(x)\). Thus, 
+    we can just work backwards. 
+
+    Doing this, we find that the optimal strategy (highest \(V_1(5)\)) is to spend 1 days in NY, 3 days in Chicago, and 1 day in LA, for a total of 170 potential recruits contacted.
 \end{answer}
+
+ \textbf{Basic setup for a finite-stage, discrete-state, deterministic dynamic programming problem:} \\
+ \begin{enumerate}
+    \item The problem can be divided into stages, with a decision required at each stage. In many problems, 
+    the stages correspond to different time periods.
+    \item Each stage can have one or more states associated with it. 
+    \begin{enumerate}
+        The problem can usually be easily stated in terms of finding the value or worth \(V_i(x)\) of a particular 
+    \end{enumerate}
+ \end{enumerate}
+
+ ADD STUFF FROM PAPER NOTES
 
 
 \end{document}
