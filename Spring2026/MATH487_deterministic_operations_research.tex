@@ -1026,17 +1026,18 @@ We can solve this by pricing out eggs.
 
 \section{Duality Theory}
 \textbf{ADD NOTES FROM 3/4}
-Rules for generating dual linear program, given an LP: \\
-Max problem | Min problem (reformat in columns):\\
-\(i^{th}\) constraint \(\leq \) | \(i^{th}\) variable \(\geq 0\) \\
-\(i^{th}\) constraint \(=\) | \(i^{th}\) variable unrestricted  \\
-i^{th} constraint \(\geq\) | i^{th} variable \(\leq 0\) \\
-j^{th} variable \(\geq 0\) | j^{th} constraint \(\geq \) \\
-j^{th} variable unrestricted | j^{th} constraint \(=\)    \\
-j^{th} variable \(\leq 0\) | j^{th} constraint \(\leq \) \\
-Objective function coefficients | RHSs\\
-RHSs | Objective function coefficients \\
-Coefficients matrix A | coefficient matrix \(A^T\) \\
+
+%    Rules for generating dual linear program, given an LP: \\
+ %   Max problem | Min problem (reformat in columns):\\
+ %   \(i^{th}\) constraint \(\leq \) | \(i^{th}\) variable \(\geq 0\) \\
+ %   \(i^{th}\) constraint \(=\) | \(i^{th}\) variable unrestricted  \\
+ %   i^{th} constraint \(\geq\) | i^{th} variable \(\leq 0\) \\
+ %   j^{th} variable \(\geq 0\) | j^{th} constraint \(\geq \) \\
+ %   j^{th} variable unrestricted | j^{th} constraint \(=\)    \\
+ %   j^{th} variable \(\leq 0\) | j^{th} constraint \(\leq \) \\
+    Objective function coefficients | RHSs\\
+    RHSs | Objective function coefficients \\
+    Coefficients matrix A | coefficient matrix \(A^T\) \\
 
 \begin{eg}
     Given: \\
@@ -1371,11 +1372,75 @@ an important feature is starting at the end and working backwards.
     the stages correspond to different time periods.
     \item Each stage can have one or more states associated with it. 
     \begin{enumerate}
-        The problem can usually be easily stated in terms of finding the value or worth \(V_i(x)\) of a particular 
+        \item The problem can usually be easily stated in terms of finding the value or worth \(V_i(x)\) of a particular 
     \end{enumerate}
  \end{enumerate}
 
  ADD STUFF FROM PAPER NOTES
 
+do all hw this weekend no matter what. absolutely no excuses\dots
+
+(communication problem, copy from paper)
+
+Reliability theory has stuff like communication problem
+
+\begin{eg}
+    \begin{tabular}{c | c | c | c | c | c | c | c | c }
+        Arc & \multicolumn{4}{|c}{Reliability} & \multicolumn{4}{|c}{Cost} \\
+        \hline
+         & 0 & 1 & 2 & 3 & 0 & 1 & 2 & 3 \\
+        0-1 & 0 & 0.6 & 0.8 & 0.9 & 0 & 1 & 2 & 3 \\
+        1-2 & 0 & 0.7 & 0.8 & 0.9 & 0 & 3 & 5 & 6 \\
+        2-3 & 0 & 0.5 & 0.7 & 0.9 & 0 & 2 & 4 & 5 
+    \end{tabular}
+
+    If we have 100k to spend, what links should we build to maximize reliability?
+\end{eg}
+\begin{answer}
+    We define \(V_i(x)\) to be the maximum reliability we can achieve for the links from i to 3  
+    given that we have \(x\) dollars to spend. 
+
+    We are trying to find \(V_0(10)\). 
+    
+    It is easy to compute \(V_2(x)\): \\
+    \begin{align*}
+        V_2(0)&=0 \\
+        V_2(1)&=0 \\
+        V_2(3)&=0.5 \\
+        V_2(3)&=0.5 \\
+        V_2(4)&=0.7 \\
+        V_2(5)&=0.9 \\
+        V_2(6)=V_2(7)=V_2(8)=V_2(9)=V_2(10)&=0.9
+    \end{align*} 
+
+    We have the recursion \\
+    \[
+        V_i(x)=\max{\ell_i \text{ s.t. } C(\ell _i)\leq x} [r_i(\ell _i)*V_{i+1}(x-C(\ell _i))]
+    \]
+
+    We use this to find \(V_1(x)\)'s from \(V_2(x)\)'s and then find \(V_0(10)\) from 
+    the \(V_1(x)\)'s:
+    \begin{align*}
+        V_1(0)&=r_1(0)*V_2(0-0)=0 \\
+        V_1(1)&=r_1(0)*V_2(1-0)=0 \\
+        V_1(2)&=r_1(0)*V_2(2-0)=0 \\
+        V_1(3)&=\max [r_1(0)*V_2(3-0), r_1(1)*V_2(3-3)]=0 \\
+        V_1(4)&=\max [r_1(0)*V_2(4-0), r_1(1)*V_2(4-3)]=0 \\
+        V_1(5)&=0.35 \\
+        V_1(6)&=0.35 \\
+        V_1(7)&=0.40 \\
+        V_1(8)&=0.63 \\
+        V_1(9)&=0.63 \\
+        V_1(10)&=0.72 \\
+        V_0(10)&=0.504
+    \end{align*}
+
+    Therefore, the maximum reliability is 0.504, when we have two links between 0 and 1, 1 link between 
+    1 and 2, and 3 links between 2 and 3.
+\end{answer}
+
+\begin{eg}
+    Shortest path on an acyclic digraph:
+\end{eg}
 
 \end{document}
