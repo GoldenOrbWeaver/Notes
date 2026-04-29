@@ -1439,8 +1439,56 @@ Reliability theory has stuff like communication problem
     1 and 2, and 3 links between 2 and 3.
 \end{answer}
 
-\begin{eg}
-    Shortest path on an acyclic digraph:
+\begin{eg}{\textbf{Shortest path on an acyclic digraph}}
+    Find the shortest path on the digraph: \\
+    
 \end{eg}
+
+\begin{section}{Nonlinear Programming}
+
+\begin{definition}
+    Let C be a region in \(\mathbb{r}^n\). Then C is \textbf{convex} if 
+    \(\underline{x}\in C\), \(\underline{y}\in C\), then \(\alpha \in[0,1]\Rightarrow \alpha \underline{x}+(1-\alpha)\underline{y}\in C\).
+
+    In other words, \(\underline{x}\in C\) and \(\underline{y}\in C\) implies that the line segment \(\overline{xy}\subseteq C\).   
+\end{definition}
+
+\begin{definition}
+    If in addition, for any \(\underline{x}\in C\), \(\underline{y}\in C\), and \(\alpha \in(0,1)\), we have \(\alpha \underline{x}+(1-\alpha)\underline{y}\in \text{int}(C)\), then \(C\) is \textbf{strictly convex}.
+\end{definition}
+
+The feasible region for any linear program is convex.
+
+\begin{theorem}
+    The intersection of any two convex regions in \(\mathbb{R}^n\) is convex. 
+\end{theorem}
+\begin{proof}
+    Suppose \(C_1\) and \(C_2\) are convex regions. Consider any two points \(\underline{x}\) and 
+    \(\underline{y}\) in \(C_1\cap C_2\). 
+    
+    Since \(\underline{x}\) and \(\underline{y}\in C_1\) and \(C_1\) is convex, \(\overline{xy}\subseteq C_1\). Similarly, 
+    since \(\underline{x}\) and \(\underline{y}\in C_2\) and \(C_2\) is convex, \(\overline{xy}\subseteq C_2\). Thus, \(\overline{xy}\subseteq C_1\cap C_2\). 
+
+    Therefore, \(C_1\cap C_2\) is convex.
+\end{proof}
+
+\begin{note}
+    Any half-space (formed from dividing a region with a hyperplane) is convex. This means 
+    that the feasible region for any linear program is convex.
+\end{note}
+
+\begin{definition}
+    An \textbf{extreme point} or convex point of a convex set C is a point \(\underline{x}\in C\) which cannot be 
+    written as \(\underline{x}=\frac{1}{2}\underline{y}+\frac{1}{2}\underline{z}\) for any \(\underline{y}\in C\), \(\underline{z}\in C\) 
+    with \(\underline{y}, \underline{z} \neq \underline{x}\).     
+\end{definition}
+
+NOTE: Superscript below denotes which point, not exponentiation.
+
+\begin{definition}
+    Let \(D\) be a convex region in \(\mathbb{R}^n\). A function \(f:D\rightarrow \mathbb{R}\) is \textbf{convex} 
+    if \(f(\alpha \underline{x}^1+(1-\alpha)\underline{x}^2)\leq \alpha f(\underline{x}^{\prime}) +(1-\alpha ))f(\underline{x}^2)\) for all 
+    \(\underline{x^1}, \underline{x^2}\in D
+
 
 \end{document}
