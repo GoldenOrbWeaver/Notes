@@ -36,6 +36,62 @@
 \fancyhead[L]{\thetitle}
 \fancyhead[R]{Autumn Weaver}
 
-\section{}
+\section{Heat Equation}
+\begin{definition}
+A \textbf{partial differential equation} (PDE) is an equation 
+containing partial derivatives. 
+\end{definition}
+
+\subsection{Conduction of Heat in a 1-D Rod}
+\begin{definition}
+The \textbf{thermal energy density} \(e(x,t)\) is the amount of thermal energy per 
+unit volume. 
+\end{definition}
+
+If we have 1 dimensional rod with cross sectional area \(A\) and length \(L\) and a slice on the rod 
+from \(x\) to \(x+\Delta x\), then the heat energy of this slice is:
+\[
+    \text{heat energy}=e(x,t)A\Delta x
+\]  
+
+If there is no lateral heat flow on the rod, then the rate of change of the heat energy of 
+this slice must be the sum of the next heat flux into the slice and the heat generate in the slice:
+\[
+    \frac{\partial }{\partial t}[e(x,t)A\Delta x]\approx \Phi(x, t)A-\Phi(x+\Delta x, t)A+Q(x, t)A\Delta X
+\]
+Where \(Q(x, t)\) is the heat energy generated per unit volume.
+
+
+We can easily simplify this by diving by \(A \Delta x\) and taking the \(\lim_{\Delta x \rightarrow 0}\)  to get the following PDE:
+\[
+    \frac{\partial e}{\partial t}=-\frac{\partial \Phi}{\partial x}+Q
+\]
+
+We can also derive this equation by considering a finite slice from \(x=a\) to \(x=b\). The rate of change of heat energy of this slice is: 
+\[
+    \frac{d}{dt}\int_a^b e dx=\Phi(a,t)-\Phi (b,t)+\int_a^b Q dx
+\]
+
+This is also known as the \textbf{integral conservation law}. 
+
+We can convert this to a single integral by noting that \(\frac{d}{dt}\int_a^b e(x, t)=\int_a^b\frac{\partial e(x, t)}{t}\) and that 
+\(\Phi(a, t)-\Phi(b, t)=-\int_a^b \frac{\partial \Phi}{\partial x}dx\), resulting in: 
+\[
+    \int_a^b (\frac{\partial e}{\partial t}+\frac{\partial \Phi}{\partial x}-Q)dx=0
+\]
+
+Since this must be true for any arbitrary \(a\) and \(b\), the integrand must be zero:
+\[
+    \frac{\partial e}{\partial t}=-\frac{\partial \Phi}{x}+Q
+\]
+
+Because we also describe the temperatures of materials instead of heat energy, it is useful to convert our equations. We let:
+\begin{align*}
+    u(x, t)&\equiv\text{temperature} \\
+    c&\equiv\text{specific heat capacity} \\
+    \rho&\equiv\text{density}
+\end{align*}
+
+
 
 \end{document}
