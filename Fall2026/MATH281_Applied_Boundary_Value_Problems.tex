@@ -92,6 +92,38 @@ Because we also describe the temperatures of materials instead of heat energy, i
     \rho&\equiv\text{density}
 \end{align*}
 
+Then, the thermal energy density can be expressed as:
+\[
+    e(x, t)=c(x)\rho(x)u(x,t)
+\]
 
+Therefore, the conservation of thermal energy can be expressed as:
+\[
+    c(x)\rho(x)\frac{\partial u}{\partial t}=-\frac{\partial \Phi}{\partial x}+Q
+\]
 
+\begin{theorem}{\textbf{Fourier's law of heat conduction}}
+    \[
+        \Phi=-K_0\frac{\partial u}{\partial x}
+    \]
+    Where \(K_0\) is the thermal conductivity of the material. 
+\end{theorem}
+
+Substituting this in, we get:
+\[
+    c\rho\frac{\partial u}{\partial t}=\frac{\partial}{\partial x}(K_0\frac{\partial u}{\partial x})+Q
+\]
+
+If \(c\), \(\rho\), and \(K_0\) are all constant, then this simplifies to the heat equation:
+\[
+    \frac{\partial u}{\partial t}=k\frac{\partial^2}{\partial x^2}
+\]
+
+where
+\[
+    k=\frac{K_0}{c\rho}
+\]
+
+is the thermal diffusivity.
+    
 \end{document}
