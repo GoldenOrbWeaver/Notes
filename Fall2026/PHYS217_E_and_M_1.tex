@@ -27,7 +27,7 @@
 % Use a relative path (forward slashes or "..") to avoid backslash-escapes
 \subimport{../}{header.tex}
 
-\title{\textbf{PHYS 217 E\&M 1}}
+\title{\textbf{PHYS 217 Electricity and Magnetism I}}
 \author{Autumn Weaver}
 \date{Fall 2026}
 
@@ -167,10 +167,180 @@ where:
 is the Kronecker delta.
 
 \begin{definition}
-    \textbf{Parity} is a property relating to (). If a system stays the same after a parity transformation, 
+    \textbf{Parity} is a property related to how a system is affected by coordinate inversions. If a system stays the same after a parity transformation, 
     it is said to have even parity. If it is inverted, it is said to have odd parity.
 \end{definition}
 
+\subsubsection{Dyadics and Tensors}
+\begin{definition}
+    A \textbf{tensor} is something that transforms like a tensor.
+\end{definition}
+
+\begin{definition}
+    A \textbf{dyadic product} or outer product is a type of multiplication that generates a second-order tensor called a \textbf{dyadic} from two vectors:
+    \[
+        \overleftrightarrow{\mathbf{C}}=\mathbf{A} \mathbf{B} 
+    \]
+\end{definition}
+
+Dyadics have nine independent components and in Cartesian coordinates can be decomposed into \textbf{dyads}:
+\[
+   \overleftrightarrow{\mathbf{C}} =A_xB_x \mathbf{\hat{x}}^2++A_xB_y \mathbf{\hat{x}} \mathbf{\hat{y}} +A_xB_z \mathbf{\hat{x}} \mathbf{\hat{z}} +A_yB_x \mathbf{\hat{y}} \mathbf{\hat{x}} +A_yB_y \mathbf{\hat{y}} ^2+A_yB_z \mathbf{\hat{y}} \mathbf{\hat{z}} +A_zB_x \mathbf{\hat{z}} \mathbf{\hat{x}} +A_zB_y \mathbf{\hat{z}} \mathbf{\hat{y}} +A_zB_z \mathbf{\hat{z}} ^2
+\]
+
+Thus, dyadics can be represented in matrix form:
+\[
+   \overleftrightarrow{\mathbf{C}} =\begin{bmatrix} A_xB_x & A_xB_y & A_xB_z \\ A_yB_x & A_yB_y & A_yB_z \\ A_zB_x & A_zB_y & A_zB_z \end{bmatrix}=\begin{bmatrix} A_x & A_y & A_z \end{bmatrix} \begin{bmatrix} B_x \\ B_y \\ B_z \end{bmatrix}=\mathbf{A} \mathbf{B} ^T
+\]
+
+The transpose symbol is usually omitted in E\&M.
+
+A dyadic \(\mathbf{\overleftrightarrow{C}} \) has two invariants, \textbf{spur} (called cusp in lecture) \(\lvert\overleftrightarrow{\mathbf{C}} \rvert\) and \textbf{rotation vector} \(\langle\overleftrightarrow{\mathbf{C}}  \rangle\):
+\begin{align*}
+    \lvert\overleftrightarrow{\mathbf{C}} \rvert &= \sum_i^3 C_{ii}\\
+    \langle\overleftrightarrow{\mathbf{C}} \rangle &= \mathbf{\hat{x}} (C_{yz}-C_{zy})+\mathbf{\hat{y}} (C_{zx}-C_{xz})+\mathbf{\hat{z}} (C_{xy}-C_{yz})
+\end{align*}
+
+Dyadics commute in addition and scalar multiplication but not in inner products:
+\begin{align*}
+    \overleftrightarrow{\mathbf{C}}+\overleftrightarrow{\mathbf{D} }&=\overleftrightarrow{\mathbf{D} }+\overleftrightarrow{\mathbf{C} } \\
+    a \overleftrightarrow{\mathbf{C} }&=\overleftrightarrow{\mathbf{C} }a \\
+    \mathbf{A} \cdot \overleftrightarrow{\mathbf{C} }&\neq \overleftrightarrow{\mathbf{C} }\cdot \mathbf{A} 
+\end{align*}
+
+\begin{definition}
+    Every dyadic \(\overleftrightarrow{\mathbf{C} }\) has a \textbf{conjugate} \(\overleftrightarrow{\mathbf{C} }^*\) such that:
+    \[
+        \mathbf{A} \cdot \overleftrightarrow{\mathbf{C} }=\overleftrightarrow{\mathbf{C} }^*\cdot \mathbf{A} 
+    \]  
+\end{definition}
+
+In three dimensional Cartesian coordinates, the conjugate of a dyadic is simply its transpose.
+
 \subsection{Differential Calculus}
- 
+\begin{definition}
+    The \textbf{gradient} of a three dimensional scalar-valued function \(f(x,y,z)\) is a vector field that points in the direction of maximum increase of \(f\) and has a magnitude equal to the rate of increase:
+    \[
+        \nabla f=\frac{\partial f}{\partial x}\mathbf{\hat{d}} +\frac{\partial f}{\partial y}\mathbf{\hat{y}} +\frac{\partial f}{\partial z}\mathbf{\hat{z}} 
+    \]   
+\end{definition}
+
+\begin{definition}
+    The \textbf{divergence} of a three dimensional vector-valued function \(f(x,y,z)=f_x \mathbf{\hat{x}} +f_y \mathbf{\hat{y}} +f_z \mathbf{\hat{z}} \) is a scalar 
+    that represents how much the vector field diverges or converges, analogous to sources and sinks in fluid flow:
+    \[
+        \nabla \cdot f=\frac{\partial f_x}{\partial x}+\frac{\partial f_y}{\partial y}+\frac{\partial f_z}{\partial z}
+    \] 
+\end{definition}
+
+\begin{definition}
+    The \textbf{curl} of a three dimensional vector-valued function \(f(x,y,z)=f_x \mathbf{\hat{x}} +f_y \mathbf{\hat{y}} +f_z \mathbf{\hat{z}} \) is a vector field with 
+    magnitude representing the infinitesimal circulation, analogous to rotation in a fluid, and direction perpendicular to that circulation:
+    \[
+        \nabla \times f = (\frac{\partial f_z}{\partial y}-\frac{\partial f_y}{\partial z})\mathbf{\hat{x}} +(\frac{\partial f_x}{\partial z}-\frac{\partial f_z}{\partial x})\mathbf{\hat{y}}+(\frac{\partial f_y}{\partial x}-\frac{\partial f_x}{\partial y})\mathbf{\hat{z}} 
+    \]
+\end{definition}
+
+Gradient, divergence, and curl can all be found by treating the vector operator \(\nabla\) \textbf{del} as a vector:
+\[
+    \nabla = \mathbf{\hat{x}} \frac{\partial}{\partial x}+\mathbf{\hat{y}} \frac{\partial}{\partial y}+\mathbf{\hat{z}} \frac{\partial}{\partial z}
+\]
+
+Gradient, divergence, and curl behave like ordinary derivatives under summation and multiplication by scalars. Since  gradient, divergence, and curl can be multiplied by scalars and vectors in multiple ways, there are six product rules:
+\begin{align*}
+    \nabla(fg)&=f \nabla g+g\nabla f \\
+    \nabla(\mathbf{A} \cdot \mathbf{B} )&=\mathbf{A} \times (\nabla \times \mathbf{B} )+\mathbf{B} \times (\nabla \times \mathbf{A} )+(\mathbf{A} \cdot \nabla)\mathbf{B} +(\mathbf{B} \cdot \nabla)\mathbf{A}  \\
+    \nabla \cdot (f \mathbf{A} )&=f(\nabla \cdot \mathbf{A} )+\mathbf{A} \cdot (\nabla f) \\
+    \nabla \cdot (\mathbf{A} \times \mathbf{B} )&=\mathbf{B} \cdot (\nabla \times \mathbf{A} )-\mathbf{A} \cdot (\nabla \times \mathbf{B} ) \\
+    \nabla \times (f \mathbf{A} )&=f(\nabla \times \mathbf{A} )-\mathbf{A} \times (\nabla f) \\
+    \nabla \times (\mathbf{A} \times \mathbf{B} )&= (\mathbf{B} \cdot \nabla) \mathbf{A} -(\mathbf{A} \cdot \nabla) \mathbf{B} +\mathbf{A} (\nabla \cdot \mathbf{B} )-\mathbf{B} (\nabla \cdot \mathbf{A} )
+\end{align*}
+
+Since you can combine the three derivatives in various ways, there are five species of second derivatives, but all but two are either degenerate or are composed of the others:
+\begin{align*}
+    \nabla \cdot (\nabla f) \\
+    \nabla (\nabla \cdot f)
+\end{align*}
+
+\begin{definition}
+    The \textbf{Laplacian} of three dimensional scalar-valued function \(f\) is:
+    \[
+        \laplacian{f}=\nabla \cdot (\nabla f)
+    \] 
+\end{definition}
+
+\subsection{Integral Calculus}
+\begin{definition}
+    A \textbf{line integral} of a vector-valued function is the integral of the dot product of the function and infinitesimal displacement along a curve:
+    \[
+        \int_a^b \mathbf{v} \cdot d \mathbf{l} 
+    \]
+\end{definition}
+
+\begin{definition}
+    A \textbf{surface integral} of a vector-valued function is the integral of the dot product of the function and infinitesimal area over a surface:
+    \[
+        \int_S \mathbf{v} \cdot d \mathbf{a} 
+    \]
+\end{definition}
+
+\begin{definition}
+    A \textbf{volume integral} of a scalar-valued function is the integral of the function over a volume:
+    \[
+        \int_v T d\tau
+    \]
+\end{definition}
+
+Since there are three types of derivatives in three dimensions, there are three versions of the fundamental theorem of calculus.
+
+\begin{theorem}{\textbf{Gradient Theorem}}
+    \[
+        \int_ \mathbf{a} ^ \mathbf{b}  (\nabla T)\cdot d \mathbf{l} =T(\mathbf{b} )-T(\mathbf{a} )
+    \] 
+\end{theorem}
+\begin{proof}
+    left as an exercise for the reader (will do tonight)
+\end{proof}
+
+\begin{theorem}{\textbf{Divergence Theorem or Gauss's Theorem}}
+    \[
+        \int_V (\nabla \cdot \mathbf{v}) d\tau=\oint_{\partial V} \mathbf{v}\cdot d \mathbf{a}
+    \]
+\end{theorem}
+\begin{proof}
+    left as an exercise for the reader (will finish tonight)
+\end{proof}
+
+\begin{theorem}{\textbf{Stoke's Theorem}}
+    \[
+        \int_S (\nabla \times \mathbf{v} )d \mathbf{a} =\oint_{\partial S} \mathbf{v} \cdot d \mathbf{l} 
+    \]
+\end{theorem}
+\begin{proof}
+    left as an exercise for the reader (will finish tonight)
+\end{proof}
+
+\subsection{Curvilinear Coordinates}
+\begin{definition}
+    \textbf{Spherical coordinates} are a coordinate system that uses distance from the origin \(r\), the angle down from the z-axis called the \textbf{polar angle} \(\theta\), 
+    and the angle around from the x-axis called the \textbf{azimuthal angle} \(\phi\). 
+\end{definition}
+
+The following are true for spherical coordinates:
+\begin{itemize}
+    \item Conversion to Cartesian coordinates: \(x=r\sin \theta \cos \phi\), \(y=r\sin \theta \sin \phi\), \(z=r\cos \theta\)
+    \item Unit vectors in terms of cartesian coordinates:
+        \begin{align*}
+            \mathbf{\hat{r}} &=\sin\theta \cos \phi \mathbf{\hat{x}} +\sin \theta \sin \phi \mathbf{\hat{y}} +\cos \theta \mathbf{\hat{z}} \\
+            \mathbf{\hat{\theta}} &=\cos \theta \cos \phi \mathbf{\hat{x}} + \cos \theta  \sin \phi \mathbf{\hat{y}} -\sin \theta \mathbf{\hat{z}} \\
+            \mathbf{\hat{\phi}} &=-\sin \phi \mathbf{\hat{x}} +\cos \phi \mathbf{\hat{y}} 
+        \end{align*}
+    \item Infinitesimal displacement: \(d \mathbf{\hat{l}} =dr \mathbf{\hat{r}} +r d \theta  \mathbf{\hat{\theta}} +r \sin \theta  d \phi \mathbf{\hat{\phi}}  \) 
+    \item Infinitesimal volume: \(d \tau =r^2 \sin \theta  dr d \theta  d \phi \) 
+    \item Gradient: \(\nabla T=\frac{\partial T}{\partial r}\mathbf{\hat{r}} +\frac{1}{r}\frac{\partial T}{\partial \theta }\mathbf{\hat{\theta}} +\frac{1}{r \sin \theta }\frac{\partial T}{\partial \phi } \mathbf{\hat{\phi}}  \) 
+    \item Divergence:\(\nabla \cdot \mathbf{v} = \frac{1}{r^2}\frac{\partial}{\partial r}(r^2v_r)+\frac{1}{r \sin \theta }\frac{\partial}{\partial \theta }(\sin \theta  v_{\theta })+\frac{1}{r \sin \theta }\frac{\partial v_{\phi }}{\partial \phi }\)
+    \item Curl: \(\nabla \times \mathbf{v} =\frac{1}{r\sin \theta }[\frac{\partial}{\partial \theta }(\sin \theta v_{\phi })-\frac{\partial v_{\theta }}{\partial \phi }]\mathbf{\hat{r}} +\frac{1}{r}[\frac{1}{\sin \theta }\frac{\partial v_r}{\partial \phi }-\frac{\partial}{\partial r }(rv_{\phi })]\mathbf{\hat{\theta}} +\frac{1}{r}[\frac{\partial}{\partial r}(rv_{\theta })-\frac{\partial v_r}{\partial \theta }]\mathbf{\hat{\phi}}   \) 
+    \item Laplacian: \(\laplacian{T}=\frac{1}{r^2}\frac{\partial}{\partial r}(r^2\frac{\partial T}{\partial r})+\frac{1}{r^2 \sin \theta }\frac{\partial }{\partial \theta }(\sin \theta  \frac{\partial T}{\partial \theta })+\frac{1}{r^2 \sin^2 \theta }\frac{\partial ^2 T}{\partial \phi ^2}\)  
+\end{itemize}
+
 \end{document}

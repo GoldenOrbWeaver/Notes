@@ -43,46 +43,39 @@ containing partial derivatives.
 \end{definition}
 
 \subsection{Conduction of Heat in a 1-D Rod}
-\begin{definition}
-The \textbf{thermal energy density} \(e(x,t)\) is the amount of thermal energy per 
-unit volume. 
-\end{definition}
-
-If we have 1 dimensional rod with cross sectional area \(A\) and length \(L\) and a slice on the rod 
-from \(x\) to \(x+\Delta x\), then the heat energy of this slice is:
+If we have 1 dimensional rod with cross sectional area \(A\), \(L\), and thermal energy density \(e(x,t)\), the heat energy of a slice on the rod 
+from \(x\) to \(x+\Delta x\) is:
 \[
     \text{heat energy}=e(x,t)A\Delta x
 \]  
 
 If there is no lateral heat flow on the rod, then the rate of change of the heat energy of 
-this slice must be the sum of the next heat flux into the slice and the heat generate in the slice:
+this slice must be the sum of the net heat flux into the slice and the heat generated in the slice:
 \[
-    \frac{\partial }{\partial t}[e(x,t)A\Delta x]\approx \Phi(x, t)A-\Phi(x+\Delta x, t)A+Q(x, t)A\Delta X
+    \frac{\partial }{\partial t}[e(x,t)A\Delta x]\approx \phi(x, t)A-\phi(x+\Delta x, t)A+Q(x, t)A\Delta X
 \]
 Where \(Q(x, t)\) is the heat energy generated per unit volume.
 
 
 We can easily simplify this by diving by \(A \Delta x\) and taking the \(\lim_{\Delta x \rightarrow 0}\)  to get the following PDE:
 \[
-    \frac{\partial e}{\partial t}=-\frac{\partial \Phi}{\partial x}+Q
+    \frac{\partial e}{\partial t}=-\frac{\partial \phi}{\partial x}+Q
 \]
 
-We can also derive this equation by considering a finite slice from \(x=a\) to \(x=b\). The rate of change of heat energy of this slice is: 
+We can also derive this equation by considering a finite slice from \(x=a\) to \(x=b\). The rate of change of heat energy of this slice is the \textbf{integral conservation law}: 
 \[
-    \frac{d}{dt}\int_a^b e dx=\Phi(a,t)-\Phi (b,t)+\int_a^b Q dx
+    \frac{d}{dt}\int_a^b e dx=\phi(a,t)-\phi (b,t)+\int_a^b Q dx
 \]
-
-This is also known as the \textbf{integral conservation law}. 
 
 We can convert this to a single integral by noting that \(\frac{d}{dt}\int_a^b e(x, t)=\int_a^b\frac{\partial e(x, t)}{t}\) and that 
-\(\Phi(a, t)-\Phi(b, t)=-\int_a^b \frac{\partial \Phi}{\partial x}dx\), resulting in: 
+\(\phi(a, t)-\phi(b, t)=-\int_a^b \frac{\partial \phi}{\partial x}dx\), resulting in: 
 \[
-    \int_a^b (\frac{\partial e}{\partial t}+\frac{\partial \Phi}{\partial x}-Q)dx=0
+    \int_a^b (\frac{\partial e}{\partial t}+\frac{\partial \phi}{\partial x}-Q)dx=0
 \]
 
 Since this must be true for any arbitrary \(a\) and \(b\), the integrand must be zero:
 \[
-    \frac{\partial e}{\partial t}=-\frac{\partial \Phi}{x}+Q
+    \frac{\partial e}{\partial t}=-\frac{\partial \phi}{x}+Q
 \]
 
 Because we also describe the temperatures of materials instead of heat energy, it is useful to convert our equations. We let:
@@ -99,14 +92,14 @@ Then, the thermal energy density can be expressed as:
 
 Therefore, the conservation of thermal energy can be expressed as:
 \[
-    c(x)\rho(x)\frac{\partial u}{\partial t}=-\frac{\partial \Phi}{\partial x}+Q
+    c(x)\rho(x)\frac{\partial u}{\partial t}=-\frac{\partial \phi}{\partial x}+Q
 \]
 
 \begin{theorem}{\textbf{Fourier's law of heat conduction}}
     \[
-        \Phi=-K_0\frac{\partial u}{\partial x}
+        \phi=-K_0\frac{\partial u}{\partial x}
     \]
-    Where \(K_0\) is the thermal conductivity of the material. 
+    where \(K_0\) is the thermal conductivity of the material. 
 \end{theorem}
 
 Substituting this in, we get:
@@ -114,7 +107,7 @@ Substituting this in, we get:
     c\rho\frac{\partial u}{\partial t}=\frac{\partial}{\partial x}(K_0\frac{\partial u}{\partial x})+Q
 \]
 
-If \(c\), \(\rho\), and \(K_0\) are all constant, then this simplifies to the heat equation:
+If \(c\), \(\rho\), and \(K_0\) are all constant, then this simplifies to the \textbf{heat equation}:
 \[
     \frac{\partial u}{\partial t}=k\frac{\partial^2}{\partial x^2}
 \]
@@ -124,6 +117,249 @@ where
     k=\frac{K_0}{c\rho}
 \]
 
-is the thermal diffusivity.
-    
+is the \textbf{thermal diffusivity}.
+
+We can similarly derive integral and regular diffusion laws for diffusion of a chemical:
+\begin{align*}
+    \frac{d}{dt}\int_a^b u(x,t)dx&=\phi (a,t)-\phi (b,t) \\
+    \frac{\partial u}{\partial t}+\frac{\partial \phi }{\partial x}&=0
+\end{align*}
+
+where \(u(x,t)\) is the density or concentration of the chemical per unit volume.
+
+\begin{theorem}{\textbf{Fick's Law of Diffusion}}
+    \[
+        \phi =-k\frac{\partial u}{\partial x}
+    \]
+    where \(k\) is chemical diffusivity.
+\end{theorem} 
+
+Using this, we get the \textbf{diffusion equation}:
+\[
+    \frac{\partial u}{\partial t}=k\frac{\partial ^2 u}{\partial x^2}
+\]
+
+\subsection{Initial and Boundary Conditions}
+Since the heat equation has one time derivative, we need one \textbf{initial condition} (IC). Additionally, we need one \textbf{boundary condition} (BC) at each end of the rod.
+
+One potential boundary condition is having a set temperature, called the \textbf{prescribed temperature}, at a boundary:
+\[
+    u(0, t)=u_B(t)
+\]
+
+\begin{definition}
+    A \textbf{Dirichlet condition} is one where the values of a function at a boundary are specified. 
+\end{definition}
+
+We can also specify heat flow at a boundary:
+\[
+    -K_0(0)\frac{\partial u}{\partial x}(0,t)=\phi (t)
+\]
+
+The simplest case of this is where the boundary is insulated:
+\[
+    \frac{\partial u}{\partial x}=0
+\]
+
+\begin{definition}
+    A \textbf{Neumann condition} is one where the derivative \(\frac{\partial u}{\partial x}\) at a boundary is specified. 
+\end{definition}
+
+Finally, we can allow the boundary to exchange heat with the surrounding.
+
+\begin{theorem}{\textbf{Newton's Law of Cooling}}
+    The rate of heat transfer between a body and its surroundings can be approximated by the following:
+    \[
+        -K_0(0)\frac{\partial u}{\partial x}(0,t)=-H[u(0,t)-u_B(t)]
+    \]
+    where \(H\) is called the \textbf{heat transfer coefficient}. 
+\end{theorem}
+
+\subsection{Equilibrium Temperature Distribution}
+\subsubsection{Prescibed Temperatures}
+\begin{definition}
+    An \textbf{equilibrium} or \textbf{steady-state} solution to a partial differential equation is one that does not depend on time.
+\end{definition}
+
+Suppose we have a simplified scenario where the thermal conditions are constant, no heat is generated, and heat is prescribed on the boundaries:
+\begin{align*}
+    u(0)&=T_1 \\
+    u(L)&=T_2
+\end{align*}
+
+We can easily found the equilibrium solution by setting the rate of heat flow to zero, double integrating, and solving:
+\begin{align*}
+    \frac{d^2u}{dx^2} &=0 \\
+    \rightarrow u(x)=C_1x+C_2
+\end{align*}
+
+We then use the boundary conditions to solve for \(C_1\) and \(C_2\):
+\begin{align*}
+    u(0)&=C_2=T_1 \\
+    u(L)&=C_1L+T_2 \rightarrow C_1=\frac{T_2-T_1}{L}
+\end{align*}
+
+Thus, we have the following solution:
+\[
+    u(x)=T_1+\frac{T_2-T_1}{L}x
+\]
+
+\subsubsection{Insulated Boundaries}
+If instead the boundaries are insulated, we have the following PDE:
+\[
+    \begin{aligned}
+        \text{PDE:} \quad & \frac{\partial u}{\partial t}=k\frac{\partial^2 u}{\partial x^2} \\
+        \text{IC:} \quad & u(x,0)=f(x) \\
+        \text{BC1:} \quad & \frac{\partial u}{\partial x}(0,t)=0 \\
+        \text{BC2:} \quad & \frac{\partial u}{\partial t}(L,t)=0
+    \end{aligned}
+\]
+
+We similarly solve for the equilibrium solution:
+\[
+    \begin{aligned}
+        \text{ODE:} \quad & \frac{d^2 u}{dx^2}=0 \\
+        \text{BC1:} \quad & \frac{du}{dx}(0)=0 \\
+        \text{BC2:} \quad & \frac{du}{dx}(L)=0 \\
+        &\rightarrow u=C_1x+C_2 \rightarrow C_1=0 \rightarrow u=C_2
+    \end{aligned}
+\]
+
+Since the boundaries are insulated, the total energy in the rod must be constant, so:
+\begin{align*}
+    \int_0^L c\rho u dx&=\int_0^L c\rho f(x) \\
+    \rightarrow u(x)=C_2=\frac{1}{L}\int_0^{L}f(x)dx
+\end{align*}
+
+\section{Method of Separation of Variables}
+ 
+\subsection{Linearity}
+\begin{definition}
+    An operator \(L\) is \textbf{linear} (and thus called a \textbf{linear operator}) if:
+    \[
+        L(c_1u_1+c_2u_2)=c_1L(u_1)+c_2L(u_2)
+    \]
+    for any functions \(u_1\) and \(u_2\) and constants \(c_1\) and \(c_2\).    
+\end{definition}
+
+\begin{definition}
+    A \textbf{linear equation} for the unknown \(u\) is of the form:
+    \[
+        L(u)=f
+    \]
+    where \(L\) is a linear operator and \(f\) is known.
+\end{definition}
+
+\begin{definition}
+    A linear equation \(L(u)=f\) is called \textbf{homogeneous} if \(f=0\). Otherwise, it is called \textbf{nonhomogeneous}.
+\end{definition}
+
+\begin{theorem}{\textbf{Principle of Superposition}}
+    If \(u_1\) and \(u_2\) satisfy an arbitrary linear homogenous equation, then any arbitrary combination \(c_1u_1+c_2u_2\), where \(c_1\) and \(c_2\) are constants, also 
+    satisfies the same equation.     
+\end{theorem}
+
+\subsection{Heat Equation with Zero Temperature at Finite Ends}
+Suppose we have a rod with fixed temperatures of \(0\) at the boundaries, represented by the following:
+\[
+    \begin{aligned}
+        \text{PDE:} \quad & \frac{\partial u}{\partial t}=k\frac{\partial ^2 u}{\partial x^2} \quad 0<x<L, \quad t> 0 \\
+        \text{BC:} \quad & u(0,t)=0 \\
+        & u(L,t) = 0 \\
+        \text{IC:} \quad & u(x,0)=f(x)
+    \end{aligned}
+\]
+
+We can solve this using the \textbf{method of separation of variables}. 
+
+\subsubsection{Product Solutions}
+The first step is to determine a \textbf{product solution} of the form:
+\[
+    u(x,t)=H(x)G(t)
+\]
+
+
+Substituting this into the PDE and dividing by \(kH(x)G(t)\) to separate variables gives us:
+\[
+    \frac{1}{kG}\frac{dG}{dt}=\frac{1}{H}\frac{d^2H}{dH^2}
+\]
+
+For this to be true for any \(x\) and \(t\), both sides must equal a constant, which we set as \(-\lambda \), where \(\lambda \) is the 
+\textbf{separation constant}. This gives us two ordinary differential equations, one for \(H(x)\) and one for \(G(t)\).
+
+The product solutions must satisfy the boundary conditions. \(u(0,t)=0\) implies that either \(H(0)=0\) or \(G(t)\equiv 0\). The latter is 
+uninteresting and is called the \textbf{trivial solution}, and thus:
+\begin{align*}
+    H(0)&=0 \\
+    H(L)&=L
+\end{align*}   
+
+\subsubsection{Time-Dependent Ordinary Differential Equation}
+We first solve the ODE for \(G(t)\):
+\[
+    \frac{dG}{dt}=-\lambda kG
+\] 
+
+Since this is a first-order linear homogeneous ODE with constant coefficients, the solution is an exponential of the form:
+\[
+    G(t)=ce^{-\lambda  kt}
+\]
+
+\subsubsection{Boundary Value (Eigenvalue) Problem}
+Next, we solve the second-order ODE for \(H(x)\):
+\begin{align*}
+    \frac{d^2 H}{dx^2}&=-\lambda H \\
+    H(0)&=0 \\
+    H(L)&=0 
+\end{align*} 
+
+Since there are boundary conditions, this is called a \textbf{boundary value problem}.
+
+We try three different scenarios for the \textbf{eigenvalue} \(\lambda \):
+\begin{itemize}
+    \item \(\lambda <0\) \\
+     If we let \(\lambda =-\beta^2\), our ODE has solutions of the form:
+     \[
+        H(x)=c_1\cosh (\beta x)+c_2 \sinh (\beta x)
+     \]
+     We then apply the boundary conditions:
+     \begin{align*}
+        H(0)&=c_1=0\\
+        H(L)&=c_2 \sinh{\beta L}=0 \rightarrow c_2=0 \quad \text{(if }\beta\text{ is positive)}
+     \end{align*}
+     Thus, this is trivial and there are no negative eigenvalues.
+    \item \(\lambda =0\) \\
+    If \(\lambda=0\), we can simply integrate twice and find that solutions are of the form:
+    \[
+        H(x)=c_1x+c_2
+    \]
+    We then apply the boundary conditions:
+    \begin{align*}
+        H(0)&=c_2=0 \\
+        H(L)&=c_1L=0 \rightarrow c_1=0
+    \end{align*}
+    Thus, this is also trivial and there is no eigenvalue of zero.
+    \item \(\lambda >0\) \\
+    If we let \(\lambda = \alpha ^2\), then the ODE has solutions of the form:
+    \[
+        H(x)=c_1\cos (\alpha x)+c_2 \sin(\alpha x)
+    \]
+    We then apply the boundary conditions:
+    \begin{align*}
+        H(0)&=c_1=0  \\
+        H(L)&=c_2\sin{\alpha L}=0 \rightarrow \alpha L=n \pi \quad \text{for the non-trivial case}
+    \end{align*}
+\end{itemize}
+
+Thus, the eigenvalues are:
+\[
+    \lambda =(\frac{n \pi }{L})^2, \quad n=1,2,3, \dots
+\] 
+
+And the corresponding \textbf{eigenfunctions} are:
+\[
+    H(x)=\sin \frac{n \pi x}{L}
+\]
+
+
 \end{document}
