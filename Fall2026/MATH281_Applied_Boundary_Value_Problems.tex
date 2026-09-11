@@ -361,5 +361,45 @@ And the corresponding \textbf{eigenfunctions} are:
     H(x)=\sin \frac{n \pi x}{L}
 \]
 
+\subsubsection{Fourier Series}
+The overall solution of our PDE is:
+\[
+    u(x,t)=\sum_{n=1}^{m} B_n \sin{\frac{n \pi x}{L}}e^\frac{-ktn^2\pi ^2}{L^2}
+\]
+
+Next, we need to find \(B_n\) using the initial condition \(f(x)\). In some situations this is easy, 
+but for many functions, it isn't possible if \(m\) is finite  and requires a \textbf{Fourier series}:
+\[
+     f(x)=\sum_{n=1}^{\infty } B_n \sin{\frac{n \pi x}{L}}
+\]
+
+We know that:
+\[
+    \int_0^{\frac{L}{2}}\sin \frac{n \pi x}{L} \sin\frac{m \pi x}{L} dx = \begin{cases} 0 \quad m\neq n \\ \frac{L}{2} \quad m=n \end{cases}
+\] 
+
+Thus, we can multiply both sides by \(\sin \frac{m \pi  x}{L}\), integrate, and rearrange to get:
+\begin{align*}
+    f(x)\sin\frac{m \pi  x }{L}&=\sum_{n=1}^{\infty} B_n \sin \frac{n \pi  x}{L} \\
+    \rightarrow \int_0^L f(x) \sin \frac{m \pi x }{L} dx &= \int _0^L \sum_{n=0}^{\infty} B_n \sin \frac{n \pi x}{L} \frac{m \pi  x}{L} dx \\
+    \rightarrow \int_0^L f(x) \sin \frac{m \pi x }{L} dx &= \frac{L}{2} B_m \\
+    \rightarrow B_m &= \frac{2}{L} \int_0^L f(x) \sin \frac{m \pi  x}{L} dx
+\end{align*}
+
+Since functions are vectors, this is essentially taking the inner product of \(f(x)\) and \(\sin \frac{m \pi  x}{L}\):   
+\[
+    \langle f(x), \sin \frac{m \pi  x}{L} \rangle = \int_0^L f(x) \sin \frac{m \pi x}{L} dx
+\]
+
+\begin{definition}
+    Two functions \(f_1(x)\) and \(f_2(x)\) are \textbf{orthogonal} over the interval \([a,b]\) if:
+    \[
+        \langle f_1, f_2 \rangle = \int_a^b f_1 f_2 dx=0
+    \]  
+\end{definition}
+
+Since functions of the form \(\sin(nx)\) are orthogonal if \(n\) is different, the eigenfunctions of our solution are an 
+\textbf{orthogonal set of vectors}. 
+
 
 \end{document}
