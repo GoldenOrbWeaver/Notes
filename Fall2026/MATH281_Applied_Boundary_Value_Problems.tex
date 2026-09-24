@@ -95,12 +95,12 @@ Therefore, the conservation of thermal energy can be expressed as:
     c(x)\rho(x)\frac{\partial u}{\partial t}=-\frac{\partial \phi}{\partial x}+Q
 \]
 
-\begin{theorem}{\textbf{Fourier's law of heat conduction}}
+\begin{law}{\textbf{Fourier's law of heat conduction}}
     \[
         \phi=-K_0\frac{\partial u}{\partial x}
     \]
     where \(K_0\) is the thermal conductivity of the material. 
-\end{theorem}
+\end{law}
 
 Substituting this in, we get:
 \[
@@ -127,12 +127,12 @@ We can similarly derive integral and regular diffusion laws for diffusion of a c
 
 where \(u(x,t)\) is the density or concentration of the chemical per unit volume.
 
-\begin{theorem}{\textbf{Fick's Law of Diffusion}}
+\begin{law}{\textbf{Fick's Law of Diffusion}}
     \[
         \phi =-k\frac{\partial u}{\partial x}
     \]
     where \(k\) is chemical diffusivity.
-\end{theorem} 
+\end{law} 
 
 Using this, we get the \textbf{diffusion equation}:
 \[
@@ -401,5 +401,38 @@ Since functions are vectors, this is essentially taking the inner product of \(f
 Since functions of the form \(\sin(nx)\) are orthogonal if \(n\) is different, the eigenfunctions of our solution are an 
 \textbf{orthogonal set of vectors}. 
 
+\section{Numerical Solutions of PDEs}
+\subsection{Linear Advection Equation}
+Consider the following linear PDE, called the \textbf{advection equation}:
+\[
+    \frac{\partial}{\partial t}u(x,t)+U_0\frac{\partial}{\partial x}u(x,t)=0
+\]
+
+We note that the total time derivative is:
+\[
+    \frac{d}{dt}=\frac{\partial}{\partial t}+\frac{dx}{dt}\frac{\partial}{\partial x}
+\]
+
+Therefore, if \(\frac{dx}{dt}=U_0\), our PDE is just :
+\[
+  0=\frac{\partial}{\partial t}u(x,t)+\frac{dx}{dt}\frac{\partial}{\partial x}u(x,t)=\frac{d}{dt}u
+\]
+
+This is effectively saying that \(u\) is moving at speed \(U_0\), and within its frame of reference 
+(along paths given by \(\frac{d}{dt}x\) ), it is constant.
+
+We easily determine that \(x(t)=x_0+U_0t\) and thus \(x_0=x(t)-U_0t\), meaning we can convert from a point \((x,t)\) to a point \((x_0, 0)\) with the same 
+value of \(u\) and thus that we've reduced our solution to:
+\[
+    u(x(t), t)=u(x-U_0t,0)=u_0(x-U_0t)
+\]    
+\subsubsection{Burger's Equation}
+The following nonlinear PDE is known as \textbf{Burger's equation}:
+\[
+    \frac{\partial}{\partial t}u+u\frac{\partial}{\partial x}u=0
+\]
+
+\subsubsection{Introduction to Linearization}
+Since Burger's Equation is nonlinear, it's difficult to solve analytically, but we can approximate it using a technique called \textbf{linearization}. 
 
 \end{document}

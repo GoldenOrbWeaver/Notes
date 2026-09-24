@@ -85,8 +85,7 @@ There are four vector operations:
 
 \textbf{Cross Product of Two Vectors}:
 \begin{itemize}
-    \item \(\mathbf{A} \cross  \mathbf{B} \equiv AB\sin{\theta}\hat{\mathbf{n}}\) where \(\mathbf{\hat{n}}\) is a unit vector perpendicular to the plane of \(\mathbf{A} \) and \(\mathbf{B} \). The direction 
-    \item is determined by the \textbf{right hand rule}, where you curl your right hand from \(\mathbf{A} \) to \(\mathbf{B} \) and take the direction of your thumb
+    \item \(\mathbf{A} \cross  \mathbf{B} \equiv AB\sin{\theta}\hat{\mathbf{n}}\) where \(\mathbf{\hat{n}}\) is a unit vector perpendicular to the plane of \(\mathbf{A} \) and \(\mathbf{B} \). The direction is determined by the \textbf{right hand rule}, where you curl your right hand from \(\mathbf{A} \) to \(\mathbf{B} \) and take the direction of your thumb
     \item Distributive: \(\mathbf{A} \cross (\mathbf{B}+\mathbf{C})=(\mathbf{A} \cross \mathbf{B} )+(\mathbf{A} \cross \mathbf{C} ) \)
     \item Not commutative: \(\mathbf{B} \cross \mathbf{A} =-(\mathbf{A} \cross \mathbf{B} )\)
     \item Result is a \textbf{pseudovector} and behaves like a vector under rigid transformations like rotations, but not under certain nonrigid transformations. Notably, \(-\mathbf{A} \cross -\mathbf{B} =\mathbf{A} \cross \mathbf{B} \)
@@ -322,14 +321,14 @@ Since there are three types of derivatives in three dimensions, there are three 
 
 \subsection{Curvilinear Coordinates}
 \begin{definition}
-    \textbf{Spherical coordinates} are a coordinate system that uses distance from the origin \(r\), the angle down from the z-axis called the \textbf{polar angle} \(\theta\), 
+    \textbf{Spherical coordinates} are a coordinate system that uses the distance from the origin \(r\), the angle down from the z-axis called the \textbf{polar angle} \(\theta\), 
     and the angle around from the x-axis called the \textbf{azimuthal angle} \(\phi\). 
 \end{definition}
 
 The following are true for spherical coordinates:
 \begin{itemize}
     \item Conversion to Cartesian coordinates: \(x=r\sin \theta \cos \phi\), \(y=r\sin \theta \sin \phi\), \(z=r\cos \theta\)
-    \item Unit vectors in terms of cartesian coordinates:
+    \item Unit vectors in terms of Cartesian coordinates:
         \begin{align*}
             \mathbf{\hat{r}} &=\sin\theta \cos \phi \mathbf{\hat{x}} +\sin \theta \sin \phi \mathbf{\hat{y}} +\cos \theta \mathbf{\hat{z}} \\
             \mathbf{\hat{\theta}} &=\cos \theta \cos \phi \mathbf{\hat{x}} + \cos \theta  \sin \phi \mathbf{\hat{y}} -\sin \theta \mathbf{\hat{z}} \\
@@ -342,5 +341,203 @@ The following are true for spherical coordinates:
     \item Curl: \(\nabla \times \mathbf{v} =\frac{1}{r\sin \theta }[\frac{\partial}{\partial \theta }(\sin \theta v_{\phi })-\frac{\partial v_{\theta }}{\partial \phi }]\mathbf{\hat{r}} +\frac{1}{r}[\frac{1}{\sin \theta }\frac{\partial v_r}{\partial \phi }-\frac{\partial}{\partial r }(rv_{\phi })]\mathbf{\hat{\theta}} +\frac{1}{r}[\frac{\partial}{\partial r}(rv_{\theta })-\frac{\partial v_r}{\partial \theta }]\mathbf{\hat{\phi}}   \) 
     \item Laplacian: \(\laplacian{T}=\frac{1}{r^2}\frac{\partial}{\partial r}(r^2\frac{\partial T}{\partial r})+\frac{1}{r^2 \sin \theta }\frac{\partial }{\partial \theta }(\sin \theta  \frac{\partial T}{\partial \theta })+\frac{1}{r^2 \sin^2 \theta }\frac{\partial ^2 T}{\partial \phi ^2}\)  
 \end{itemize}
+
+\begin{definition}
+    \textbf{Cylindrical coordinates} are a coordinate system that uses distance from the z-axis \(s\), the angle around from the x-axis \(\phi\), and the distance up the z-axis \(z\).
+\end{definition}
+
+The following are true for cylindrical coordinates:
+\begin{itemize}
+    \item Conversion to Cartesian coordinates: \(x=s\cos \phi \) \(y=s\sin \phi \), \(z=z\) 
+    \item Unit vectors in terms of Cartesian coordinates:
+        \begin{align*}
+            \mathbf{\hat{s}}&=\cos \phi \mathbf{\hat{x}} +\sin \phi \mathbf{\hat{y}} \\
+            \mathbf{\hat{\phi}}&=-\sin \phi \mathbf{\hat{x}} +\cos \phi \mathbf{\hat{y}} \\
+            \mathbf{\hat{z}} &=\mathbf{\hat{z}} 
+        \end{align*}
+    \item Infinitesimal displacement: \(d \mathbf{l}=ds \mathbf{\hat{s}} +s d \phi \mathbf{\hat{\phi}} +dz \mathbf{\hat{z}} \)
+    \item Infinitesimal volume: \(d \tau =s ds d \phi dz\)
+    \item Gradient: \(\nabla T=\frac{\partial T}{\partial s}\mathbf{\hat{s}} +\frac{1}{s}\frac{\partial T}{\partial \phi }\mathbf{\hat{\phi}} +\frac{\partial T}{\partial z}\mathbf{\hat{z}} \)
+    \item Divergence: \(\nabla \cdot \mathbf{v} =\frac{1}{s}\frac{\partial}{\partial s}(sv_s)+\frac{1}{s}\frac{\partial v_{\phi }}{\partial \phi }+\frac{\partial v_z}{\partial z}\)
+    \item Curl: \(\nabla \times \mathbf{v} =(\frac{1}{s}\frac{\partial v_z}{\partial \phi }-\frac{\partial v_{\phi }}{\partial z})\mathbf{\hat{s}} +(\frac{\partial v_s}{\partial z}-\frac{\partial v_z}{\partial s})\mathbf{\hat{\phi}} +\frac{1}{s}[\frac{\partial}{\partial s}(sv_{\phi })-\frac{\partial v_s}{\partial \phi }]\mathbf{\hat{z}} \)
+    \item Laplacian: \(\laplacian{T}=\frac{1}{s}\frac{\partial }{\partial s}(s\frac{\partial T}{\partial s})+\frac{1}{s^2}\frac{\partial^2 T}{\partial \phi^2}+\frac{\partial^2 T}{\partial z^2}\)     
+\end{itemize}
+
+\subsection{Dirac Delta Function}
+\begin{definition}
+    The \textbf{Dirac delta function} is a \textbf{generalized function} or \textbf{distribution} with a value of 0 
+    everywhere except 0, where it equals infinity:
+    \[
+        \delta(x)=\begin{cases} 0 & x\neq 0 \\ \infty & x=0 \end{cases}
+    \]
+    The delta function has the integral:
+    \[
+        \int_{-\infty }^{\infty }\delta (x)dx=1
+    \]
+\end{definition}
+
+The Dirac delta function is useful because it allows us to pick out a specific value of a function in an integral:
+\[
+    \int_{-\infty }^{\infty }f(x)\delta(x-a)dx=f(a)
+\]
+
+The Dirac delta function behaves similarly in three dimensions and can be written as:
+\[
+    \delta^3(\boldscriptr)=\frac{1}{4 \pi }\nabla \cdot (\frac{\hat{\boldscriptr}}{\scriptr^2})
+\]
+
+\subsection{Theory of Vector Fields}
+\begin{theorem}{\textbf{Helmholtz Theorem}}
+    $ $ \newline
+    
+    If the divergence \(D(\mathbf{r} )\) and curl \(C(\mathbf{r} )\) of a vector function \(\mathbf{F}(\mathbf{r})\) are 
+    specified, and if both go to zero faster than \(\frac{1}{r^2}\) as \(r\rightarrow\infty \), and if \(\mathbf{F}(\mathbf{r} )\) goes to 
+    zero as \(r \rightarrow \infty \), then \(\mathbf{F}\) can uniquely be decomposed into an irrotational component \(-\nabla U\) and solenoidal component 
+    \(\nabla \times \mathbf{W} \):
+    \[
+        \mathbf{F}=-\nabla U+\nabla \times \mathbf{W} 
+    \]         
+\end{theorem}
+
+\begin{theorem}{\textbf{Theorem 1. Irrotational Fields}}
+    $ $ \newline
+    
+    The following conditions are equivalent:
+    \begin{itemize}
+        \item \(\nabla \times \mathbf{F} =0\) everywhere
+        \item \(\int_{\mathbf{a} }^{\mathbf{b} }\mathbf{F} \cdot d \mathbf{l} \) is independent of path for any given end points
+        \item \(\oint \mathbf{F} \cdot d \mathbf{l} =0\) for any closed loop
+        \item \(\mathbf{F}\) is the gradient of some scalar function \(V\) called the \textbf{scalar potential}: \(\mathbf{F}=-\nabla V\) 
+    \end{itemize}
+\end{theorem}
+
+\begin{theorem}{\textbf{Theorem 2. Solenoidal Fields}}
+    $ $ \newline
+
+    The following conditions are equivalent:
+    \begin{itemize}
+        \item \(\nabla \cdot \mathbf{F} =0\) everywhere
+        \item \(\int  \mathbf{F} \cdot d \mathbf{a} \) is independent of surface for a given boundary line
+        \item \(\oint \mathbf{F} \cdot d \mathbf{a}=0 \) for any closed surface
+        \item \(\mathbf{F} \) is the curl of some vector function \(\mathbf{A}\) called the \textbf{vector potential}: \(\mathbf{F} =\nabla \times \mathbf{A} \)      
+    \end{itemize}
+\end{theorem}
+
+\newpage
+\section{Electrostatics}
+\subsection{The Electric Field}
+\begin{definition}
+    The \textbf{principle of superposition} states that the interaction between any two charges is completely unaffected by the presence 
+    of other charges.
+\end{definition}
+
+\begin{law}{\textbf{Coulomb's Law}}
+    $ $ \newline
+    The force on charge \(Q\) from charge \(q\) with separation vector \(\scriptr\) between them is:   
+    \[
+        \mathbf{F}=\frac{1}{4 \pi \epsilon_0}\frac{qQ}{\scriptr^2}\hat{\boldscriptr}
+    \]
+    where \(\epsilon_0\) is the \textbf{permittivity of free space}.
+\end{law}
+
+\begin{definition}
+    An \textbf{electric field} \(\mathbf{E} \)  is the total contribution from a collection of charges or a continuous charge distribution, with the resultant force on test charge \(Q\) being: 
+    \[
+        \mathbf{F} =Q \mathbf{E} 
+    \]
+\end{definition}
+
+The electric field of a volume charge with charge density \(\rho \) is:
+\[
+    \mathbf{E} (\mathbf{r} )=\frac{1}{4 \pi \epsilon_0}\int \frac{\rho (\mathbf{r}^{\prime})}{\scriptr^2}\hat{\boldscriptr} d \tau^{\prime} 
+\]
+
+\subsection{Divergence and Curl of Electrostatic Fields}
+We notice that the \textbf{electric flux} \(\int \mathbf{E}\cdot d \mathbf{a} \) through a closed surface only depends on the divergence 
+of the electric field within that surface, since any fields originating from outside pass through two sides of the surface, making the net flux zero.
+\begin{law}{\textbf{Gauss's Law}}
+    $ $ \newline
+    
+    Integral form:
+    \[
+        \oint \mathbf{E} \cdot d \mathbf{a}=\frac{Q_{enc}}{\epsilon_0}
+    \]
+
+    Differential form:
+    \[
+        \nabla \cdot \mathbf{E}=\frac{\rho }{\epsilon_0}
+    \]
+\end{law}
+
+We can also derive this by taking the divergence of the formula for the electric field from a charge distribution:
+\begin{align*}
+    \nabla \cdot \mathbf{E} &=\frac{1}{4 \pi \epsilon_0}\int \nabla \cdot (\frac{\hat{\boldscriptr}}{\scriptr^2})\rho (\mathbf{r}^{\prime} )d \tau^{\prime}  \\
+    &= \frac{1}{4 \pi  \epsilon_0}\int 4 \pi \delta^3(\mathbf{r}-r^{\prime})\rho(\mathbf{r}^{\prime} )d \tau^{\prime} \\
+    &=\frac{\rho(\mathbf{r})}{\epsilon_0}
+\end{align*}
+
+When a situation has symmetry, Gauss's law can be used to easily find the electric field. Additionally, due to the principle of superposition, some 
+situations can be split into multiple problems that have symmetry and are thus simple to solve.
+
+\subsection{Electric Potential}
+\begin{definition}
+    The \textbf{electric potential} is defined as:
+    \[
+        V(\mathbf{r} )=\int_{\mathscr{O}}^{\mathbf{r} }\mathbf{E} \cdot d \mathbf{l} 
+    \]
+    where \(\mathscr{O}\) is a reference point where the potential is 0 (typically at infinity). This can be 
+    thought of as the work required to move a unit charge from infinity to \(\mathbf{r}\).
+    
+    The differential form of this is:
+    \[
+        \mathbf{E} =-\nabla V
+    \]
+\end{definition}
+
+Electric potential is useful because it is a scalar function, not a vector function (though the electric field still only has one 
+independent function because it has zero curl). Like the electric field, it obeys the principle of superposition.
+
+\begin{definition}{\textbf{Poisson's Equation for Electrostatics}}
+    \[
+        \laplacian{V}=-\frac{\rho }{\epsilon_0}
+    \]
+\end{definition}
+
+\begin{definition}{\textbf{Laplace's Equation}}
+    \[
+        \laplacian{V}=0
+    \]
+\end{definition}
+
+The potential of a charge distribution is:
+\[
+    V(\mathbf{r} )=\frac{1}{4 \pi \epsilon_0}\int \frac{\rho(r^{\prime})}{\scriptr}d \tau^{\prime} 
+\]
+
+The electric field experiences discontinuities across surface charges (easily verified using Gauss's law) but the tangential 
+component is continuous across surface charges (also easily verified with Gauss's law), so:
+\[
+    E_{above}^{\perp}-E_{below}^{\perp}=\frac{\sigma }{\epsilon_0}\mathbf{\hat{n}} 
+\]
+This can also be written in terms of the electric potential:
+\[
+    \frac{\partial V_{above}}{\partial n}-\frac{\partial V_{below}}{\partial n}=-\frac{\sigma }{\epsilon_0}
+\]
+
+\subsection{Work and Energy in Electrostatics}
+Starting with a single point charge, we can incrementally move point charges from infinity to different positions, with the total amount of work 
+done being the energy of the configuration:
+\[
+    W=\frac{1}{2}\sum_{i=1}^{n}q_iV(\mathbf{r}_i)
+\]
+
+We can determine a version of this for continuous charge distributions:
+\begin{align*}
+    W&=\frac{1}{2}\int \rho V d \tau \\
+    &= \frac{\epsilon_0}{2}\int(\nabla \cdot \mathbf{E} )V d \tau  \quad \text{using Gauss's law} \\
+    &=\frac{\epsilon_0}{2}[-\int_{\mathscr{V}}\mathbf{E} \cdot (\nabla V)d \tau +\oint_{\mathscr{S}}V \mathbf{E}\cdot d \mathbf{a} ] \quad \text{using integration by parts} \\
+    &=\frac{\epsilon_0}{2}(\int_{\mathscr{V}}E^2 d \tau +\oint_{\mathscr{S}}V \mathbf{E} \cdot d \mathbf{a} ) \\
+    &=\frac{\epsilon_0}{2}\int E^2 d \tau  \quad \text{if E vanishes at infinity}
+\end{align*}
 
 \end{document}

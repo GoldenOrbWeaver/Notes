@@ -60,6 +60,86 @@ Several steps when analyzing data:
     Plot parameters against each other to observe if there are any correlations.
 \end{enumerate}
 
+\section{Probability and Measurement Error}
+\begin{definition}
+    A \textbf{random variable} is a function whose value is determined by a random event.
+\end{definition}
+
+Data with measurement error is an important case of a random variable.
+
+\begin{definition}
+    A \textbf{probability} \(P(d)\) is a function describing the probability that 
+    random variable \(d\) has a certain value. The total probability of \(d\) over its sample space is 1.
+\end{definition}
+
+\begin{definition}
+    A \textbf{probability density function} \(p(d)\) is a function whose integral over a subset of the sample space is 
+    the probability that \(d\) lies in that section:
+    \[
+        P(d_1,d_2)=\int_{d_1}^{d_2}p(d)d d
+    \]
+\end{definition}
+
+Random variables often tend to clump around values. There are three main choices of a typical value: mean, median, and mode.
+
+\begin{definition}
+    The \textbf{mode} of a probability density function \(p(d)\) is the point \(d_{mode}\) that has the highest 
+    probability density. 
+\end{definition}
+
+\begin{definition}
+    The \textbf{median} of a probability density function \(p(d)\) is the value \(d_{median}\) that divides the sample space in half:
+    \[
+        \int_{d_{min}}^{d_{median}}p(d)dd=\int_{d_{median}}^{d_{max}}p(d)dd
+    \]
+\end{definition}
+
+\begin{definition}
+    The \textbf{mean} or \textbf{expected value} of a probability density function \(p(d)\) is the weighted average of the p.d.f.:
+    \begin{align*}
+        \overline{d}&\approx \sum_S^M d^{(S)}P(d_s) \\
+        \overline{d}&= \int_{d_{min}}^{d_{max}}d p(d) dd
+    \end{align*}
+\end{definition}
+
+It is also important to measure how tightly the data is clumped around the typical value. This is usually done 
+with variance.
+
+\begin{definition}
+    The \textbf{variance} of a random variable \(d\)  is:
+    \[
+        \sigma_d^2=\int_{d_{min}}^{d_{max}}(d-\overline{d} )^2p(d)dd
+    \] 
+
+    \(\sigma_d\) is called the \textbf{standard deviation} of \(d\).  
+\end{definition}
+
+There are many probability density distributions, but the most important for us are the uniform and normal distributions.
+
+\begin{definition}
+    The \textbf{uniform distribution} has the same probability density everywhere in the sample space:
+    \[
+        p(d)=\frac{1}{d_{max}-d_{min}}
+    \]
+\end{definition}
+
+\begin{definition}
+    The \textbf{normal distribution} is:
+    \[
+        p(d)=\frac{1}{\sqrt{2\pi }\sigma }\exp {-\frac{(d-\overline{d} )^2}{2\sigma ^2}}
+    \]
+\end{definition}
+
+The probability density function of a random variable \(m\) that is a function of a random variable \(d\) can be determined using the chain rule:
+\begin{align*}
+    P(d_1,d_2)&=\int_{d_1}^{d_2}p(d)dd=\int_{d(m_1)}^{d(m_2)}p[d(m)]\frac{\partial d}{\partial m}dm=\int_{m_1}^{m_2}p(m)dm \\
+    \rightarrow p(m)&=p[d(m)]\lvert \frac{\partial d}{\partial m}\rvert
+\end{align*}
+
+The mean and variance of a function of a random variable can be found the same way.
+
+\section{Multivariate Distributions}
+
 
 
 \end{document}
