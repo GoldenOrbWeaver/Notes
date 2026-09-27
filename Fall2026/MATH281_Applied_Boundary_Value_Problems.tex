@@ -13,6 +13,7 @@
 \usepackage{subcaption}
 \usepackage{multicol}
 \usepackage{import}
+\usepackage{cancel}
 \usepackage[usenames,dvipsnames]{xcolor}
 \usepackage[a4paper, margin=1in]{geometry}
 % The configuration for boxes and parts of the overall idea come from Pingbang Hu: https://github.com/sleepymalc
@@ -43,6 +44,7 @@ containing partial derivatives.
 \end{definition}
 
 \subsection{Conduction of Heat in a 1-D Rod}
+
 If we have 1 dimensional rod with cross sectional area \(A\), \(L\), and thermal energy density \(e(x,t)\), the heat energy of a slice on the rod 
 from \(x\) to \(x+\Delta x\) is:
 \[
@@ -140,6 +142,7 @@ Using this, we get the \textbf{diffusion equation}:
 \]
 
 \subsection{Initial and Boundary Conditions}
+
 Since the heat equation has one time derivative, we need one \textbf{initial condition} (IC). Additionally, we need one \textbf{boundary condition} (BC) at each end of the rod.
 
 One potential boundary condition is having a set temperature, called the \textbf{prescribed temperature}, at a boundary:
@@ -205,6 +208,7 @@ Thus, we have the following solution:
 \]
 
 \subsubsection{Insulated Boundaries}
+
 If instead the boundaries are insulated, we have the following PDE:
 \[
     \begin{aligned}
@@ -260,6 +264,7 @@ Since the boundaries are insulated, the total energy in the rod must be constant
 \end{theorem}
 
 \subsection{Heat Equation with Zero Temperature at Finite Ends}
+
 Suppose we have a rod with fixed temperatures of \(0\) at the boundaries, represented by the following:
 \[
     \begin{aligned}
@@ -273,6 +278,7 @@ Suppose we have a rod with fixed temperatures of \(0\) at the boundaries, repres
 We can solve this using the \textbf{method of separation of variables}. 
 
 \subsubsection{Product Solutions}
+
 The first step is to determine a \textbf{product solution} of the form:
 \[
     u(x,t)=H(x)G(t)
@@ -295,6 +301,7 @@ uninteresting and is called the \textbf{trivial solution}, and thus:
 \end{align*}   
 
 \subsubsection{Time-Dependent Ordinary Differential Equation}
+
 We first solve the ODE for \(G(t)\):
 \[
     \frac{dG}{dt}=-\lambda kG
@@ -306,6 +313,7 @@ Since this is a first-order linear homogeneous ODE with constant coefficients, t
 \]
 
 \subsubsection{Boundary Value (Eigenvalue) Problem}
+
 Next, we solve the second-order ODE for \(H(x)\):
 \begin{align*}
     \frac{d^2 H}{dx^2}&=-\lambda H \\
@@ -362,6 +370,7 @@ And the corresponding \textbf{eigenfunctions} are:
 \]
 
 \subsubsection{Fourier Series}
+
 The overall solution of our PDE is:
 \[
     u(x,t)=\sum_{n=1}^{m} B_n \sin{\frac{n \pi x}{L}}e^\frac{-ktn^2\pi ^2}{L^2}
@@ -403,6 +412,7 @@ Since functions of the form \(\sin(nx)\) are orthogonal if \(n\) is different, t
 
 \section{Numerical Solutions of PDEs}
 \subsection{Linear Advection Equation}
+
 Consider the following linear PDE, called the \textbf{advection equation}:
 \[
     \frac{\partial}{\partial t}u(x,t)+U_0\frac{\partial}{\partial x}u(x,t)=0
@@ -427,12 +437,45 @@ value of \(u\) and thus that we've reduced our solution to:
     u(x(t), t)=u(x-U_0t,0)=u_0(x-U_0t)
 \]    
 \subsubsection{Burger's Equation}
-The following nonlinear PDE is known as \textbf{Burger's equation}:
+
+The following non-linear PDE is known as \textbf{Burger's equation}:
 \[
     \frac{\partial}{\partial t}u+u\frac{\partial}{\partial x}u=0
 \]
 
 \subsubsection{Introduction to Linearization}
-Since Burger's Equation is nonlinear, it's difficult to solve analytically, but we can approximate it using a technique called \textbf{linearization}. 
+
+Since Burger's Equation is non-linear, it's difficult to solve analytically, but we can approximate it using a technique called \textbf{linearization}. 
+
+We approximate \(u\) with a \textbf{reference state} and a \textbf{deviation}:
+\[
+    \underbrace{u(x,t)}_\text{Full solution}=\underbrace{U_0}_{\text{Reference state (constant)}}+\underbrace{\epsilon}_\text{"Small constant"}*\underbrace{\tilde{u}(x,t)}_{\text{Perturbation}}
+\]
+
+Substituting this into the PDE and noting that \(U_0\) is constant and a solution to the PDE gives us:
+\begin{align*}
+    \frac{\partial}{\partial t}(U_0+\epsilon\tilde{u})+(U_0+\epsilon\tilde{u})\frac{\partial}{\partial x}(U_0+\epsilon\tilde{u})&=0 \\
+    \rightarrow \underbrace{\cancelto{0}{\frac{\partial}{\partial t} U_0+U_0\frac{\partial}{\partial x}U_0}}_{U_0 \text{ solution to PDE}}+\epsilon \frac{\partial}{\partial t}\tilde{u}+\underbrace{\cancelto{0}{\epsilon \tilde{u}\frac{\partial u}{\partial x}U_0}}_{U_0 \text{ constant}}+U_0 \epsilon \frac{\partial}{\partial x}\tilde{u}+\epsilon^2 \tilde{u}\frac{\partial}{\partial x}\tilde{u}&=0 \\
+    \rightarrow \epsilon[\frac{\partial}{\partial t}\tilde{u}+U_0\frac{\partial}{\partial x}\tilde{u}+\epsilon \tilde{u}\frac{\partial}{\partial x}\tilde{u}]&=0 \\
+    \rightarrow \frac{\partial}{\partial t}\tilde{u}+U_0\frac{\partial}{\partial x}\tilde{u}+\underbrace{\epsilon \tilde{u}\frac{\partial}{\partial x}\tilde{u}}_{\text{non-linear}}&=0
+\end{align*}
+
+If \(\abs{\epsilon} \ll 1\), then we have the advection equation:
+\[
+    \frac{\partial}{\partial t}\tilde{u}+U_0\frac{\partial}{\partial x}\tilde{u}=0
+\]
+
+\subsection{Numerical Methods}
+It is often difficult or impossible to analytically solve non-linear PDEs, and thus we use numerical methods to approximate their solutions. However, numerical methods have the following drawbacks:
+\begin{itemize}
+    \item A numerical solution only applies to one set of initial conditions, unlike analytical solutions that apply everywhere
+    \item Numerical solutions (typically) have inherent error, so we need to understand it and keep it within a reasonable range
+    \item Sometimes the error isn't large enough to be glaringly obvious, but still breaks the laws of physics, so numerical methods should be paired with analytical theory like checking conservation of energy.
+\end{itemize}
+
+\textbf{FINISH THIS AND WRITE NOTES 2.4, 2.5 and 3}
+
+
+
 
 \end{document}

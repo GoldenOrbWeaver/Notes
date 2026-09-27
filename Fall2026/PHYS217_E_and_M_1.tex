@@ -17,6 +17,7 @@
 \usepackage[usenames,dvipsnames]{xcolor}
 \usepackage[a4paper, margin=1in]{geometry}
 \usepackage{calligra}
+\usepackage{cancel}
 
 \DeclareMathAlphabet{\mathcalligra}{T1}{calligra}{m}{n}
 \DeclareFontShape{T1}{calligra}{m}{n}{<->s*[2.2]callig15}{}
@@ -539,5 +540,117 @@ We can determine a version of this for continuous charge distributions:
     &=\frac{\epsilon_0}{2}(\int_{\mathscr{V}}E^2 d \tau +\oint_{\mathscr{S}}V \mathbf{E} \cdot d \mathbf{a} ) \\
     &=\frac{\epsilon_0}{2}\int E^2 d \tau  \quad \text{if E vanishes at infinity}
 \end{align*}
+
+\subsection{Conductors}
+In \textbf{insulators}, electrons are attached to particular atoms, but in metallic \textbf{conductors}, electrons can move around freely. 
+This leads to the following properties:
+\begin{itemize}
+    \item \(\mathbf{\mathbf{E}} =0\) inside a conductor (because otherwise charges would flow until this is the case). In the presence of external 
+    electric fields, \textbf{induced charges} are created that move to produce electric fields that counteract the external field
+    \item \(\rho =0\) inside a conductor
+    \item All net charge lies on the surface 
+    \item Conductors are equipotentials
+    \item \(\mathbf{E}\) is perpendicular to the surface just outside a conductor
+\end{itemize}
+
+The field immediately outside a conductor is:
+\[
+    \mathbf{E} =\frac{\sigma }{\epsilon_0} \mathbf{\hat{n}} 
+\]
+
+And equivalently:
+\[
+    \sigma =-\epsilon_0 \frac{\partial V}{\partial n}
+\]
+
+The force on the surface of an electric conductor is:
+\begin{align*}
+    \mathbf{f}&=\sigma \mathbf{E}_{average}=\frac{1}{2}(\mathbf{E}_{above}+\mathbf{E}_{below})=\frac{1}{2 \epsilon_0}\sigma^2 \mathbf{\hat{n}}
+\end{align*}
+
+And the \textbf{electrostatic pressure} pointing outward is thus:
+\[
+    P=\frac{\epsilon_0}{2}E^2
+\]
+
+If we have two conductors and put a charge of \(+Q\) on one and \(-Q\) on the other, the potential difference between 
+the capacitors is proportional to \(Q\), and the ratio is the \textbf{capacitance}:
+\[
+    C \equiv \frac{Q}{V}
+\]
+
+The energy stored by the capacitor is the total work required to move the positive charge to the positive conductor 
+and negative charge to the negative conductor, or:
+\begin{align*}
+    W=\int_0^Q (\frac{q}{C})dq=\frac{1}{2}\frac{Q^2}{C}=\frac{1}{2}CV^2
+\end{align*}
+
+\newpage
+\section{Potentials}
+\subsection{Laplace's Equation}
+It is often difficult to find the electric field or potential analytically through integration, and thus in many cases it is 
+better to use the Poisson equation. In regions with zero charge, this reduces to the Laplace equation, solutions of which are called \textbf{harmonic functions}.
+
+Harmonic functions have several useful properties:
+\begin{itemize}
+    \item The value a harmonic function \(V\) at point \(\mathbf{r} \) is the average value of \(V\) over a spherical surface of radius \(R\) centered at \(\mathbf{r}\):
+        \[
+            V(\mathbf{r} )=\frac{1}{4 \pi R^2}\oint_{sphere} V da
+        \]
+    \item \(V\) cannot have any local minima or maxima; extrema must occur at boundaries 
+\end{itemize}
+
+\begin{theorem}{\textbf{Earnshaw's Theorem}}
+    $ $ \newline
+    A charged particle cannot be held in stable equilibrium by electrostatic forces alone.
+\end{theorem}
+\begin{proof}
+    Imagine a cube with point charges at the vertices. The electric potential in the interior of the cube satisfies 
+    the Laplace equation because there is no charge there, and thus cannot have a minimum inside the cube, meaning there cannot be a stable 
+    equilibrium.
+\end{proof}
+
+For the Laplace equation to be useful, we need to know whether solutions exist and whether they are unique (and thus we can use whatever method we prefer 
+and not worry about determining if we found the right solution). The existence of solutions is difficult to prove and left to mathematicians, but we can relatively 
+easily prove that solutions are unique.
+
+\begin{theorem}{\textbf{Uniqueness Theorem}}
+    $ $ \newline
+    The Poisson equation, when subjected to boundary conditions on the solution, its first derivative, or combinations of these, yields unique solutions for \(V(\mathbf{r})\). 
+\end{theorem}
+\begin{proof}
+    Let \(V\) be continuous, as well as its derivatives through second order in region \(\mathscr{V}\) bounded by \(\partial \mathscr{V}\). Suppose:
+    \begin{align*}
+        \laplacian{V}&=f \\
+        p\frac{dV}{dn}+hV&=g
+    \end{align*}
+    where \(f\) is a function in \(\mathscr{V}\) and \(g\) is a function on \(\partial \mathscr{V}\). (Note: the second equation is the \textbf{Robin boundary condition}, which is a generalization of 
+    Dirichlet and Neumann boundary conditions).
+    
+    If \(V_1\) and \(V_2\) are both solutions, then by superposition, \(U\equiv V_1-V_2\) is a solution to the Laplace equation:
+    \begin{align*}
+        \laplacian{U}=\laplacian{V_1}-\laplacian{V_2}&=0 \\
+        p\frac{dU}{dn}+hV=0-0&=0
+    \end{align*}
+
+    Let us consider the function \(U\nabla U\) with divergence \(\nabla \cdot (U\nabla U)=U \laplacian{U}+(\nabla U)^2\). The integral of this over \(\mathscr{V}\) is:
+    \[
+        \int_{\mathscr{V}} \nabla \cdot (U\nabla U)d \tau =\int_{\mathscr{V}}\underbrace{\cancelto{0}{U\laplacian{U}}}_{\text{U is harmonic}}+(\nabla U)^2 d \tau =\int_{\mathscr{V}}(\nabla U)^2 d \tau =\oint_{\partial \mathscr{V}} U \nabla U \cdot d \mathbf{a} =\oint_{\partial \mathscr{V}} U\frac{dU}{dn}da
+    \]
+
+    There are three non-trivial cases of the boundary conditions:
+    \begin{enumerate}
+        \item \(p=0\) and thus only \(V\) is defined on the boundary \\
+        From \(p\frac{dU}{dn}+hU=0\), this means that \(U=0\) everywhere on \(\partial \mathscr{V}\). Then, since \((\nabla U)^2\) can't be negative, \(\nabla U=0\), so \(U=0\) everywhere on \(\mathscr{V}\). Therefore \(V_1=V_2\) and the solution is unique. 
+        \item \(h=0\) and thus only \(\frac{dV}{dn}\) is defined on the boundary \\
+        From \(p\frac{dU}{dn}+hU=0\), this means that \(\frac{dU}{dn}=0\) everywhere on \(\partial \mathscr{V}\). Then \(\nabla U=0\) again, so \(U\) is constant on \(\mathscr{V}\). Therefore \(V_1\) and \(V_2\) only differ by an additive constant (reference point).
+        \item \(p\frac{dU}{dn}+hU=0\) with mixed boundary conditions (both \(V\) and \(\frac{dV}{dn}\) defined) \\
+        From \(p\frac{dU}{dn}+hU=0\), we find that \(\frac{dU}{dn}=-\frac{h}{p}U\) and thus \(\oint_{\partial \mathscr{V}}U\frac{dU}{dn}da=-\frac{h}{p}\oint_{\partial \mathscr{V}}U^2 da \leq 0\). However, we know that \(\oint_{\partial \mathscr{V}} U \nabla U \cdot d \mathbf{a} =\oint_{\partial \mathscr{V}} U\frac{dU}{dn}da=\int_{\mathscr{V}}(\nabla U)^2 d \tau \geq 0\), and thus \(\nabla U=0\) and \(U\) is constant, meaning that \(V_1\) and \(V_2\) differ only by an additive constant.      
+    \end{enumerate}    
+\end{proof}
+
+A useful corollary of the uniqueness theorem is that if we have a volume \(\mathscr{V}\) surrounded by conductors and containing a specified charge density \(\rho \), 
+then the electric field is uniquely determined if the total charge on each conductor is given.  
+
 
 \end{document}
