@@ -652,5 +652,136 @@ easily prove that solutions are unique.
 A useful corollary of the uniqueness theorem is that if we have a volume \(\mathscr{V}\) surrounded by conductors and containing a specified charge density \(\rho \), 
 then the electric field is uniquely determined if the total charge on each conductor is given.  
 
+\subsection{Method of Images}
+
+\subsection{Separation of Variables}
+One of the simplest methods of solving the Laplace equation is \textbf{separation of variables}, where \(V\) is decomposed into a product of 
+functions in each dimension. This can be used when the potential or charge density are specified on the boundaries of some region where we want to find 
+the potential of the interior. It is easiest to derive and elucidate this method with several examples:
+
+\subsubsection{Cartesian Coordinates}
+\begin{eg}
+    Two infinite grounded metal plates lie parallel to the \(xz\) plane, one at \(y=0\) and the other at \(y=a\). The left end, at \(x=0\), is closed off with an infinite strip insulated 
+    from the two plates, and maintained at a specific potential \(V_0(y)\). Find the potential inside this "slot".     
+\end{eg}
+\begin{answer}
+    Since this configuration is independent of \(z\), this is effectively a two dimensional problem, with the Laplace equation:
+    \[
+        \frac{\partial^2 V}{\partial x^2}+\frac{\partial^2 V}{\partial y^2}=0
+    \] 
+    And boundary conditions:
+    \begin{align*}
+        V(x, 0)&=0 \\
+        V(x, a)&=0 \\
+        V(0,y)&=V_0(y) \\
+        V\to 0 &\text{ as } x\to \infty 
+    \end{align*}
+
+    Suppose that the solution is the product of functions in \(x\) and \(y\):
+    \[
+        V(x,y)=X(x)Y(y)
+    \]
+
+    Substituting this into the Laplace equation, we get:
+    \begin{align*}
+        Y\frac{\partial^2 X}{\partial x^2}+X \frac{\partial^2 Y}{\partial Y^2}&=0 \\ 
+        \rightarrow \frac{1}{X}\frac{\partial^2 X}{\partial x^2}+\frac{1}{Y}\frac{\partial^2 Y}{\partial y^2}&=0
+    \end{align*}
+
+    This can only be true if \(\frac{1}{X}\frac{\partial^2 X}{\partial x^2}\) and \(\frac{1}{Y}\frac{\partial^2 Y}{\partial y^2}\) both equal the same constant, so:
+    \begin{align*}
+        \frac{\partial^2 X}{\partial x^2}&=k^2X \\
+        \frac{\partial^2 Y}{\partial y^2}&=-k^2Y
+    \end{align*}
+
+    We have thus reduced our situation to two ODEs. We know that the general solutions are of the form:
+    \begin{align*}
+        X(x)&=Ae^{kx}+Be^{-kx} \\
+        Y(y)&=C\sin(ky)+D\cos(ky)
+    \end{align*}
+    
+    And thus:
+    \[
+        V(x,y)=(Ae^{kx}+Be^{-kx})(C\sin(ky)+D\cos(ky))
+    \]
+
+    We then use our BCs to find the coefficients:
+    \begin{align*}
+        V\to 0 \text{ as } x\to \infty \rightarrow A&=0 \\
+        V(x,0)=0 \rightarrow D&=0 \\
+        V(x,y)=0 \rightarrow k&=\frac{n \pi }{a}, (n=1,2,3,\dots)
+    \end{align*}
+
+    Since any linear combination of solutions the Laplace equation is also a solution, we can construct a solution 
+    by taking the infinite sum:
+    \[
+        V(x,y)=\sum_{n=1}^{\infty }C_n e^{-\frac{n \pi x}{a}}\sin(\frac{n \pi y}{a})
+    \]  
+
+    Using our initial conditions we get the \textbf{Fourier sine series}:
+    \[
+        V(0,y)=\sum_{n=1}^{\infty }\sin(\frac{n \pi y}{a})=V_0(y)
+    \]
+
+    We can find the coefficients \(C_n\) by multiplying both sides by \(\sin(\frac{m \pi y}{a})\) and integrating, which is called \textbf{Fourier's trick}, which (after rearrangement) gives us:
+    \[
+        C_n=\frac{2}{a}\int_0^a V_0(y)\sin(\frac{n \pi y}{a})dy
+    \]
+\end{answer}
+
+We can use similar methods to solve for \(V\) in other situations with given boundary conditions, and in general we take the following steps:
+\begin{enumerate}
+    \item Separate \(V\) into functions of the relevant coordinates
+    \item Write the Laplace equation using the product functions and define the eigenvalues (Note: In three dimensions, an eigenvalue might be the sum of the squares of two others)
+    \item Use the boundary conditions to solve for coefficients
+    \item Use Fourier's trick to find the remaining coefficient (Note: In three dimensions, may have product of two harmonic functions)
+\end{enumerate}
+
+\subsubsection{Spherical Coordinates}
+In spherical coordinates, if a problem has azimuthal symmetry (meaning that \(V\) is independent of \(\phi\)), then the Laplace equation 
+is:
+\[
+    \frac{\partial}{\partial r}(r^2 \frac{\partial V}{\partial r})+\frac{1}{\sin \theta }\frac{\partial}{\partial \theta }(\sin \theta \frac{\partial V}{\partial \theta })=0
+\]
+
+We assume that the solution is a product of functions in \(r\) and \(\theta \):
+\[
+    V(r, \theta )=R(r)\Theta(\theta )
+\]
+
+Like before, we plug this back into the Laplace equation and determine that each term is a constant (which we call \(l(l+1)\) to make our math easier later), eventually giving us:
+\begin{align*}
+    \frac{d}{dr}(r^2 \frac{dR}{dr})&=l(l+1)R \\
+    \\frac{d}{d \theta }(\sin \theta \frac{d \Theta }{d \theta })&=-l(l+1)\sin \theta \Theta 
+\end{align*}
+
+The first ODE is a Cauchy-Euler equation, so we easily determine that its solution is:
+\[
+    R(r)=Ar^l+\frac{B}{r^{l+1}}
+\]
+
+The second ODE turns out to have solutions that are \textbf{Legendre polynomials} in the variable \(\cos \theta \):
+\[
+    \Theta(\theta )=P_l(\cos \theta )
+\] 
+
+\(P_l(x)\) is conveniently defined by the \textbf{Rodrigues formula}:
+\[
+    P_l(x)=\frac{1}{2^l l!}(\frac{d}{dx})^l (x^2-1)^l
+\]  
+
+Note that \(P_l(x)\) is an \(l\)th-order polynomial in \(x\) and contains only even powers of \(x\) if \(l\) is even and only odd powers if \(l\) is odd.
+
+While the ODE of \(\Theta \) is second order, it turns out that the non-Legendre polynomial solutions blow up at \(\theta =0\) or \(\theta =\pi \) and are thus 
+physically impossible, meaning we can ignore them. Therefore, the general solution is the linear combination of solutions:
+\[
+    V(r,\theta )=\sum_{l=0}^{\infty }(A_l r^l+\frac{B_l}{r^{l+1}})P_l(\cos \theta )
+\] 
+
+Like in Cartesian coordinates, the general method is to write out the product solutions and then use the boundary conditions (and other known information) to solve 
+for the coefficients. Fourier's trick is of use again, and for Legendre polynomials is:
+\[
+    \int_{0}^{\pi }P_l(\cos \theta )P_{l^{\prime} }(\cos \theta )\sin \theta d \theta =\begin{cases} 0 & l\neq l^{\prime} \\  \frac{2}{1l+1} & l=l^{\prime} \end{cases}
+\]
 
 \end{document}

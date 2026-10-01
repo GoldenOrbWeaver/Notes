@@ -473,9 +473,47 @@ It is often difficult or impossible to analytically solve non-linear PDEs, and t
     \item Sometimes the error isn't large enough to be glaringly obvious, but still breaks the laws of physics, so numerical methods should be paired with analytical theory like checking conservation of energy.
 \end{itemize}
 
+\subsubsection{Notation}
+Suppose \(x\in[a,b]\) and \(t\geq t_0\). We discretize \(x\) and \(t\) and let \(x_j\) be the \(j\)th point in space and \(t_n\) be the \(n\)th point in time. Then:
+\[
+    u_j^n=u(x_j, t_n)
+\]       
 
+Our spatial grid is \(\{x_0, x_1, \dots, x_{N-1}\}\) where \(N\) is the total number of points in our grid. Since \(x\in [a,b]\), we have \(a\leq x_0\) and \(x_{N-1}\leq b\) (need not be strict equalities), and our points are ordered such that
+\(i<j\rightarrow x_i<x_j\). The spacing does not have to be uniform but we assume it is to make our math easier.
 
+\subsubsection{General Procedure}
+Suppose we have the following PDE:
+\[
+    \partial_t u+u \partial_x u=0
+\]
+with initial conditions:
+\[
+    u(x_i, 0)=u_0(x_i)
+\]
 
+We go through the following steps:
+\begin{enumerate}
+    \item Use a \textbf{spatial scheme} to approximate \(\partial_x u\) at each \(x_i\). Then, we let:
+    \[
+        F_i=u_i \frac{\partial}{\partial x}u|_{x=x_i}
+    \]
+    \item Use a \textbf{temporal scheme} on the resulting ODEs:
+    \[
+        \frac{d}{dt}u_i=-F_i        
+    \]
+    to advance the solution forward in time from \(t_0\) to some time \(t_0+\Delta t\)  
+    \item Repeat until desired end time is reached.
+\end{enumerate}
 
+\subsubsection{Spatial Scheme}
+\text{Finite Difference} (FD) methods use Taylor expansions to find derivatives. If we have \(u_i\), we can find \(u\) at nearby points:
+\begin{align*}
+    u_{i-2}&\approx u_i-2\Delta x \frac{\partial u}{\partial x}|_{x=x_i}+\frac{1}{2}4 \Delta x^2 \frac{\partial^2 u}{\partial x^2}|_{x=x_i}+\mathscr{O}(\Delta x^3) \\
+    u_{i-1}&\approx u_i-\Delta x \frac{\partial u}{\partial x}|_{x=x_i}+\frac{1}{2} \Delta x^2 \frac{\partial^2 u}{\partial x^2}|_{x=x_i}+\mathscr{O}(\Delta x^3) \\
+    u_i&=u_i \\
+    u_{i+1}&\approx u_i+\Delta x \frac{\partial u}{\partial x}|_{x=x_i}+\frac{1}{2}\Delta x^2 \frac{\partial^2 u}{\partial x^2}|_{x=x_i}+\mathscr{O}(\Delta x^3) \\
+    u_{i+2}&\approx u_i + 2 \Delta x \frac{\partial u}{\partial x}|_{x=x_i}+\frac{1}{2}4 \Delta x^2 \frac{\partial ^2 u}{\partial x^2}|_{x=x_i}+\mathscr{O}(\Delta x^3)
+\end{align*}
 
 \end{document}
