@@ -784,4 +784,70 @@ for the coefficients. Fourier's trick is of use again, and for Legendre polynomi
     \int_{0}^{\pi }P_l(\cos \theta )P_{l^{\prime} }(\cos \theta )\sin \theta d \theta =\begin{cases} 0 & l\neq l^{\prime} \\  \frac{2}{1l+1} & l=l^{\prime} \end{cases}
 \]
 
+\subsection{Multipole Expansion}
+Suppose we have a region density \(\rho (\mathbf{r}^{\prime} )\). Then, the potential outside this region is:
+\[
+    V(\mathbf{r})=\frac{1}{4 \pi \epsilon_0}\int \frac{1}{\scriptr}\rho (\mathbf{r}^{\prime} )d \tau^{\prime} 
+\]
+
+If we take some point within the region and let \(\alpha \) be the angle between \(\mathbf{r}\) and \(\mathbf{r}^{\prime}\), then the law of cosines gives us:
+\[
+    \scriptr^2=r^2+r^{\prime 2}-2rr^{\prime} \cos \alpha =r^2[1+(\frac{r^{\prime} }{r})^2-2(\frac{r^{\prime} }{r})\cos \alpha ]
+\]   
+
+Thus, we can rewrite the separation vector as:
+\[
+    \scriptr=r\sqrt{1+\epsilon}, \epsilon =(\frac{r^{\prime} }{r})(\frac{r^{\prime} }{r}-2\cos \alpha )
+\]
+
+At points far outside of the charge distribution, \(\epsilon \) is very small, so we can use the binomial expansion to find \(\frac{1}{\scriptr}\):
+\[
+    \frac{1}{\scriptr}=\frac{1}{r}(1+\epsilon)^{-\frac{1}{2}}=\frac{1}{r}(1-\frac{1}{2}\epsilon+\frac{3}{8}\epsilon^2-\frac{5}{16}\epsilon^3+\dots)
+\]  
+
+Substituting in \(\epsilon\), we realize that this is just a sum of Legendre polynomials:
+\begin{align*}
+    \frac{1}{r}&=\frac{1}{r}[1-\frac{1}{2}(\frac{r^{\prime} }{r})(\frac{r^{\prime} }{r}-2 \cos \alpha )+\frac{3}{8}(\frac{r^{\prime} }{r})^2(\frac{r^{\prime} }{r}-2 \cos \alpha )^2+\dots] \\
+    &=\frac{1}{r}[1+\frac{r^{\prime} }{r}P_1(\cos \alpha )+(\frac{r^{\prime} }{r})^2P_2(\cos \alpha )+\dots]\\
+    &=\frac{1}{r}\sum_{n=0}^{\infty }(\frac{r^{\prime} }{r})^n P_n(\cos \alpha )
+\end{align*}
+
+Thus, the potential is:
+\[
+    V(\mathbf{r} )=\frac{1}{4 \pi \epsilon_0}\sum_{n=0}^{\infty }\frac{1}{r^{n+1}} \int r^{\prime n}P_n (\cos \alpha )\rho(\mathbf{r}^{\prime}) d \tau^{\prime} 
+\]
+
+This is called the \textbf{multipole expansion} of the potential. The first term is the \textbf{monopole} term, the second is the \textbf{dipole}, 
+the third is the \textbf{quadrupole}, the fourth is the \textbf{octopole}, and so on. Each successive term is a factor of \(r\) less than the previous term, so at large distances, 
+we can approximate the potential with the earliest non-vanishing term.
+
+
+\subsubsection{Dipoles}
+The dipole term can be written more succinctly as:
+\[
+    V_dip(\mathbf{r})=\frac{1}{4 \pi \epsilon_0}\frac{\mathbf{p} \cdot \mathbf{\hat{r}} }{r^2}
+\]
+
+where \(\mathbf{p} \) is the \textbf{dipole moment} of the charge distribution:
+\[
+    \mathbf{p} \equiv \int \mathbf{r}^{\prime} \rho (\mathbf{r}^{\prime} )d \tau ^{\prime} 
+\] 
+
+A \textbf{physical dipole} is a configuration of two equal and opposite point charges with separation vector \(\mathbf{d}\). The dipole moment 
+of a physical dipole is thus:
+\[
+    \mathbf{p}=q \mathbf{r}^{\prime}_+-q \mathbf{r}^{\prime} _-=q(\mathbf{r}^{\prime} _+-\mathbf{r}^{\prime}_-)=q \mathbf{d} 
+\]
+
+A \textbf{perfect dipole} is something that only has a dipole moment, with no quadrupole or higher terms. This is the limit when \(d\to 0 \) and \(q\to \infty \) if the product is constant.
+
+\begin{note}
+    The monopole moment does not depend on the origin, but dipole and higher terms ordinarily do. However, 
+    if the total charge is zero, the dipole moment doesn't depend on the choice of origin.
+\end{note}
+
+\subsubsection{The Electric Field of a Dipole}
+\textbf{INCLUDE AFTER FINISHING HW. COPY SOLUTION TO KEEP IN NOTES}
+
+
 \end{document}
