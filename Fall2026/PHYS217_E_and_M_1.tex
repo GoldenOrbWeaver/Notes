@@ -653,7 +653,26 @@ A useful corollary of the uniqueness theorem is that if we have a volume \(\math
 then the electric field is uniquely determined if the total charge on each conductor is given.  
 
 \subsection{Method of Images}
+In many situations, you can use a technique reminiscent of geometrical optics called the \textbf{method of images}. Conductors (or other 
+equipotential surfaces) are treated as mirrors, and virtual charges are added at the locations of images of the real charges, and as long 
+as the charges are arranged in such a way that the boundary conditions, including constant potential on the conductors, holds, the solutions are valid. These images must be real 
+and the solution only holds in the region outside of the conductor.
 
+\begin{eg}
+    Suppose a point charge \(q\) is placed a distance \(d\) above an infinite grounded conducting plane. What 
+    is the potential in the region above the plane?  
+\end{eg}
+\begin{answer}
+    We can treat the conducting plane as a mirror. As we know from basic optics, the image of the point charge is a distance \(d\) below the plane, at the same 
+    x and y coordinates as the original charge. The potential in this situation is:
+    \[
+        V(x,y,z)=\frac{1}{4 \pi \epsilon_0}[\frac{q}{\sqrt{x^2+y^2+(z-d^2)}}-\frac{q}{\sqrt{x^2+y^2+(z+d)^2}}]
+    \] 
+
+    This reduces to zero at \(z=0\), matching the boundary condition for the infinite grounded conducting plane, meaning that 
+    this solution is valid, and by the uniqueness of solutions to the Poisson equation, is the only solution for this scenario. Thus, we can use 
+    it for \(z\geq 0\). 
+\end{answer}
 \subsection{Separation of Variables}
 One of the simplest methods of solving the Laplace equation is \textbf{separation of variables}, where \(V\) is decomposed into a product of 
 functions in each dimension. This can be used when the potential or charge density are specified on the boundaries of some region where we want to find 
@@ -847,7 +866,14 @@ A \textbf{perfect dipole} is something that only has a dipole moment, with no qu
 \end{note}
 
 \subsubsection{The Electric Field of a Dipole}
-\textbf{INCLUDE AFTER FINISHING HW. COPY SOLUTION TO KEEP IN NOTES}
+The electric field of a perfect dipole is:
+\[
+    \mathbf{E}_{dip}(\mathbf{r} )=\frac{1}{4 \pi  \epsilon_0}\frac{1}{r^3}[3(\mathbf{p} \cdot \mathbf{\hat{r}} )\mathbf{\hat{r}} -\mathbf{p} ]
+\]
 
+In spherical coordinates, this is:
+\[
+    \mathbf{E}_{dip}(r, \theta )=\frac{p}{4 \pi \epsilon_0 r^3}(2 \cos \theta \mathbf{\hat{r}} +\sin \theta \hat{\theta })
+\]
 
 \end{document}
