@@ -313,7 +313,7 @@ Since there are three types of derivatives in three dimensions, there are three 
 
 \begin{theorem}{\textbf{Stoke's Theorem}}
     \[
-        \int_S (\nabla \times \mathbf{v} )d \mathbf{a} =\oint_{\partial S} \mathbf{v} \cdot d \mathbf{l} 
+        \int_S (\nabla \times \mathbf{v} )\cdot d \mathbf{a} =\oint_{\partial S} \mathbf{v} \cdot d \mathbf{l} 
     \]
 \end{theorem}
 \begin{proof}
@@ -565,7 +565,7 @@ And equivalently:
 
 The force on the surface of an electric conductor is:
 \begin{align*}
-    \mathbf{f}&=\sigma \mathbf{E}_{average}=\frac{1}{2}(\mathbf{E}_{above}+\mathbf{E}_{below})=\frac{1}{2 \epsilon_0}\sigma^2 \mathbf{\hat{n}}
+    \mathbf{F}&=\sigma \mathbf{E}_{average}=\frac{1}{2}(\mathbf{E}_{above}+\mathbf{E}_{below})=\frac{1}{2 \epsilon_0}\sigma^2 \mathbf{\hat{n}}
 \end{align*}
 
 And the \textbf{electrostatic pressure} pointing outward is thus:
@@ -739,7 +739,7 @@ the potential of the interior. It is easiest to derive and elucidate this method
 
     Using our initial conditions we get the \textbf{Fourier sine series}:
     \[
-        V(0,y)=\sum_{n=1}^{\infty }\sin(\frac{n \pi y}{a})=V_0(y)
+        V(0,y)=\sum_{n=1}^{\infty }C_n\sin(\frac{n \pi y}{a})=V_0(y)
     \]
 
     We can find the coefficients \(C_n\) by multiplying both sides by \(\sin(\frac{m \pi y}{a})\) and integrating, which is called \textbf{Fourier's trick}, which (after rearrangement) gives us:
@@ -771,7 +771,7 @@ We assume that the solution is a product of functions in \(r\) and \(\theta \):
 Like before, we plug this back into the Laplace equation and determine that each term is a constant (which we call \(l(l+1)\) to make our math easier later), eventually giving us:
 \begin{align*}
     \frac{d}{dr}(r^2 \frac{dR}{dr})&=l(l+1)R \\
-    \\frac{d}{d \theta }(\sin \theta \frac{d \Theta }{d \theta })&=-l(l+1)\sin \theta \Theta 
+    \frac{d}{d \theta }(\sin \theta \frac{d \Theta }{d \theta })&=-l(l+1)\sin \theta \Theta 
 \end{align*}
 
 The first ODE is a Cauchy-Euler equation, so we easily determine that its solution is:
@@ -800,7 +800,7 @@ physically impossible, meaning we can ignore them. Therefore, the general soluti
 Like in Cartesian coordinates, the general method is to write out the product solutions and then use the boundary conditions (and other known information) to solve 
 for the coefficients. Fourier's trick is of use again, and for Legendre polynomials is:
 \[
-    \int_{0}^{\pi }P_l(\cos \theta )P_{l^{\prime} }(\cos \theta )\sin \theta d \theta =\begin{cases} 0 & l\neq l^{\prime} \\  \frac{2}{1l+1} & l=l^{\prime} \end{cases}
+    \int_{0}^{\pi }P_l(\cos \theta )P_{l^{\prime} }(\cos \theta )\sin \theta d \theta =\begin{cases} 0 & l\neq l^{\prime} \\  \frac{2}{2l+1} & l=l^{\prime} \end{cases}
 \]
 
 \subsection{Multipole Expansion}
@@ -844,7 +844,7 @@ we can approximate the potential with the earliest non-vanishing term.
 \subsubsection{Dipoles}
 The dipole term can be written more succinctly as:
 \[
-    V_dip(\mathbf{r})=\frac{1}{4 \pi \epsilon_0}\frac{\mathbf{p} \cdot \mathbf{\hat{r}} }{r^2}
+    V_{dip}(\mathbf{r})=\frac{1}{4 \pi \epsilon_0}\frac{\mathbf{p} \cdot \mathbf{\hat{r}} }{r^2}
 \]
 
 where \(\mathbf{p} \) is the \textbf{dipole moment} of the charge distribution:
