@@ -803,6 +803,30 @@ for the coefficients. Fourier's trick is of use again, and for Legendre polynomi
     \int_{0}^{\pi }P_l(\cos \theta )P_{l^{\prime} }(\cos \theta )\sin \theta d \theta =\begin{cases} 0 & l\neq l^{\prime} \\  \frac{2}{2l+1} & l=l^{\prime} \end{cases}
 \]
 
+\subsection{Method of Relaxation}
+The \textbf{method of relaxation} essentially uses numerical differentiation to find an approximate solution to the Laplace equation.
+
+In two dimensions, the partial derivatives of the potential are:
+\begin{align*}
+    \frac{\partial V}{\partial x}&\approx \frac{V(x+\frac{\epsilon}{2}, y)-V(x-\frac{\epsilon }{2}, y)}{\epsilon } \\
+    \frac{\partial V}{\partial y}&\approx \frac{V(x, y+\frac{\epsilon }{2})-V(x, y-\frac{\epsilon }{2})}{\epsilon } \\
+    \frac{\partial^2 V}{\partial x^2}&\approx \frac{V(x+\epsilon, y)-2V(x,y)+V(x-\epsilon ), y}{\epsilon ^2} \\
+    \frac{\partial^2 V}{\partial y^2}&\approx \frac{V(x, y+\epsilon )-2V(x, y)+V(x, y-\epsilon )}{\epsilon^2}
+\end{align*}
+
+Thus, the Laplace equation becomes:
+\[
+    \frac{\partial^2 V}{\partial x^2}+\frac{\partial^2 V}{\partial y^2}\approx \frac{1}{\epsilon^2}[V(x+\epsilon, y)+V(x-\epsilon, y)+V(x,y+\epsilon )+V(x, y-\epsilon )-4V(x,y)]=0
+\]
+
+We solve for \(V(x,y)\) :
+\[
+    V(x,y)\approx \frac{1}{4}[V(x+\epsilon , y)+V(x-\epsilon , y)+V(x, y+\epsilon )+V(x, y-\epsilon )]
+\]
+
+Therefore, on a discrete grid with spacing \(\epsilon \), \(V\) at a point is the average of its values at the four nearest points. We can thus 
+approximate the solution computationally by assigning values to points on the edge using the boundary conditions and then sequentially finding the value for interior points.  
+
 \subsection{Multipole Expansion}
 Suppose we have a region density \(\rho (\mathbf{r}^{\prime} )\). Then, the potential outside this region is:
 \[

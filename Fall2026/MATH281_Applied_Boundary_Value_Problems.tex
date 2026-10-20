@@ -171,6 +171,8 @@ The simplest case of this is where the boundary is insulated:
 Finally, we can allow the boundary to exchange heat with the surrounding.
 
 \begin{theorem}{\textbf{Newton's Law of Cooling}}
+    $ $
+    
     The rate of heat transfer between a body and its surroundings can be approximated by the following:
     \[
         -K_0(0)\frac{\partial u}{\partial x}(0,t)=-H[u(0,t)-u_B(t)]
@@ -259,6 +261,8 @@ Since the boundaries are insulated, the total energy in the rod must be constant
 \end{definition}
 
 \begin{theorem}{\textbf{Principle of Superposition}}
+    $ $
+    
     If \(u_1\) and \(u_2\) satisfy an arbitrary linear homogenous equation, then any arbitrary combination \(c_1u_1+c_2u_2\), where \(c_1\) and \(c_2\) are constants, also 
     satisfies the same equation.     
 \end{theorem}
@@ -409,6 +413,112 @@ Since functions are vectors, this is essentially taking the inner product of \(f
 
 Since functions of the form \(\sin(nx)\) are orthogonal if \(n\) is different, the eigenfunctions of our solution are an 
 \textbf{orthogonal set of vectors}. 
+
+\section{Fourier Series}
+\begin{definition}
+    A \textbf{Fourier series} is an infinite series of the form:
+    \[
+        f(x)~ a_0+\sum_{n=1}^{\infty }a_N\cos\frac{n \pi}{L}x+\sum_{n=1}^{\infty }b_n\sin\frac{n \pi }{L}x
+    \]
+\end{definition}
+
+\begin{definition}
+    A function \(f(x)\) is defined to be \textbf{piecewise smooth} on some interval if the interval 
+    can be divided into a finite number of subintervals such that
+    \begin{enumerate}
+        \item Both \(f(x)\) and \(f^{\prime} (x)\) are continuous at all points on the interior of the subintervals 
+        \item The one-sided limits of \(f(x)\) and \(f^{\prime} (x)\) both exist (as finite values) at the boundaries of the subintervals
+    \end{enumerate}     
+\end{definition}
+
+\subsubsection{Statement of Convergence Theorem}
+\textbf{Fourier coefficients} can be found using the following equations:
+\begin{align*}
+    a_0&=\frac{1}{2L}\int_{-L}^{L}f(x)dx \\
+    a_n&=\frac{1}{L}\int_{-L}^{L}f(x)\cos \frac{n \pi x}{L}dx \\
+    b_n&=\frac{1}{L}\int_{-L}^L f(x)\sin \frac{n \pi x}{L}dx
+\end{align*}
+
+\begin{theorem}{\textbf{Convergence Theorem (Fourier's Theorem)}}
+    $ $
+   
+    If \(f(x)\) is piecewise smooth on the interval \(-L\leq x \leq L\), then the Fourier series of \(f(x)\) 
+    converges for all \(-\infty <x<\infty \).
+    
+    Let \(f_E(x)\) denote the \textbf{periodic extension} of \(f(x)\).
+    \begin{enumerate}
+        \item At any point \(x\) where \(f_E(x)\) is continuous, the Fourier series of \(f(x)\) converges to \(f_E(x)\). 
+        \item At any point \(x\) where \(f_E(x)\) has a jump discontinuity, the Fourier series of \(f(x)\) converges to the average of the left 
+        \item and right hand limits:
+        \[
+            \frac{1}{2}(f_E(x+)+f_E(x-))
+        \]    
+    \end{enumerate}
+\end{theorem}
+
+\subsection{Fourier Cosine and Sine Series}
+\subsubsection{Fourier Cosine Series}
+For even functions, the sine coefficients of the Fourier series are zero. If we have a function \(f(x)\) 
+defined on \(0<x<L\), we can create an \(even extension\) of \(f(x)\) that, as one might guess, is an even function. Since the Fourier series 
+of an even function only has cosine terms, it is called a \textbf{Fourier cosine series}:
+\begin{align*}
+    f(x)&~\sum_{n=0}^{\infty} A_n \cos \frac{n \pi x}{L}, \quad 0\leq x \leq L \\
+    A_0&=\frac{1}{L}\int_{0}^L f(x)dx \\
+    A_n&=\frac{2}{L}\int_0^L f(x)\cos \frac{n \pi x}{L}dx
+\end{align*}
+
+\subsubsection{Fourier Sine Series}
+For odd functions, the cosine coefficients of the Fourier series are zero. If we have a function \(f(x)\) defined on \(0 \leq x \leq L\), 
+we can create an \textbf{odd extension} of \(f(x)\) that, as the name implies, is an odd function. Since the Fourier series of 
+an odd function only has sine terms, it is called a \textbf{Fourier sine series}:
+\begin{align*}
+    f(x)&~\sum_{n=1}^{\infty} B_n \sin \frac{n \pi  x}{L}, \quad 0\leq x \leq L \\
+    B_n&=\frac{2}{L}\int_{0}^L f(x)\sin \frac{n \pi  x}{L} dx
+\end{align*}
+
+\subsubsection{Even and Odd Parts}
+Any function \(f(x)\) can be decomposed into a combination of an even function, called the \textbf{even part} of \(f(x)\), and an odd function, called the \textbf{odd part}  of \(f(x)\): 
+\begin{align*}
+    f(x)&=f_e(x)+f_o(x)\\
+    f_e(x)&=\frac{1}{2}[f(x)+f(-x)]\\
+    f_o(x)&=\frac{1}{2}[f(x)-f(-x)]
+\end{align*}
+
+Thus, the Fourier series of some function \(f(x)\) is equal to the Fourier sine series of \(f_o(x)\) plus the Fourier cosine series 
+of \(f_e(x)\).
+
+\subsubsection{Continuous Fourier Series}
+For a piecewise smooth function \(f(x)\), the Fourier series of \(f(x)\) is continuous and converges to \(f(x)\) for \(-L\leq x \leq L\) if and only if 
+\(f(x)\) is continuous and \(f(-L)=f(L)\).
+
+For a piecewise smooth function \(f(x)\), the Fourier cosine series of \(f(x)\) is continuous and converges to \(f(x)\) for \(0\leq x\leq L\) if and only if \(f(x)\) is continuous.
+
+For a piecewise smooth function \(f(x)\), the Fourier sine series is continuous and converges to \(f(x)\) for \(0\leq x\leq L\) if and only if \(f(x)\) is continuous and both \(f(0)=0\) and \(f(L=0)\).   
+
+The \textbf{Gibbs phenomenon} is an example of overshoot that occurs at jump discontinuities, with an 
+overshoot of around 9\%. It occurs when a finite series of eigenfunctions approximates a discontinuous function.
+
+\section{Term-By-Term Differentiation of Fourier Series}
+If \(f^{\prime} (x)\) is piecewise smooth, then the Fourier series of a continuous function \(f(x)\) can be differentiated term by term if \(f(-L)=f(L)\).
+
+If \(f^{\prime} (x)\) is piecewise smooth, then the Fourier cosine series of a continuous function \(f(x)\) can be differentiated term by term.
+
+If \(f^{\prime} (x)\) is piecewise smooth, then the Fourier sine series of a continuous function \(f(x)\) can be differentiated term by term only if \(f(0)=0\) and \(f(L)=0\).   `'
+
+If \(f^{\prime} (x)\) is piecewise smooth, then the Fourier sine series of a continuous function \(f(x)\),
+\[
+    f(x)~\sum_{n=1}^{\infty }B_n \sin \frac{n \pi  x}{L}
+\]  
+cannot, in general, be differentiated term by term. However:
+\[
+    f^{\prime} (x)~\frac{1}{L}[f(L)-f(0)]+\sum_{n=1}^{\infty }[\frac{n \pi }{L}B_n+\frac{2}{L}((-1)^nf(L)-f(0))]\cos \frac{n \pi x}{L}
+\]
+
+\section{Method of Eigenfunction Expansion}
+Suppose we have the heat equation with boundaries of \(u=0\) at \(x=0\) and \(x=L\).
+
+We start with the assumption that \(u(x,t)\) is continuous and that \(\frac{\partial u}{\partial t}\), \(\frac{\partial u}{\partial x}\), and 
+\(\frac{\partial^2 u}{\partial x^2}\) are also continuous.     
 
 \section{Numerical Solutions of PDEs}
 \subsection{Linear Advection Equation}
