@@ -825,7 +825,8 @@ We solve for \(V(x,y)\) :
 \]
 
 Therefore, on a discrete grid with spacing \(\epsilon \), \(V\) at a point is the average of its values at the four nearest points. We can thus 
-approximate the solution computationally by assigning values to points on the edge using the boundary conditions and then sequentially finding the value for interior points.  
+approximate the solution computationally by assigning values to points on the edge using the boundary conditions and then sequentially finding the value for interior points. This is most commonly done
+by assigning an initial value (like 0) to the interior points, rastering through all of them, and then repeatedly averaging until the desired precision is reached.
 
 \subsection{Multipole Expansion}
 Suppose we have a region density \(\rho (\mathbf{r}^{\prime} )\). Then, the potential outside this region is:
@@ -899,5 +900,45 @@ In spherical coordinates, this is:
 \[
     \mathbf{E}_{dip}(r, \theta )=\frac{p}{4 \pi \epsilon_0 r^3}(2 \cos \theta \mathbf{\hat{r}} +\sin \theta \hat{\theta })
 \]
+
+\newpage
+\section{Electric Fields in Matter}
+
+\subsection{Polarization}
+\begin{definition}
+    A \textbf{dielectric} is an insulator that can be \textbf{polarized} by an external electric field, with charges shifting or rotating slightly.
+\end{definition}
+
+If an electric field is applied to an atom, the centers of the electron cloud and nucleus shift and no longer coincide, 
+forming an induced dipole moment in the same direction as the external field:
+\[
+    \mathbf{p} =\alpha \mathbf{E} 
+\] 
+where \(\alpha \) is the \textbf{atomic polarizability}. For simple atoms, this is approximately proportional to atomic volume.
+
+Molecules often polarize more easily in certain directions than others, so we replace \(\alpha \) with the \textbf{polarizability tensor} with nine components \(\alpha_{ij}\), giving us the following equations:
+\begin{align*}
+    p_x&=\alpha_{xx}E_x+\alpha _{xy}E_y+\alpha_{xz}E_z \\
+    p_y&=\alpha_{yx}E_x+\alpha_{yy}E_y+\alpha_{yz}E_z \\
+    p_z&=\alpha_{zx}E_x+\alpha_{zy}E_y+\alpha_{zz}E_z
+\end{align*}
+
+\textbf{Polar molecules} are molecules that have dipole moments. If a dipole is placed in a uniform electric field, 
+it experiences a net force of zero, but a nonzero torque that causes it to rotate until it is parallel to the field:
+\[
+    \mathbf{N}=\mathbf{p} \times \mathbf{E} 
+\]
+
+If a dipole is placed in a nonuniform electric field, the force it experiences is nonzero:
+\[
+    \mathbf{F}=q(\mathbf{E}_+-\mathbf{E}_-)=q(\Delta \mathbf{E} )=(\nabla E_x)\cdot \mathbf{d} =(\mathbf{d} \cdot \nabla)\mathbf{E}=(\mathbf{p} \cdot \nabla)\mathbf{E}  
+\]
+
+The energy of a permanent ideal dipole in an electric field is:
+\[
+    U=-\mathbf{p} \cdot \mathbf{E} 
+\]
+
+
 
 \end{document}
